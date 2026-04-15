@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources — Cloud Pre-Sales Learning Path</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* --- Resources Page Styles --- */
+    .resource-hero {
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      color: #fff;
+      padding: 52px 0 40px;
+      text-align: center;
+    }
+    .resource-hero h1 { font-size: 2.3rem; margin-bottom: 10px; color: #fff; }
+    .resource-hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+    /* Filter Bar */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      padding: 24px 0 8px;
+    }
+    .filter-btn {
+      padding: 8px 18px;
+      border-radius: 20px;
+      border: 2px solid var(--gray-200);
+      background: #fff;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .filter-btn:hover { border-color: var(--primary-light); color: var(--primary); }
+    .filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Resource Cards Grid */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 22px;
+      padding: 8px 0 24px;
+    }
+    .resource-card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: box-shadow var(--transition), transform var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .resource-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+    .resource-card .rc-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .resource-card h3 {
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .resource-card .rc-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 2px 9px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .tag-platform { background: var(--primary-light); color: var(--primary); }
+    .tag-youtube { background: #fee2e2; color: #dc2626; }
+    .tag-lab { background: var(--success-light); color: #047857; }
+    .tag-cert { background: var(--accent-light); color: #b45309; }
+    .tag-book { background: #ede9fe; color: #6d28d9; }
+    .tag-community { background: #dbeafe; color: #1e40af; }
+
+    .resource-card .rc-desc {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 14px;
+    }
+    .resource-card .rc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-top: auto;
+    }
+    .resource-card .rc-link:hover { color: var(--primary-dark); }
+
+    .resource-section { padding: 16px 0 0; }
+    .resource-section-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .resource-section-sub {
+      font-size: 0.92rem;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+
+    /* Hide filtered-out sections & cards */
+    .resource-section.hidden { display: none; }
+
+    @media (max-width: 768px) {
+      .resource-hero h1 { font-size: 1.7rem; }
+      .resource-hero { padding: 36px 0 28px; }
+      .resource-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ====== NAVBAR ====== -->
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-brand"><span>☁️</span> Cloud Path</a>
+    <div class="nav-links">
+      <a href="index.html">Journey</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="resources.html" class="active">Resources</a>
+    </div>
+    <div class="header-xp">
+      <span id="header-level" class="header-level">☁️ Cloud Rookie</span>
+      <span id="header-xp-text">0 XP</span>
+      <div class="header-xp-bar"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
+      <span id="header-streak" class="header-streak"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ====== HERO ====== -->
+<section class="resource-hero">
+  <div class="container">
+    <h1>📚 Resource Library</h1>
+    <p>Curated resources to accelerate your cloud pre-sales journey — all free or low-cost.</p>
+  </div>
+</section>
+
+<!-- ====== MAIN CONTENT ====== -->
+<main class="container">
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">🌐 All</button>
+    <button class="filter-btn" data-filter="platforms">🎓 Platforms</button>
+    <button class="filter-btn" data-filter="youtube">▶️ YouTube</button>
+    <button class="filter-btn" data-filter="labs">🧪 Labs</button>
+    <button class="filter-btn" data-filter="certs">🏅 Certs</button>
+    <button class="filter-btn" data-filter="books">📖 Books</button>
+    <button class="filter-btn" data-filter="communities">💬 Communities</button>
+  </div>
+
+  <!-- ========== 1. FREE LEARNING PLATFORMS ========== -->
+  <section class="resource-section" data-category="platforms">
+    <h2 class="resource-section-title">🎓 Free Learning Platforms</h2>
+    <p class="resource-section-sub">Start here — structured, free courses from the cloud providers themselves.</p>
+    <div class="resource-grid">
+
+      <div class="resource-card">
+        <div class="rc-icon">🔷</div>
+        <span class="rc-tag tag-platform">Platform</span>
+        <h3>Microsoft Learn</h3>
+        <p class="rc-desc">Azure fundamentals, Active Directory, identity management. Official Microsoft learning paths with hands-on sandboxes.</p>
+        <a href="https://learn.microsoft.com/training/" target="_blank" rel="noopener" class="rc-link">Visit Microsoft Learn →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🟠</div>
+        <span class="rc-tag tag-platform">Platform</span>
+        <h3>AWS Skill Builder</h3>
+        <p class="rc-desc">AWS basics, Cloud Practitioner prep, and 500+ free digital courses for every AWS service.</p>
+        <a href="https://skillbuilder.aws/" target="_blank" rel="noopener" class="rc-link">Visit AWS Skill Builder →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🔴</div>
+        <span class="rc-tag tag-platform">Platform</span>
+        <h3>Google Cloud Skills Boost</h3>
+        <p class="rc-desc">GCP fundamentals, hands-on labs with real cloud consoles. Earn badges as you complete learning paths.</p>
+        <a href="https://www.cloudskillsboost.google/" target="_blank" rel="noopener" class="rc-link">Visit Cloud Skills Boost →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🌐</div>
+        <span class="rc-tag tag-platform">Platform</span>
+        <h3>Cisco Skills for All</h3>
+        <p class="rc-desc">Networking fundamentals — essential for understanding cloud infrastructure, VPCs, and connectivity.</p>
+        <a href="https://skillsforall.com/" target="_blank" rel="noopener" class="rc-link">Visit Skills for All →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🛡️</div>
+        <span class="rc-tag tag-platform">Platform</span>
+        <h3>CompTIA ITF+</h3>
+        <p class="rc-desc">IT fundamentals for beginners — covers hardware, software, networking, and security basics before diving into cloud.</p>
+        <a href="https://www.comptia.org/certifications/it-fundamentals" target="_blank" rel="noopener" class="rc-link">Visit CompTIA ITF+ →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🐧</div>
+        <span class="rc-tag tag-platform">Platform</span>
+        <h3>Linux Journey</h3>
+        <p class="rc-desc">Learn the Linux command line from scratch — a must for cloud admins. Interactive, beginner-friendly, and completely free.</p>
+        <a href="https://linuxjourney.com/" target="_blank" rel="noopener" class="rc-link">Visit Linux Journey →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== 2. YOUTUBE CHANNELS ========== -->
+  <section class="resource-section" data-category="youtube">
+    <h2 class="resource-section-title">▶️ YouTube Channels</h2>
+    <p class="resource-section-sub">Ranked by beginner-friendliness — start from the top.</p>
+    <div class="resource-grid">
+
+      <div class="resource-card">
+        <div class="rc-icon">🎮</div>
+        <span class="rc-tag tag-youtube">YouTube</span>
+        <h3>NetworkChuck</h3>
+        <p class="rc-desc"><strong>Focus:</strong> Networking, Active Directory, cloud.<br><strong>Why:</strong> Fun, motivating, and perfect for non-IT beginners. Makes complex topics feel approachable.</p>
+        <a href="https://www.youtube.com/@NetworkChuck" target="_blank" rel="noopener" class="rc-link">Watch on YouTube →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">📚</div>
+        <span class="rc-tag tag-youtube">YouTube</span>
+        <h3>Professor Messer</h3>
+        <p class="rc-desc"><strong>Focus:</strong> CompTIA Network+ / Security+.<br><strong>Why:</strong> Clear, structured, free full courses. The gold standard for CompTIA exam prep.</p>
+        <a href="https://www.youtube.com/@professormesser" target="_blank" rel="noopener" class="rc-link">Watch on YouTube →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🏗️</div>
+        <span class="rc-tag tag-youtube">YouTube</span>
+        <h3>John Savill</h3>
+        <p class="rc-desc"><strong>Focus:</strong> Azure masterclass.<br><strong>Why:</strong> Best deep-dive Azure content on YouTube. Whiteboard explanations make architecture click.</p>
+        <a href="https://www.youtube.com/@NTFAQGuy" target="_blank" rel="noopener" class="rc-link">Watch on YouTube →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🔬</div>
+        <span class="rc-tag tag-youtube">YouTube</span>
+        <h3>David Bombal</h3>
+        <p class="rc-desc"><strong>Focus:</strong> Networking deep dives, labs.<br><strong>Why:</strong> Practical demos with GNS3 and real gear. Excellent for building hands-on confidence.</p>
+        <a href="https://www.youtube.com/@davidbombal" target="_blank" rel="noopener" class="rc-link">Watch on YouTube →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">☁️</div>
+        <span class="rc-tag tag-youtube">YouTube</span>
+        <h3>A Cloud Guru</h3>
+        <p class="rc-desc"><strong>Focus:</strong> Multi-cloud fundamentals.<br><strong>Why:</strong> Energetic, beginner-friendly explanations of AWS, Azure, and GCP concepts.</p>
+        <a href="https://www.youtube.com/@ACloudGuru" target="_blank" rel="noopener" class="rc-link">Watch on YouTube →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🎓</div>
+        <span class="rc-tag tag-youtube">YouTube</span>
+        <h3>edureka!</h3>
+        <p class="rc-desc"><strong>Focus:</strong> Full cloud courses.<br><strong>Why:</strong> Long-form, structured tutorials covering end-to-end cloud topics in single videos.</p>
+        <a href="https://www.youtube.com/@edaboredureka" target="_blank" rel="noopener" class="rc-link">Watch on YouTube →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">📊</div>
+        <span class="rc-tag tag-youtube">YouTube</span>
+        <h3>Simplilearn</h3>
+        <p class="rc-desc"><strong>Focus:</strong> Cloud + career guidance.<br><strong>Why:</strong> "Full Course" playlists for beginners covering cloud, DevOps, and career switching.</p>
+        <a href="https://www.youtube.com/@SimplilearnOfficial" target="_blank" rel="noopener" class="rc-link">Watch on YouTube →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🌐</div>
+        <span class="rc-tag tag-youtube">YouTube</span>
+        <h3>IT k Funde</h3>
+        <p class="rc-desc"><strong>Focus:</strong> Networking for cloud.<br><strong>Why:</strong> Covers VPCs, subnets, and firewalls simply — critical networking for cloud roles.</p>
+        <a href="https://www.youtube.com/@ITkFunde" target="_blank" rel="noopener" class="rc-link">Watch on YouTube →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🎯</div>
+        <span class="rc-tag tag-youtube">YouTube</span>
+        <h3>ExamPro</h3>
+        <p class="rc-desc"><strong>Focus:</strong> AWS cert prep.<br><strong>Why:</strong> Concise, exam-focused content. Free full-length prep courses for AWS certifications.</p>
+        <a href="https://www.youtube.com/@exaboredureka" target="_blank" rel="noopener" class="rc-link">Watch on YouTube →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🧪</div>
+        <span class="rc-tag tag-youtube">YouTube</span>
+        <h3>Jeremy's IT Lab</h3>
+        <p class="rc-desc"><strong>Focus:</strong> CCNA / networking path.<br><strong>Why:</strong> Stepwise, logical networking path — perfect for building a solid foundation before cloud.</p>
+        <a href="https://www.youtube.com/@JeremysITLab" target="_blank" rel="noopener" class="rc-link">Watch on YouTube →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🐳</div>
+        <span class="rc-tag tag-youtube">YouTube</span>
+        <h3>TechWorld with Nana</h3>
+        <p class="rc-desc"><strong>Focus:</strong> DevOps, containers, K8s.<br><strong>Why:</strong> Great for understanding the cloud + DevOps overlap. Clear tutorials on Docker and Kubernetes.</p>
+        <a href="https://www.youtube.com/@TechWorldwithNana" target="_blank" rel="noopener" class="rc-link">Watch on YouTube →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🔥</div>
+        <span class="rc-tag tag-youtube">YouTube</span>
+        <h3>Fireship</h3>
+        <p class="rc-desc"><strong>Focus:</strong> Quick tech explainers.<br><strong>Why:</strong> "X in 100 seconds" format — great for fast overviews of any cloud or dev topic.</p>
+        <a href="https://www.youtube.com/@Fireship" target="_blank" rel="noopener" class="rc-link">Watch on YouTube →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== 3. HANDS-ON LABS & FREE TIERS ========== -->
+  <section class="resource-section" data-category="labs">
+    <h2 class="resource-section-title">🧪 Hands-On Labs &amp; Free Tiers</h2>
+    <p class="resource-section-sub">Nothing beats building things yourself. Use these free tiers to practice.</p>
+    <div class="resource-grid">
+
+      <div class="resource-card">
+        <div class="rc-icon">🔷</div>
+        <span class="rc-tag tag-lab">Lab</span>
+        <h3>Azure Free Account</h3>
+        <p class="rc-desc">12 months of free services + $200 credit for the first 30 days. Spin up VMs, databases, and more.</p>
+        <a href="https://azure.microsoft.com/free/" target="_blank" rel="noopener" class="rc-link">Get Azure Free →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🟠</div>
+        <span class="rc-tag tag-lab">Lab</span>
+        <h3>AWS Free Tier</h3>
+        <p class="rc-desc">EC2, S3, Lambda, and dozens more services free for 12 months. Build real projects at zero cost.</p>
+        <a href="https://aws.amazon.com/free/" target="_blank" rel="noopener" class="rc-link">Get AWS Free Tier →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🔴</div>
+        <span class="rc-tag tag-lab">Lab</span>
+        <h3>Google Cloud Free Tier</h3>
+        <p class="rc-desc">$300 credit for 90 days plus always-free products. Great for experimenting with GCP services.</p>
+        <a href="https://cloud.google.com/free" target="_blank" rel="noopener" class="rc-link">Get GCP Free Tier →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">📦</div>
+        <span class="rc-tag tag-lab">Lab</span>
+        <h3>Oracle VirtualBox</h3>
+        <p class="rc-desc">Free local VM software — run Windows Server, Linux, or practice networking in isolated virtual environments.</p>
+        <a href="https://www.virtualbox.org/" target="_blank" rel="noopener" class="rc-link">Download VirtualBox →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🧊</div>
+        <span class="rc-tag tag-lab">Lab</span>
+        <h3>Microsoft Learn Sandboxes</h3>
+        <p class="rc-desc">Free Azure sandboxes built into Microsoft Learn modules — no credit card required. Practice directly in real Azure.</p>
+        <a href="https://learn.microsoft.com/training/" target="_blank" rel="noopener" class="rc-link">Try Learn Sandboxes →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">⚡</div>
+        <span class="rc-tag tag-lab">Lab</span>
+        <h3>KillerCoda</h3>
+        <p class="rc-desc">Interactive Linux and Kubernetes labs in the browser — a great Katacoda alternative for hands-on CLI practice.</p>
+        <a href="https://killercoda.com/" target="_blank" rel="noopener" class="rc-link">Try KillerCoda →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== 4. CERTIFICATION PATHS ========== -->
+  <section class="resource-section" data-category="certs">
+    <h2 class="resource-section-title">🏅 Certification Paths</h2>
+    <p class="resource-section-sub">Industry-recognized certs to validate your cloud knowledge.</p>
+    <div class="resource-grid">
+
+      <div class="resource-card">
+        <div class="rc-icon">⭐</div>
+        <span class="rc-tag tag-cert">Cert · Recommended First</span>
+        <h3>AZ-900: Azure Fundamentals</h3>
+        <p class="rc-desc">The recommended first certification. Covers cloud concepts, Azure services, security, pricing, and support. Great starting point for pre-sales.</p>
+        <a href="https://learn.microsoft.com/certifications/azure-fundamentals/" target="_blank" rel="noopener" class="rc-link">View AZ-900 Path →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🔷</div>
+        <span class="rc-tag tag-cert">Cert · Azure</span>
+        <h3>AZ-104: Azure Administrator</h3>
+        <p class="rc-desc">Next step after AZ-900. Deep dive into managing Azure identities, governance, storage, compute, and virtual networks.</p>
+        <a href="https://learn.microsoft.com/certifications/azure-administrator/" target="_blank" rel="noopener" class="rc-link">View AZ-104 Path →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🟠</div>
+        <span class="rc-tag tag-cert">Cert · AWS</span>
+        <h3>AWS Cloud Practitioner (CLF-C02)</h3>
+        <p class="rc-desc">AWS entry-level cert covering cloud concepts, AWS services, security, architecture, and pricing/billing fundamentals.</p>
+        <a href="https://aws.amazon.com/certification/certified-cloud-practitioner/" target="_blank" rel="noopener" class="rc-link">View CLF-C02 Path →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🟠</div>
+        <span class="rc-tag tag-cert">Cert · AWS</span>
+        <h3>AWS Solutions Architect Associate (SAA-C03)</h3>
+        <p class="rc-desc">Design distributed systems on AWS. Covers compute, storage, databases, networking, and cost optimization at scale.</p>
+        <a href="https://aws.amazon.com/certification/certified-solutions-architect-associate/" target="_blank" rel="noopener" class="rc-link">View SAA-C03 Path →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🌐</div>
+        <span class="rc-tag tag-cert">Cert · Networking</span>
+        <h3>CompTIA Network+</h3>
+        <p class="rc-desc">Networking foundation — covers architecture, operations, security, and troubleshooting. Essential before cloud networking.</p>
+        <a href="https://www.comptia.org/certifications/network" target="_blank" rel="noopener" class="rc-link">View Network+ Path →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🛡️</div>
+        <span class="rc-tag tag-cert">Cert · Security</span>
+        <h3>CompTIA Security+</h3>
+        <p class="rc-desc">Security foundation — covers threats, vulnerabilities, cryptography, and identity management. Key for cloud security discussions.</p>
+        <a href="https://www.comptia.org/certifications/security" target="_blank" rel="noopener" class="rc-link">View Security+ Path →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== 5. BOOKS & READING ========== -->
+  <section class="resource-section" data-category="books">
+    <h2 class="resource-section-title">📖 Books &amp; Reading</h2>
+    <p class="resource-section-sub">Deepen your understanding with these essential reads.</p>
+    <div class="resource-grid">
+
+      <div class="resource-card">
+        <div class="rc-icon">💼</div>
+        <span class="rc-tag tag-book">Book</span>
+        <h3>"Mastering Technical Sales" — John Care</h3>
+        <p class="rc-desc">The bible of technical pre-sales. Covers discovery, demos, POCs, and how to bridge technical depth with business value.</p>
+        <a href="https://www.amazon.com/dp/1630816280" target="_blank" rel="noopener" class="rc-link">Find on Amazon →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🔥</div>
+        <span class="rc-tag tag-book">Book</span>
+        <h3>"The Phoenix Project" — Gene Kim</h3>
+        <p class="rc-desc">A novel about IT operations and DevOps culture. Understand how IT teams work, what pains they face, and how cloud solves real problems.</p>
+        <a href="https://www.amazon.com/dp/1942788290" target="_blank" rel="noopener" class="rc-link">Find on Amazon →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">☁️</div>
+        <span class="rc-tag tag-book">Book</span>
+        <h3>"Cloud Computing: Concepts, Technology &amp; Architecture" — Thomas Erl</h3>
+        <p class="rc-desc">Comprehensive reference on cloud architecture patterns, service models (IaaS/PaaS/SaaS), and deployment strategies.</p>
+        <a href="https://www.amazon.com/dp/0133387526" target="_blank" rel="noopener" class="rc-link">Find on Amazon →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== 6. COMMUNITIES & FORUMS ========== -->
+  <section class="resource-section" data-category="communities">
+    <h2 class="resource-section-title">💬 Communities &amp; Forums</h2>
+    <p class="resource-section-sub">Learn faster by connecting with others on the same path.</p>
+    <div class="resource-grid">
+
+      <div class="resource-card">
+        <div class="rc-icon">🟧</div>
+        <span class="rc-tag tag-community">Community</span>
+        <h3>Reddit Communities</h3>
+        <p class="rc-desc">Join <strong>r/Azure</strong>, <strong>r/aws</strong>, <strong>r/cloudcomputing</strong>, and <strong>r/ITCareerQuestions</strong> for discussions, tips, and career advice from cloud professionals.</p>
+        <a href="https://www.reddit.com/r/cloudcomputing/" target="_blank" rel="noopener" class="rc-link">Browse r/cloudcomputing →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">🔷</div>
+        <span class="rc-tag tag-community">Community</span>
+        <h3>Microsoft Q&amp;A</h3>
+        <p class="rc-desc">Official Microsoft technical forum. Ask Azure questions and get answers from Microsoft engineers and MVPs.</p>
+        <a href="https://learn.microsoft.com/answers/" target="_blank" rel="noopener" class="rc-link">Visit Microsoft Q&amp;A →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">📋</div>
+        <span class="rc-tag tag-community">Community</span>
+        <h3>Stack Overflow</h3>
+        <p class="rc-desc">The world's largest developer Q&amp;A site. Search cloud-tagged questions or ask your own when stuck on a technical problem.</p>
+        <a href="https://stackoverflow.com/questions/tagged/cloud" target="_blank" rel="noopener" class="rc-link">Browse Cloud Questions →</a>
+      </div>
+
+      <div class="resource-card">
+        <div class="rc-icon">💬</div>
+        <span class="rc-tag tag-community">Community</span>
+        <h3>Discord: Cloud Study Network</h3>
+        <p class="rc-desc">Active Discord community for cloud learners. Study groups, cert prep channels, and real-time help from peers.</p>
+        <a href="https://discord.gg/cloud" target="_blank" rel="noopener" class="rc-link">Join on Discord →</a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ====== FOOTER ====== -->
+<footer class="footer">
+  <div class="container">
+    <p id="motivational-quote" class="motivational-quote"></p>
+    <p style="margin-top:12px;">Cloud Pre-Sales Learning Path © 2026</p>
+  </div>
+</footer>
+
+<script src="js/game-engine.js"></script>
+<script>
+  // Category filter logic
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const sections = document.querySelectorAll('.resource-section');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      // Update active button
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Show/hide sections
+      sections.forEach(section => {
+        if (filter === 'all' || section.dataset.category === filter) {
+          section.classList.remove('hidden');
+        } else {
+          section.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
