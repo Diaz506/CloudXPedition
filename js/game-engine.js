@@ -221,20 +221,29 @@ const GameEngine = (() => {
   }
 
   // --- Assessment ---
-  function saveAssessment(scores) {
+  function saveAssessment(scores, reasons) {
+    const isFirstTime = !state.assessmentDone;
     state.assessmentScores = scores;
+    state.assessmentReasons = reasons || null;
     state.assessmentDone = true;
     saveState(state);
-    addXP(100, 'Assessment complete');
-    unlockBadge('trailblazer');
+
+    if (isFirstTime) {
+      addXP(100, 'Assessment complete');
+      unlockBadge('trailblazer');
+    } else {
+      addXP(25, 'Assessment retake');
+    }
     const allConfident = Object.values(scores).every(s => s === 3);
     if (allConfident) unlockBadge('perfectionist');
   }
 
   function getAssessmentScores() { return state.assessmentScores; }
+  function getAssessmentReasons() { return state.assessmentReasons || null; }
   function isAssessmentDone() { return state.assessmentDone; }
   function resetAssessment() {
     state.assessmentScores = {};
+    state.assessmentReasons = null;
     state.assessmentDone = false;
     saveState(state);
   }
@@ -281,6 +290,8 @@ const GameEngine = (() => {
 
     const toast = document.createElement('div');
     toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
     toast.textContent = message;
     document.body.appendChild(toast);
     setTimeout(() => toast.remove(), 3000);
@@ -355,7 +366,7 @@ const GameEngine = (() => {
     completePhase, isPhaseCompleted, getCurrentPhase,
     completeCheck, isCheckCompleted,
     completeBoss,
-    saveAssessment, getAssessmentScores, isAssessmentDone, resetAssessment,
+    saveAssessment, getAssessmentScores, getAssessmentReasons, isAssessmentDone, resetAssessment,
     getStreak, getStreakMultiplier,
     getRandomQuote, getOverallProgress,
     showToast, triggerCelebration, updateHeaderUI,

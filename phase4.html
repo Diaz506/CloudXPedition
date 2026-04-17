@@ -420,6 +420,7 @@
     <button class="btn btn-primary btn-lg" id="btn-complete-phase" onclick="completePhase()" disabled>
       🎓 Complete Phase 4 — Earn 500 XP + Badge
     </button>
+    <p id="complete-phase-hint" style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">Complete all 9 topics to unlock</p>
     <p id="phase-complete-msg" style="margin-top:12px; display:none; color:green; font-weight:bold;">✅ Phase 4 Complete! You've earned the Cloud Services Deep Dive badge!</p>
 
     <div class="phase-nav">
@@ -489,10 +490,17 @@
     document.getElementById('phase-progress-label').textContent = count + ' of ' + TOPICS.length + ' topics completed';
 
     var btn = document.getElementById('btn-complete-phase');
-    if (count === TOPICS.length) {
+    var hint = document.getElementById('complete-phase-hint');
+    if (GameEngine.isPhaseCompleted(4)) {
+      btn.disabled = true;
+      btn.textContent = '✅ Phase 4 Completed!';
+      hint.textContent = "You've earned the Cloud Services Deep Dive badge!";
+    } else if (count === TOPICS.length) {
       btn.disabled = false;
+      hint.textContent = 'All topics done — claim your badge!';
     } else {
       btn.disabled = true;
+      hint.textContent = 'Complete all ' + TOPICS.length + ' topics to unlock (' + (TOPICS.length - count) + ' remaining)';
     }
   }
 

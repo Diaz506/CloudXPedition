@@ -109,9 +109,10 @@
   ];
 
   const REC_MAP = {
-    1: { label: '🔴 Required — Deep Study', cls: 'rec-required' },
-    2: { label: '🟡 Review — Refresh Knowledge', cls: 'rec-review' },
-    3: { label: '🟢 Skim — You Know This', cls: 'rec-skim' },
+    0: { label: '🔴 Required — Deep Study', cls: 'rec-required' },
+    1: { label: '🟡 Review — Refresh Knowledge', cls: 'rec-review' },
+    2: { label: '🟢 Skim — You Know This', cls: 'rec-skim' },
+    3: { label: '🔵 Skip — Revision Only', cls: 'rec-skip' },
   };
 
   /* ---------- Stats ---------- */
@@ -208,7 +209,7 @@
 
     PHASES.forEach(p => {
       const score = scores[p.num] || scores['phase' + p.num] || 1;
-      const rec = REC_MAP[score] || REC_MAP[1];
+      const rec = REC_MAP[score] || REC_MAP[0];
       html +=
         '<div class="results-phase-card">' +
           '<div class="emoji">' + p.icon + '</div>' +

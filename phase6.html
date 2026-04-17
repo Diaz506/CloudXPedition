@@ -449,6 +449,7 @@
     <button class="btn btn-primary btn-lg btn-block" id="btn-complete-phase" onclick="completePhase()" disabled>
       🏆 Complete Phase 6 — Certification &amp; Portfolio
     </button>
+    <p id="complete-phase-hint" style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">Complete all topics to unlock</p>
     <p id="phase-complete-msg" style="margin-top:12px;display:none;color:#27ae60;font-weight:bold;font-size:1.2em;">
       🌟 You've completed the Cloud Pre-Sales Learning Path! You're ready to start your cloud career!
     </p>
@@ -500,7 +501,19 @@
     const pct = Math.round((completed.length / TOPICS.length) * 100);
     document.getElementById('phase-progress-fill').style.width = pct + '%';
     document.getElementById('phase-progress-label').textContent = completed.length + ' of ' + TOPICS.length + ' topics completed';
-    document.getElementById('btn-complete-phase').disabled = completed.length < TOPICS.length;
+    const btn = document.getElementById('btn-complete-phase');
+    const hint = document.getElementById('complete-phase-hint');
+    if (GameEngine.isPhaseCompleted(6)) {
+      btn.disabled = true;
+      btn.textContent = '🏆 Phase 6 Completed! ✅';
+      hint.textContent = "You've completed the entire Cloud Pre-Sales Learning Path!";
+    } else if (completed.length >= TOPICS.length) {
+      btn.disabled = false;
+      hint.textContent = 'All topics done — claim your badge!';
+    } else {
+      btn.disabled = true;
+      hint.textContent = 'Complete all ' + TOPICS.length + ' topics to unlock (' + (TOPICS.length - completed.length) + ' remaining)';
+    }
   }
 
   // Knowledge check

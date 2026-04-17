@@ -392,6 +392,7 @@
     <!-- ========== COMPLETE PHASE ========== -->
     <div style="text-align:center; margin-top: 36px;">
       <button class="btn btn-primary btn-lg" id="btn-complete-phase" onclick="completePhase()" disabled>🎓 Complete Phase 5 — Earn 500 XP + Badge</button>
+      <p id="complete-phase-hint" style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;">Complete all topics to unlock</p>
       <p id="phase-complete-msg" style="color: #22c55e; font-weight: 700; margin-top: 12px; display: none;">✅ Phase 5 Completed! You've earned the Pre-Sales Pro badge!</p>
     </div>
 
@@ -469,12 +470,19 @@
 
   function checkPhaseReady() {
     var allDone = TOPICS.every(function(t) { return GameEngine.isTopicCompleted(t); });
+    var completed = TOPICS.filter(function(t) { return GameEngine.isTopicCompleted(t); });
     var btn = document.getElementById('btn-complete-phase');
+    var hint = document.getElementById('complete-phase-hint');
     btn.disabled = !allDone;
     if (GameEngine.isPhaseCompleted(PHASE)) {
       btn.disabled = true;
       btn.textContent = 'Phase 5 Completed ✅';
+      hint.textContent = "You've earned the Pre-Sales Pro badge!";
       document.getElementById('phase-complete-msg').style.display = 'block';
+    } else if (allDone) {
+      hint.textContent = 'All topics done — claim your badge!';
+    } else {
+      hint.textContent = 'Complete all ' + TOPICS.length + ' topics to unlock (' + (TOPICS.length - completed.length) + ' remaining)';
     }
   }
 

@@ -454,16 +454,24 @@
   window.selectConfidence = function (value) {
     const s = SCENARIOS[currentIndex];
     answers[s.id] = value;
-    const level = CONFIDENCE_LEVELS[value];
+
+    // Save progress to sessionStorage for recovery
+    try {
+      sessionStorage.setItem('assessmentSession', JSON.stringify({ currentIndex, answers }));
+    } catch (e) { /* sessionStorage unavailable — ignore */ }
 
     // Highlight selected button, but keep all clickable for changing answer
     document.querySelectorAll('.confidence-btn').forEach(btn => {
       btn.classList.toggle('selected', parseInt(btn.dataset.value) === value);
     });
 
-    // Show feedback panel with what this scenario tests
-    const existingFeedback = document.getElementById('scenario-feedback');
-    if (existingFeedback) existingFeedback.remove();
+    // Remove existing feedback (if user changed answer)
+    const oldNav = document.querySelector('.scenario-nav');
+    const oldHint = document.querySelector('.change-answer-hint');
+    const oldFeedback = document.getElementById('scenario-feedback');
+    if (oldNav) oldNav.remove();
+    if (oldHint) oldHint.remove();
+    if (oldFeedback) oldFeedback.remove();
 
     const phaseInfo = PHASE_INFO[s.phase];
     const feedbackHTML = `
@@ -476,19 +484,19 @@
       </div>
       <p class="change-answer-hint">💡 You can change your answer above before continuing</p>
       <div class="scenario-nav">
-        <button class="btn btn-primary" onclick="nextScenario()">
+        <button class="btn btn-primary" id="btn-continue" onclick="nextScenario()">
           ${currentIndex < SCENARIOS.length - 1 ? 'Continue →' : 'See My Results →'}
         </button>
       </div>`;
 
     document.getElementById('scenario-container').querySelector('.scenario-card').insertAdjacentHTML('beforeend', feedbackHTML);
-
-    // Scroll feedback into view
     document.getElementById('scenario-feedback').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   };
 
-  // ── Next Scenario ──
+  // ── Next Scenario (with double-click guard) ──
   window.nextScenario = function () {
+    const btn = document.getElementById('btn-continue');
+    if (btn) btn.disabled = true;
     currentIndex++;
     if (currentIndex < SCENARIOS.length) {
       renderScenario();
@@ -500,10 +508,10 @@
   // ── Finish & Calculate Results ──
   function finishAssessment() {
     const { scores, reasons } = calculatePhaseScores();
-    // Save only the numeric scores for GameEngine (convert Phase 6 back to 0)
     const saveScores = { ...scores };
     saveScores[6] = 0;
-    GameEngine.saveAssessment(saveScores);
+    GameEngine.saveAssessment(saveScores, reasons);
+    sessionStorage.removeItem('assessmentSession');
     showResults(scores, reasons);
   }
 
@@ -635,8 +643,18 @@
     currentIndex = 0;
     Object.keys(answers).forEach(k => delete answers[k]);
     GameEngine.resetAssessment();
+    sessionStorage.removeItem('assessmentSession');
     showScreen('welcome');
   };
+
+  // ── Warn before navigating away mid-assessment ──
+  window.addEventListener('beforeunload', function (e) {
+    if (currentIndex > 0 && currentIndex < SCENARIOS.length &&
+        !document.getElementById('screen-results').classList.contains('active')) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
 
   // ── Init ──
   function init() {
@@ -653,13 +671,32 @@
     if (GameEngine.isAssessmentDone()) {
       const scores = GameEngine.getAssessmentScores();
       if (scores && Object.keys(scores).length > 0) {
-        // Convert Phase 6 to -1 for display
         const displayScores = { ...scores };
         displayScores[6] = -1;
-        showResults(displayScores, null);
+        const reasons = GameEngine.getAssessmentReasons();
+        showResults(displayScores, reasons);
         return;
       }
     }
+
+    // Check for in-progress assessment to resume
+    try {
+      const saved = sessionStorage.getItem('assessmentSession');
+      if (saved) {
+        const session = JSON.parse(saved);
+        if (session.currentIndex > 0 && session.answers && Object.keys(session.answers).length > 0) {
+          if (confirm('You have an assessment in progress (scenario ' + (session.currentIndex + 1) + ' of ' + SCENARIOS.length + '). Resume where you left off?')) {
+            currentIndex = session.currentIndex;
+            Object.assign(answers, session.answers);
+            showScreen('scenario');
+            renderScenario();
+            return;
+          } else {
+            sessionStorage.removeItem('assessmentSession');
+          }
+        }
+      }
+    } catch (e) { /* sessionStorage unavailable */ }
   }
 
   init();
