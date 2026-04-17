@@ -351,6 +351,10 @@
         🎉 <strong>Boss Defeated!</strong> You recommended a practical, phased approach: lift-and-shift for quick wins, TCO analysis for the CFO, and hybrid cloud for compliance. This is exactly how real cloud consultants advise enterprise customers!
       </div>
       <div class="check-feedback error" id="boss-feedback-wrong" style="display:none;"></div>
+      <div id="boss-retry" style="display:none;text-align:center;margin-top:12px;">
+        <p style="color:var(--gray-600);font-size:0.9rem;margin-bottom:8px;">💡 Review the topics above to strengthen your understanding, then try again.</p>
+        <button class="btn btn-outline" onclick="retryBoss()">🔄 Retry Boss Challenge</button>
+      </div>
     </div>
 
     <!-- Complete Phase -->
@@ -405,6 +409,12 @@
   }
 
   const bossAnswers = {};
+  const BOSS_EXPLANATIONS = {
+    1: '💡 <strong>The correct answer is B) Lift-and-shift to Azure VMs first, then modernize.</strong> A deeply customized ERP can\'t be easily re-architected or replaced overnight. Lift-and-shift gets them off aging hardware quickly, then you can modernize components over time with less risk.',
+    2: '💡 <strong>The correct answer is B) Use the Azure TCO Calculator.</strong> Never claim "cloud is always cheaper" — it depends on the workload. The TCO Calculator shows the full picture: CapEx vs OpEx, plus hidden on-prem costs like power, cooling, IT staff, and hardware refresh cycles.',
+    3: '💡 <strong>The correct answer is C) Hybrid cloud.</strong> Regulations don\'t make cloud impossible — they require the right approach. Hybrid keeps regulated data on-prem or in a sovereign cloud region while moving other workloads to the public cloud for flexibility and cost savings.'
+  };
+
   function bossCheck(el, part, correct) {
     if (bossAnswers[part] !== undefined) return;
     bossAnswers[part] = correct;
@@ -412,13 +422,28 @@
     if (!correct) {
       const fb = document.getElementById('boss-feedback-wrong');
       fb.style.display = 'block';
-      fb.innerHTML = '❌ Part ' + part + ' incorrect. Review the topics above and try again on your next visit!';
+      fb.innerHTML = '❌ <strong>Part ' + part + ' incorrect.</strong><br>' + BOSS_EXPLANATIONS[part];
+      document.getElementById('boss-retry').style.display = 'block';
     }
     if (Object.keys(bossAnswers).length === 3 && bossAnswers[1] && bossAnswers[2] && bossAnswers[3]) {
       document.getElementById('boss-feedback-correct').style.display = 'block';
+      document.getElementById('boss-retry').style.display = 'none';
       const firstTry = !document.getElementById('boss-feedback-wrong').style.display || document.getElementById('boss-feedback-wrong').style.display === 'none';
       GameEngine.completeBoss(PHASE, firstTry);
     }
+  }
+
+  function retryBoss() {
+    Object.keys(bossAnswers).forEach(k => delete bossAnswers[k]);
+    document.querySelectorAll('.check-option').forEach(opt => {
+      if (opt.closest('.card')) {
+        opt.classList.remove('correct', 'incorrect');
+        opt.style.pointerEvents = '';
+      }
+    });
+    document.getElementById('boss-feedback-wrong').style.display = 'none';
+    document.getElementById('boss-feedback-correct').style.display = 'none';
+    document.getElementById('boss-retry').style.display = 'none';
   }
 
   function completePhase() {

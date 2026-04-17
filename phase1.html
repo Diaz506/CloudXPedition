@@ -352,6 +352,10 @@
         🎉 <strong>Boss Defeated!</strong> You combined networking (DHCP), storage (RAID 5), and security (layered defense) knowledge perfectly. You're thinking like a real IT professional!
       </div>
       <div class="check-feedback error" id="boss-feedback-wrong" style="display:none;"></div>
+      <div id="boss-retry" style="display:none;text-align:center;margin-top:12px;">
+        <p style="color:var(--gray-600);font-size:0.9rem;margin-bottom:8px;">💡 Review the topics above to strengthen your understanding, then try again.</p>
+        <button class="btn btn-outline" onclick="retryBoss()">🔄 Retry Boss Challenge</button>
+      </div>
     </div>
 
     <!-- Complete Phase -->
@@ -410,6 +414,12 @@
 
   // Boss challenge tracking
   const bossAnswers = {};
+  const BOSS_EXPLANATIONS = {
+    1: '💡 <strong>The correct answer is A) A router with DHCP enabled.</strong> DHCP (Dynamic Host Configuration Protocol) automatically assigns IP addresses to devices on a network. A DNS server resolves domain names to IPs, and a firewall filters traffic — neither assigns IPs.',
+    2: '💡 <strong>The correct answer is C) RAID 5.</strong> RAID 5 stripes data across drives with parity, so one drive can fail without data loss — and it uses storage more efficiently than RAID 1 (mirroring). RAID 0 offers no redundancy at all.',
+    3: '💡 <strong>The correct answer is B) Firewall + strong passwords + antivirus on all machines.</strong> Security requires a layered approach (defense in depth). Protecting only the server or only the connection leaves other attack vectors open.'
+  };
+
   function bossCheck(el, part, correct) {
     if (bossAnswers[part] !== undefined) return;
     bossAnswers[part] = correct;
@@ -417,14 +427,30 @@
     if (!correct) {
       const fb = document.getElementById('boss-feedback-wrong');
       fb.style.display = 'block';
-      fb.innerHTML = '❌ Part ' + part + ' incorrect. Review the topics above and try again on your next visit!';
+      fb.innerHTML = '❌ <strong>Part ' + part + ' incorrect.</strong><br>' + BOSS_EXPLANATIONS[part];
+      document.getElementById('boss-retry').style.display = 'block';
     }
     // Check if all 3 parts answered correctly
     if (Object.keys(bossAnswers).length === 3 && bossAnswers[1] && bossAnswers[2] && bossAnswers[3]) {
       document.getElementById('boss-feedback-correct').style.display = 'block';
+      document.getElementById('boss-retry').style.display = 'none';
       const firstTry = !document.getElementById('boss-feedback-wrong').style.display || document.getElementById('boss-feedback-wrong').style.display === 'none';
       GameEngine.completeBoss(PHASE, firstTry);
     }
+  }
+
+  function retryBoss() {
+    Object.keys(bossAnswers).forEach(k => delete bossAnswers[k]);
+    document.querySelectorAll('.check-option').forEach(opt => {
+      // Only reset boss options (inside the boss card)
+      if (opt.closest('.card')) {
+        opt.classList.remove('correct', 'incorrect');
+        opt.style.pointerEvents = '';
+      }
+    });
+    document.getElementById('boss-feedback-wrong').style.display = 'none';
+    document.getElementById('boss-feedback-correct').style.display = 'none';
+    document.getElementById('boss-retry').style.display = 'none';
   }
 
   // Complete phase
