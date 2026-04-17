@@ -81,8 +81,17 @@
               <a class="resource-link" href="https://learn.microsoft.com/en-us/training/modules/network-fundamentals/" target="_blank">
                 <span class="emoji">📄</span> Article: Microsoft Learn — Networking fundamentals
               </a>
-              <div class="resource-link">
+              <div class="resource-link" style="cursor:pointer;" onclick="this.querySelector('.lab-steps').style.display=this.querySelector('.lab-steps').style.display==='none'?'block':'none'">
                 <span class="emoji">🧪</span> Lab: Open command prompt, run <code>ipconfig</code> and <code>nslookup</code> on 3 websites
+                <div class="lab-steps" style="display:none;margin-top:10px;padding:12px;background:#f0f7ff;border-radius:8px;font-size:0.85rem;line-height:1.8;cursor:default;" onclick="event.stopPropagation()">
+                  <strong>Step-by-step:</strong><br>
+                  1️⃣ Press <kbd>Win + R</kbd> on your keyboard, type <code>cmd</code>, and press Enter — this opens Command Prompt<br>
+                  2️⃣ Type <code>ipconfig</code> and press Enter — you'll see your computer's IP address, subnet mask, and default gateway<br>
+                  3️⃣ Type <code>nslookup google.com</code> and press Enter — this shows the IP address behind the domain<br>
+                  4️⃣ Try <code>nslookup microsoft.com</code> and <code>nslookup github.com</code> — notice each domain resolves to different IPs<br>
+                  5️⃣ Try <code>ping google.com</code> — this tests if you can reach the server and shows response time<br>
+                  <strong>🎯 What you learned:</strong> Your computer has a local IP (ipconfig), and DNS translates domain names into IP addresses (nslookup).
+                </div>
               </div>
             </div>
           </div>
@@ -123,8 +132,17 @@
               <a class="resource-link" href="https://www.cloudflare.com/learning/dns/what-is-dns/" target="_blank">
                 <span class="emoji">📄</span> Article: Cloudflare — What is DNS?
               </a>
-              <div class="resource-link">
+              <div class="resource-link" style="cursor:pointer;" onclick="this.querySelector('.lab-steps').style.display=this.querySelector('.lab-steps').style.display==='none'?'block':'none'">
                 <span class="emoji">🧪</span> Lab: Use <code>nslookup</code> to find DNS records for 3 different websites
+                <div class="lab-steps" style="display:none;margin-top:10px;padding:12px;background:#f0f7ff;border-radius:8px;font-size:0.85rem;line-height:1.8;cursor:default;" onclick="event.stopPropagation()">
+                  <strong>Step-by-step:</strong><br>
+                  1️⃣ Open Command Prompt: press <kbd>Win + R</kbd>, type <code>cmd</code>, press Enter<br>
+                  2️⃣ Type <code>nslookup -type=A google.com</code> — the "A" record maps a domain to an IPv4 address<br>
+                  3️⃣ Type <code>nslookup -type=MX google.com</code> — "MX" records show which mail servers handle email for the domain<br>
+                  4️⃣ Type <code>nslookup -type=NS microsoft.com</code> — "NS" records show the authoritative name servers<br>
+                  5️⃣ Try the same commands with <code>github.com</code> and your favorite website<br>
+                  <strong>🎯 What you learned:</strong> DNS has different record types (A, MX, NS, CNAME) — each serves a different purpose in routing traffic.
+                </div>
               </div>
             </div>
           </div>
@@ -164,8 +182,17 @@
               <a class="resource-link" href="https://www.comptia.org/content/guides/what-is-a-port" target="_blank">
                 <span class="emoji">📄</span> Article: CompTIA — Ports and Protocols
               </a>
-              <div class="resource-link">
+              <div class="resource-link" style="cursor:pointer;" onclick="this.querySelector('.lab-steps').style.display=this.querySelector('.lab-steps').style.display==='none'?'block':'none'">
                 <span class="emoji">🧪</span> Lab: Check which ports are open on your computer with <code>netstat</code>
+                <div class="lab-steps" style="display:none;margin-top:10px;padding:12px;background:#f0f7ff;border-radius:8px;font-size:0.85rem;line-height:1.8;cursor:default;" onclick="event.stopPropagation()">
+                  <strong>Step-by-step:</strong><br>
+                  1️⃣ Open Command Prompt: press <kbd>Win + R</kbd>, type <code>cmd</code>, press Enter<br>
+                  2️⃣ Type <code>netstat -an</code> and press Enter — this shows all active network connections and listening ports<br>
+                  3️⃣ Look for <code>LISTENING</code> entries — these are ports your computer has open and waiting for connections<br>
+                  4️⃣ Common ports you might see: <strong>443</strong> (HTTPS), <strong>80</strong> (HTTP), <strong>135</strong> (Windows RPC), <strong>445</strong> (File sharing)<br>
+                  5️⃣ Try <code>netstat -an | find "443"</code> — this filters to show only HTTPS connections<br>
+                  <strong>🎯 What you learned:</strong> Your computer constantly communicates through numbered ports. Each port is like a door for a specific service.
+                </div>
               </div>
             </div>
           </div>
@@ -207,8 +234,18 @@
               <a class="resource-link" href="https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/" target="_blank">
                 <span class="emoji">📄</span> Article: Microsoft Learn — Introduction to Virtual Machines
               </a>
-              <div class="resource-link">
+              <div class="resource-link" style="cursor:pointer;" onclick="this.querySelector('.lab-steps').style.display=this.querySelector('.lab-steps').style.display==='none'?'block':'none'">
                 <span class="emoji">🧪</span> Lab: Download VirtualBox and create your first VM with Ubuntu
+                <div class="lab-steps" style="display:none;margin-top:10px;padding:12px;background:#f0f7ff;border-radius:8px;font-size:0.85rem;line-height:1.8;cursor:default;" onclick="event.stopPropagation()">
+                  <strong>Step-by-step:</strong><br>
+                  1️⃣ Go to <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" style="color:var(--primary)">virtualbox.org/wiki/Downloads</a> and download VirtualBox for your OS — install it like any normal program<br>
+                  2️⃣ Go to <a href="https://ubuntu.com/download/desktop" target="_blank" style="color:var(--primary)">ubuntu.com/download/desktop</a> and download the Ubuntu ISO file (it's free, ~5 GB)<br>
+                  3️⃣ Open VirtualBox → click <strong>"New"</strong> → name it "Ubuntu Test" → select Type: Linux, Version: Ubuntu (64-bit)<br>
+                  4️⃣ Set memory to <strong>4096 MB</strong> (4 GB) and create a virtual hard disk of <strong>25 GB</strong><br>
+                  5️⃣ Click <strong>Settings → Storage</strong> → click the empty disk icon → choose the Ubuntu ISO you downloaded<br>
+                  6️⃣ Click <strong>"Start"</strong> — Ubuntu will boot inside a window! Follow the on-screen installer<br>
+                  <strong>🎯 What you learned:</strong> A VM is a computer inside your computer. You can create, destroy, and snapshot them — this is how cloud providers work at massive scale.
+                </div>
               </div>
             </div>
           </div>
@@ -251,8 +288,17 @@
               <a class="resource-link" href="https://www.comptia.org/content/guides/storage-technologies" target="_blank">
                 <span class="emoji">📄</span> Article: CompTIA — Storage Technologies
               </a>
-              <div class="resource-link">
+              <div class="resource-link" style="cursor:pointer;" onclick="this.querySelector('.lab-steps').style.display=this.querySelector('.lab-steps').style.display==='none'?'block':'none'">
                 <span class="emoji">🧪</span> Lab: Explore your disk management tool, understand partitions and volumes
+                <div class="lab-steps" style="display:none;margin-top:10px;padding:12px;background:#f0f7ff;border-radius:8px;font-size:0.85rem;line-height:1.8;cursor:default;" onclick="event.stopPropagation()">
+                  <strong>Step-by-step:</strong><br>
+                  1️⃣ Right-click the <strong>Start button</strong> (Windows icon, bottom-left) → select <strong>"Disk Management"</strong><br>
+                  2️⃣ You'll see a visual map of your drives — each colored block is a <strong>partition</strong> (a logical section of a disk)<br>
+                  3️⃣ Look for your <strong>C: drive</strong> — this is your main partition where Windows lives<br>
+                  4️⃣ Notice the small partitions labeled "System Reserved" or "Recovery" — Windows uses these for boot and recovery<br>
+                  5️⃣ Right-click your C: drive → click <strong>"Properties"</strong> to see used vs free space and file system type (usually NTFS)<br>
+                  <strong>🎯 What you learned:</strong> Physical disks are divided into partitions, each formatted with a file system. This same concept applies to cloud storage volumes.
+                </div>
               </div>
             </div>
           </div>
@@ -294,8 +340,17 @@
               <a class="resource-link" href="https://learn.microsoft.com/en-us/training/modules/describe-basic-security-capabilities/" target="_blank">
                 <span class="emoji">📄</span> Article: Microsoft Learn — Security fundamentals
               </a>
-              <div class="resource-link">
+              <div class="resource-link" style="cursor:pointer;" onclick="this.querySelector('.lab-steps').style.display=this.querySelector('.lab-steps').style.display==='none'?'block':'none'">
                 <span class="emoji">🧪</span> Lab: Check your Windows Firewall settings and understand inbound/outbound rules
+                <div class="lab-steps" style="display:none;margin-top:10px;padding:12px;background:#f0f7ff;border-radius:8px;font-size:0.85rem;line-height:1.8;cursor:default;" onclick="event.stopPropagation()">
+                  <strong>Step-by-step:</strong><br>
+                  1️⃣ Press <kbd>Win + R</kbd>, type <code>wf.msc</code>, press Enter — this opens Windows Defender Firewall with Advanced Security<br>
+                  2️⃣ Click <strong>"Inbound Rules"</strong> on the left — these control what traffic is allowed <em>into</em> your computer<br>
+                  3️⃣ Notice the green checkmarks (✅ allowed) and red circles (🚫 blocked) — each rule has a name, port, and protocol<br>
+                  4️⃣ Click <strong>"Outbound Rules"</strong> — these control what your computer can send <em>out</em> to the internet<br>
+                  5️⃣ Find a rule for a program you recognize (like a browser or game) and double-click it — explore the Protocols, Ports, and Scope tabs<br>
+                  <strong>🎯 What you learned:</strong> Firewalls use rules to allow or block traffic by port, protocol, and program. This same concept applies to cloud network security groups (NSGs).
+                </div>
               </div>
             </div>
           </div>

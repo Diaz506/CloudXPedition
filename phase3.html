@@ -124,8 +124,18 @@
               <a class="resource-link" href="https://learn.microsoft.com/en-us/training/paths/az-900-describe-cloud-concepts/" target="_blank">
                 <span class="emoji">📄</span> Article: Microsoft Learn — Azure Fundamentals path
               </a>
-              <div class="resource-link">
+              <div class="resource-link" style="cursor:pointer;" onclick="this.querySelector('.lab-steps').style.display=this.querySelector('.lab-steps').style.display==='none'?'block':'none'">
                 <span class="emoji">🧪</span> Lab: Create a free Azure account and explore the portal
+                <div class="lab-steps" style="display:none;margin-top:10px;padding:12px;background:#f0f7ff;border-radius:8px;font-size:0.85rem;line-height:1.8;cursor:default;" onclick="event.stopPropagation()">
+                  <strong>Step-by-step:</strong><br>
+                  1️⃣ Go to <a href="https://azure.microsoft.com/free" target="_blank" style="color:var(--primary)">azure.microsoft.com/free</a> and click <strong>"Start free"</strong> — you'll get $200 in credits for 30 days + 12 months of free services<br>
+                  2️⃣ Sign in with your Microsoft account (or create one) — you'll need a phone number and credit card for verification (you won't be charged)<br>
+                  3️⃣ Once signed up, you'll land on the <strong>Azure Portal</strong> at <a href="https://portal.azure.com" target="_blank" style="color:var(--primary)">portal.azure.com</a><br>
+                  4️⃣ Click <strong>"Resource groups"</strong> in the left menu — this is where you organize your cloud resources (like folders on your computer)<br>
+                  5️⃣ Click <strong>"Create"</strong> → name it "my-first-rg" → pick a region close to you → click "Review + create" → "Create"<br>
+                  6️⃣ Explore the portal: click the <strong>☰ hamburger menu</strong> (top-left) and browse services like "Virtual machines", "Storage accounts", "App Services"<br>
+                  <strong>🎯 What you learned:</strong> The Azure Portal is your control center for all cloud resources. Everything starts with a resource group.
+                </div>
               </div>
             </div>
           </div>
@@ -169,8 +179,20 @@
               <a class="resource-link" href="https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/" target="_blank">
                 <span class="emoji">📄</span> Article: AWS — Cloud Practitioner Essentials
               </a>
-              <div class="resource-link">
+              <div class="resource-link" style="cursor:pointer;" onclick="this.querySelector('.lab-steps').style.display=this.querySelector('.lab-steps').style.display==='none'?'block':'none'">
                 <span class="emoji">🧪</span> Lab: Create a free AWS account and launch an EC2 instance
+                <div class="lab-steps" style="display:none;margin-top:10px;padding:12px;background:#f0f7ff;border-radius:8px;font-size:0.85rem;line-height:1.8;cursor:default;" onclick="event.stopPropagation()">
+                  <strong>Step-by-step:</strong><br>
+                  1️⃣ Go to <a href="https://aws.amazon.com/free" target="_blank" style="color:var(--primary)">aws.amazon.com/free</a> and click <strong>"Create a Free Account"</strong> — you'll get 12 months of free-tier services<br>
+                  2️⃣ Fill in your email, create a password, and choose an account name — you'll need a credit card for verification (you won't be charged for free-tier usage)<br>
+                  3️⃣ Once logged in, you'll be at the <strong>AWS Management Console</strong>. In the search bar at the top, type <strong>"EC2"</strong> and click it<br>
+                  4️⃣ Click the orange <strong>"Launch instance"</strong> button<br>
+                  5️⃣ Name it "my-first-server" → under AMI, select <strong>"Amazon Linux 2023"</strong> (Free tier eligible) → Instance type: <strong>t2.micro</strong> (Free tier eligible)<br>
+                  6️⃣ Under Key pair, click <strong>"Create new key pair"</strong> → name it "my-key" → download the .pem file (you'll need this to connect later)<br>
+                  7️⃣ Click <strong>"Launch instance"</strong> — congratulations, you just created a server in the cloud! 🎉<br>
+                  ⚠️ <strong>Important:</strong> When done exploring, go back to EC2 → Instances → right-click your instance → <strong>"Terminate instance"</strong> to avoid any charges<br>
+                  <strong>🎯 What you learned:</strong> Launching a cloud server takes minutes, not weeks. This is the fundamental power of cloud computing.
+                </div>
               </div>
             </div>
           </div>

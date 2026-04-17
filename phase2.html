@@ -197,8 +197,23 @@
               <a class="resource-link" href="https://linuxjourney.com/lesson/the-shell" target="_blank">
                 <span class="emoji">📄</span> Article: Linux Journey — Command Line
               </a>
-              <div class="resource-link">
+              <div class="resource-link" style="cursor:pointer;" onclick="this.querySelector('.lab-steps').style.display=this.querySelector('.lab-steps').style.display==='none'?'block':'none'">
                 <span class="emoji">🧪</span> Lab: Open WSL or a Linux VM and navigate the file system using <code>ls</code>, <code>cd</code>, <code>pwd</code>
+                <div class="lab-steps" style="display:none;margin-top:10px;padding:12px;background:#f0f7ff;border-radius:8px;font-size:0.85rem;line-height:1.8;cursor:default;" onclick="event.stopPropagation()">
+                  <strong>Option A — Using WSL (Windows Subsystem for Linux):</strong><br>
+                  1️⃣ Open PowerShell <strong>as Administrator</strong>: right-click the Start button → "Windows Terminal (Admin)" or search for "PowerShell" → right-click → "Run as administrator"<br>
+                  2️⃣ Type <code>wsl --install</code> and press Enter — this installs Ubuntu automatically (requires a restart)<br>
+                  3️⃣ After restart, open the Start menu and search for <strong>"Ubuntu"</strong> — it will ask you to create a username and password<br>
+                  <strong>Option B — Already have WSL or a Linux VM:</strong><br>
+                  1️⃣ Open your Linux terminal (Ubuntu from Start menu, or boot your VM)<br><br>
+                  <strong>Now try these commands:</strong><br>
+                  4️⃣ Type <code>pwd</code> — shows your current directory (Print Working Directory)<br>
+                  5️⃣ Type <code>ls</code> — lists files and folders in the current directory<br>
+                  6️⃣ Type <code>ls -la</code> — shows ALL files including hidden ones, with permissions and sizes<br>
+                  7️⃣ Type <code>cd /</code> — go to the root of the file system, then <code>ls</code> to see Linux's directory structure<br>
+                  8️⃣ Type <code>cd ~</code> — go back to your home directory<br>
+                  <strong>🎯 What you learned:</strong> Linux uses text commands instead of clicking through File Explorer. These same commands work on every cloud server.
+                </div>
               </div>
             </div>
           </div>
@@ -239,8 +254,23 @@
               <a class="resource-link" href="https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/01-getting-started" target="_blank">
                 <span class="emoji">📄</span> Article: Microsoft Learn — PowerShell 101
               </a>
-              <div class="resource-link">
+              <div class="resource-link" style="cursor:pointer;" onclick="this.querySelector('.lab-steps').style.display=this.querySelector('.lab-steps').style.display==='none'?'block':'none'">
                 <span class="emoji">🧪</span> Lab: Write a PowerShell script that lists all files in a folder and their sizes
+                <div class="lab-steps" style="display:none;margin-top:10px;padding:12px;background:#f0f7ff;border-radius:8px;font-size:0.85rem;line-height:1.8;cursor:default;" onclick="event.stopPropagation()">
+                  <strong>Step-by-step:</strong><br>
+                  1️⃣ Open PowerShell: press <kbd>Win + R</kbd>, type <code>powershell</code>, press Enter (or search "PowerShell" in the Start menu)<br>
+                  2️⃣ First, try a simple command: type <code>Get-ChildItem</code> and press Enter — this lists all files in your current folder<br>
+                  3️⃣ Now let's make it show sizes: type <code>Get-ChildItem | Select-Object Name, Length</code><br>
+                  4️⃣ Let's create your first script file! Type: <code>notepad my-first-script.ps1</code> — Notepad will open asking to create the file, click Yes<br>
+                  5️⃣ Paste this code into Notepad and save:<br>
+                  <code style="display:block;background:#1a1a2e;color:#e0e0ff;padding:8px;border-radius:4px;margin:4px 0;white-space:pre;">$folder = Read-Host "Enter folder path (e.g. C:\Users)"
+Get-ChildItem -Path $folder | 
+  Select-Object Name, @{N='Size(KB)';E={[math]::Round($_.Length/1KB,2)}} |
+  Format-Table -AutoSize</code>
+                  6️⃣ Back in PowerShell, run it: <code>.\my-first-script.ps1</code><br>
+                  ⚠️ If you get an error about execution policy, run: <code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code> and try again<br>
+                  <strong>🎯 What you learned:</strong> PowerShell scripts automate repetitive tasks. Cloud engineers use scripts like this to manage thousands of servers.
+                </div>
               </div>
             </div>
           </div>
