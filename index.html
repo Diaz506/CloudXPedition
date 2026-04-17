@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Pre-Sales Learning Path</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-brand"><span>☁️</span> Cloud Path</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Journey</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="resources.html">Resources</a>
+    </div>
+    <div class="header-xp">
+      <span id="header-level" class="header-level">☁️ Cloud Rookie</span>
+      <span id="header-xp-text">0 XP</span>
+      <div class="header-xp-bar"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
+      <span id="header-streak" class="header-streak"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <h1>Your Journey to Cloud Pre-Sales</h1>
+    <p>Master cloud fundamentals, infrastructure, and pre-sales skills through a guided learning path — earn XP, unlock badges, and level up.</p>
+    <div style="margin-top:24px;">
+      <a id="hero-cta" href="assessment.html" class="btn btn-primary btn-lg" style="background:#fff;color:var(--primary);">
+        🚀 Start Self-Assessment
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Journey Map -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center;">Your Learning Path</h2>
+    <p class="section-subtitle" style="text-align:center;">Follow the path from assessment through all 6 phases</p>
+    <div class="journey-map" id="journey-map"></div>
+  </div>
+</section>
+
+<!-- Phase Cards Grid -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <h2 class="section-title">Phases Overview</h2>
+    <p class="section-subtitle">Dive into each phase to explore topics, complete knowledge checks, and earn badges</p>
+    <div class="phase-grid" id="phase-grid"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p id="motivational-quote" class="motivational-quote"></p>
+    <p style="margin-top:12px;">Cloud Pre-Sales Learning Path © 2026</p>
+  </div>
+</footer>
+
+<script src="js/game-engine.js"></script>
+<script>
+(function () {
+  const PHASES = [
+    { num: 1, icon: '🌐', title: 'IT Fundamentals',          desc: 'Networking, VMs, storage, security basics',                     topics: 6 },
+    { num: 2, icon: '🛡️', title: 'Infrastructure & Identity', desc: 'Active Directory, Windows Server, Linux, scripting',             topics: 6 },
+    { num: 3, icon: '☁️', title: 'Cloud Fundamentals',        desc: 'IaaS/PaaS/SaaS, Azure, AWS, cloud economics',                   topics: 6 },
+    { num: 4, icon: '⚙️', title: 'Cloud Deep Dive',           desc: 'Compute, containers, networking, DR, monitoring, security',      topics: 9 },
+    { num: 5, icon: '💼', title: 'Pre-Sales Skills',          desc: 'Lifecycle, architecture, ROI, compliance, demos',                topics: 6 },
+    { num: 6, icon: '📜', title: 'Certification & Portfolio', desc: 'AZ-900, AZ-104, portfolio, mock scenarios',                     topics: 4 },
+  ];
+
+  const JOURNEY_NODES = [
+    { id: 'assess', icon: '📝', label: 'Assessment', href: 'assessment.html' },
+    ...PHASES.map(p => ({ id: 'phase-' + p.num, icon: p.icon, label: 'Phase ' + p.num, href: 'phase' + p.num + '.html' }))
+  ];
+
+  /* ---------- Journey Map ---------- */
+  function renderJourneyMap() {
+    const map = document.getElementById('journey-map');
+    map.innerHTML = '';
+    const currentPhase = GameEngine.getCurrentPhase();
+    const assessDone = GameEngine.isAssessmentDone();
+
+    JOURNEY_NODES.forEach((node, i) => {
+      // Connector before every node except the first
+      if (i > 0) {
+        const conn = document.createElement('div');
+        conn.className = 'journey-connector';
+        // connector is completed if the previous node is completed
+        const prevCompleted = i === 1 ? assessDone : GameEngine.isPhaseCompleted(i - 1);
+        if (prevCompleted) conn.classList.add('completed');
+        map.appendChild(conn);
+      }
+
+      const nodeEl = document.createElement('div');
+      nodeEl.className = 'journey-node';
+
+      // Determine state
+      if (node.id === 'assess') {
+        if (assessDone) nodeEl.classList.add('completed');
+        else nodeEl.classList.add('current');
+      } else {
+        const phaseNum = parseInt(node.id.replace('phase-', ''));
+        if (GameEngine.isPhaseCompleted(phaseNum)) {
+          nodeEl.classList.add('completed');
+        } else if (phaseNum === currentPhase && assessDone) {
+          nodeEl.classList.add('current');
+        } else if (phaseNum > currentPhase || !assessDone) {
+          nodeEl.classList.add('locked');
+        }
+      }
+
+      nodeEl.innerHTML =
+        '<div class="journey-node-circle">' + node.icon + '</div>' +
+        '<span class="journey-node-label">' + node.label + '</span>';
+
+      if (!nodeEl.classList.contains('locked')) {
+        nodeEl.style.cursor = 'pointer';
+        nodeEl.addEventListener('click', () => { window.location.href = node.href; });
+      }
+
+      map.appendChild(nodeEl);
+    });
+  }
+
+  /* ---------- Phase Cards ---------- */
+  function renderPhaseCards() {
+    const grid = document.getElementById('phase-grid');
+    grid.innerHTML = '';
+    const currentPhase = GameEngine.getCurrentPhase();
+    const assessDone = GameEngine.isAssessmentDone();
+
+    PHASES.forEach(p => {
+      const completed = GameEngine.isPhaseCompleted(p.num);
+      const isCurrent = p.num === currentPhase && assessDone;
+      const locked = (!assessDone || p.num > currentPhase) && !completed;
+      const progress = GameEngine.getPhaseProgress(p.num);
+      const pct = Math.round((progress.length / p.topics) * 100);
+
+      const stateClass = completed ? 'completed' : isCurrent ? 'current' : locked ? 'locked' : '';
+
+      const card = document.createElement('div');
+      card.className = 'card phase-card ' + stateClass;
+      card.innerHTML =
+        '<div class="card-header">' +
+          '<div class="card-icon" style="background:var(--primary-light);">' + p.icon + '</div>' +
+          '<div>' +
+            '<div class="card-title">' + p.title + '</div>' +
+            '<div class="card-subtitle">Phase ' + p.num + ' · ' + p.topics + ' topics</div>' +
+          '</div>' +
+        '</div>' +
+        '<p style="font-size:0.9rem;color:var(--gray-600);margin-bottom:8px;">' + p.desc + '</p>' +
+        '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+        '<div class="progress-label"><span>' + progress.length + ' / ' + p.topics + ' topics</span><span>' + pct + '%</span></div>';
+
+      if (!locked) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => { window.location.href = 'phase' + p.num + '.html'; });
+      }
+      grid.appendChild(card);
+    });
+  }
+
+  /* ---------- Hero CTA ---------- */
+  function updateHeroCTA() {
+    const cta = document.getElementById('hero-cta');
+    if (GameEngine.isAssessmentDone()) {
+      const phase = GameEngine.getCurrentPhase();
+      if (phase <= 6) {
+        cta.textContent = '🚀 Continue Phase ' + phase;
+        cta.href = 'phase' + phase + '.html';
+      } else {
+        cta.textContent = '🏆 View Dashboard';
+        cta.href = 'dashboard.html';
+      }
+    }
+  }
+
+  /* ---------- Init ---------- */
+  document.addEventListener('DOMContentLoaded', () => {
+    renderJourneyMap();
+    renderPhaseCards();
+    updateHeroCTA();
+  });
+})();
+</script>
+</body>
+</html>

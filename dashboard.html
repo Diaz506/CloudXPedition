@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Cloud Pre-Sales Learning Path</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-brand"><span>☁️</span> Cloud Path</a>
+    <div class="nav-links">
+      <a href="index.html">Journey</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="resources.html">Resources</a>
+    </div>
+    <div class="header-xp">
+      <span id="header-level" class="header-level">☁️ Cloud Rookie</span>
+      <span id="header-xp-text">0 XP</span>
+      <div class="header-xp-bar"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
+      <span id="header-streak" class="header-streak"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Dashboard Header -->
+<section class="hero" style="padding:40px 0;">
+  <div class="container">
+    <h1 style="font-size:2rem;">📊 Your Dashboard</h1>
+    <p>Track your progress, badges, and learning milestones</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- Stats Row -->
+  <div class="stats-row" id="stats-row">
+    <div class="stat-card"><div class="stat-value" id="stat-xp">0</div><div class="stat-label">Total XP</div></div>
+    <div class="stat-card"><div class="stat-value" id="stat-level">—</div><div class="stat-label">Current Level</div></div>
+    <div class="stat-card"><div class="stat-value" id="stat-streak">0</div><div class="stat-label">Study Streak (Longest)</div></div>
+    <div class="stat-card"><div class="stat-value" id="stat-phases">0 / 6</div><div class="stat-label">Phases Completed</div></div>
+  </div>
+
+  <!-- XP Progress to Next Level -->
+  <section class="section" style="padding-top:0;">
+    <div class="card">
+      <h3 style="margin-bottom:4px;" id="level-title">Progress to Next Level</h3>
+      <p style="font-size:0.85rem;color:var(--gray-500);margin-bottom:8px;" id="level-subtitle"></p>
+      <div class="progress-bar" style="height:14px;">
+        <div class="progress-fill" id="level-progress-fill" style="width:0%;height:100%;"></div>
+      </div>
+      <div class="progress-label">
+        <span id="level-xp-current"></span>
+        <span id="level-xp-next"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Badge Showcase -->
+  <section class="section" style="padding-top:0;">
+    <h2 class="section-title">🏅 Badge Showcase</h2>
+    <p class="section-subtitle">Earn badges by completing phases, streaks, and special challenges</p>
+    <div class="badge-grid" id="badge-grid"></div>
+  </section>
+
+  <!-- Per-Phase Progress -->
+  <section class="section" style="padding-top:0;">
+    <h2 class="section-title">📈 Phase Progress</h2>
+    <p class="section-subtitle">Topic completion by phase</p>
+    <div class="phase-grid" id="phase-progress-grid"></div>
+  </section>
+
+  <!-- Assessment Results -->
+  <section class="section" style="padding-top:0;display:none;" id="assessment-section">
+    <h2 class="section-title">📝 Assessment Results</h2>
+    <p class="section-subtitle">Your personalized learning map based on self-assessment confidence</p>
+    <div class="results-panel" id="assessment-results"></div>
+  </section>
+
+  <!-- Reset -->
+  <section class="section" style="padding-top:0;text-align:center;">
+    <button class="btn btn-outline" style="color:var(--danger);border-color:var(--danger);" id="reset-btn">
+      🗑️ Reset All Progress
+    </button>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p id="motivational-quote" class="motivational-quote"></p>
+    <p style="margin-top:12px;">Cloud Pre-Sales Learning Path © 2026</p>
+  </div>
+</footer>
+
+<script src="js/game-engine.js"></script>
+<script>
+(function () {
+  const PHASES = [
+    { num: 1, icon: '🌐', title: 'IT Fundamentals',          topics: 6 },
+    { num: 2, icon: '🛡️', title: 'Infrastructure & Identity', topics: 6 },
+    { num: 3, icon: '☁️', title: 'Cloud Fundamentals',        topics: 6 },
+    { num: 4, icon: '⚙️', title: 'Cloud Deep Dive',           topics: 9 },
+    { num: 5, icon: '💼', title: 'Pre-Sales Skills',          topics: 6 },
+    { num: 6, icon: '📜', title: 'Certification & Portfolio', topics: 4 },
+  ];
+
+  const REC_MAP = {
+    1: { label: '🔴 Required — Deep Study', cls: 'rec-required' },
+    2: { label: '🟡 Review — Refresh Knowledge', cls: 'rec-review' },
+    3: { label: '🟢 Skim — You Know This', cls: 'rec-skim' },
+  };
+
+  /* ---------- Stats ---------- */
+  function renderStats() {
+    const level = GameEngine.getLevel();
+    const streak = GameEngine.getStreak();
+    let phasesComplete = 0;
+    for (let i = 1; i <= 6; i++) { if (GameEngine.isPhaseCompleted(i)) phasesComplete++; }
+
+    document.getElementById('stat-xp').textContent = GameEngine.getXP().toLocaleString();
+    document.getElementById('stat-level').textContent = level.title;
+    document.getElementById('stat-streak').textContent = streak.current + 'd (' + streak.longest + 'd best)';
+    document.getElementById('stat-phases').textContent = phasesComplete + ' / 6';
+  }
+
+  /* ---------- Level Progress ---------- */
+  function renderLevelProgress() {
+    const level = GameEngine.getLevel();
+    const next = GameEngine.getNextLevel();
+    const pct = GameEngine.getLevelProgress();
+
+    document.getElementById('level-progress-fill').style.width = pct + '%';
+
+    if (next) {
+      document.getElementById('level-title').textContent = level.title + ' → ' + next.title;
+      document.getElementById('level-subtitle').textContent = pct + '% to next level';
+      document.getElementById('level-xp-current').textContent = GameEngine.getXP() + ' XP';
+      document.getElementById('level-xp-next').textContent = next.xpRequired + ' XP needed';
+    } else {
+      document.getElementById('level-title').textContent = level.title + ' — MAX LEVEL!';
+      document.getElementById('level-subtitle').textContent = 'You have reached the highest level';
+      document.getElementById('level-xp-current').textContent = GameEngine.getXP() + ' XP';
+      document.getElementById('level-xp-next').textContent = '⭐ Max';
+    }
+  }
+
+  /* ---------- Badges ---------- */
+  function renderBadges() {
+    const grid = document.getElementById('badge-grid');
+    grid.innerHTML = '';
+    const badges = GameEngine.getAllBadges();
+
+    badges.forEach(b => {
+      const item = document.createElement('div');
+      item.className = 'badge-item ' + (b.earned ? 'earned' : 'locked');
+      item.innerHTML =
+        '<div class="badge-emoji">' + b.emoji + '</div>' +
+        '<div class="badge-name">' + b.name + '</div>' +
+        '<div style="font-size:0.75rem;color:var(--gray-500);margin-top:4px;">' + b.desc + '</div>';
+      item.title = b.desc;
+      grid.appendChild(item);
+    });
+  }
+
+  /* ---------- Phase Progress ---------- */
+  function renderPhaseProgress() {
+    const grid = document.getElementById('phase-progress-grid');
+    grid.innerHTML = '';
+
+    PHASES.forEach(p => {
+      const progress = GameEngine.getPhaseProgress(p.num);
+      const pct = Math.round((progress.length / p.topics) * 100);
+      const completed = GameEngine.isPhaseCompleted(p.num);
+
+      const card = document.createElement('div');
+      card.className = 'card' + (completed ? ' phase-card completed' : '');
+      card.innerHTML =
+        '<div class="card-header">' +
+          '<div class="card-icon" style="background:' + (completed ? 'var(--success-light)' : 'var(--primary-light)') + ';">' + p.icon + '</div>' +
+          '<div>' +
+            '<div class="card-title">' + p.title + '</div>' +
+            '<div class="card-subtitle">Phase ' + p.num + (completed ? ' ✅ Complete' : '') + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+        '<div class="progress-label"><span>' + progress.length + ' / ' + p.topics + ' topics</span><span>' + pct + '%</span></div>';
+
+      grid.appendChild(card);
+    });
+  }
+
+  /* ---------- Assessment Results ---------- */
+  function renderAssessment() {
+    if (!GameEngine.isAssessmentDone()) return;
+
+    const section = document.getElementById('assessment-section');
+    section.style.display = '';
+
+    const scores = GameEngine.getAssessmentScores();
+    const panel = document.getElementById('assessment-results');
+
+    let html = '<h2>Your Personalized Learning Map</h2><p style="opacity:0.85;">Based on your self-assessment confidence levels</p>';
+    html += '<div class="results-phase-grid">';
+
+    PHASES.forEach(p => {
+      const score = scores[p.num] || scores['phase' + p.num] || 1;
+      const rec = REC_MAP[score] || REC_MAP[1];
+      html +=
+        '<div class="results-phase-card">' +
+          '<div class="emoji">' + p.icon + '</div>' +
+          '<div class="name">Phase ' + p.num + ': ' + p.title + '</div>' +
+          '<div class="rec ' + rec.cls + '">' + rec.label + '</div>' +
+        '</div>';
+    });
+
+    html += '</div>';
+    panel.innerHTML = html;
+  }
+
+  /* ---------- Reset ---------- */
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (confirm('Are you sure you want to reset ALL progress? This cannot be undone.')) {
+      GameEngine.reset();
+      GameEngine.showToast('🗑️ Progress has been reset');
+      setTimeout(() => location.reload(), 500);
+    }
+  });
+
+  /* ---------- Init ---------- */
+  document.addEventListener('DOMContentLoaded', () => {
+    renderStats();
+    renderLevelProgress();
+    renderBadges();
+    renderPhaseProgress();
+    renderAssessment();
+  });
+})();
+</script>
+</body>
+</html>

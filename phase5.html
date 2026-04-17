@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 5: Pre-Sales Skills 💼 — Cloud Pre-Sales Learning Path</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .topic-header { cursor: pointer; user-select: none; display: flex; align-items: center; justify-content: space-between; }
+    .topic-header .toggle-icon { transition: transform 0.2s; font-size: 1.2em; }
+    .topic-header .toggle-icon.open { transform: rotate(90deg); }
+    .topic-content { display: none; padding-top: 12px; }
+    .topic-content.open { display: block; }
+    .boss-section { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #fff; border-radius: 16px; padding: 32px; margin-top: 32px; }
+    .boss-section h2 { color: #f5c518; }
+    .boss-part { background: rgba(255,255,255,0.07); border-radius: 10px; padding: 18px; margin: 14px 0; }
+    .boss-part h4 { color: #f5c518; margin-bottom: 8px; }
+    .boss-option { display: block; margin: 6px 0; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.18); cursor: pointer; transition: background 0.15s; color: #fff; }
+    .boss-option:hover { background: rgba(255,255,255,0.12); }
+    .boss-option.correct { background: #22c55e33; border-color: #22c55e; }
+    .boss-option.wrong { background: #ef444433; border-color: #ef4444; }
+    .boss-feedback { margin-top: 8px; padding: 10px; border-radius: 8px; font-weight: 600; display: none; }
+    .boss-feedback.show { display: block; }
+    .nav-phase-links { display: flex; justify-content: space-between; margin: 40px 0 20px; flex-wrap: wrap; gap: 12px; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-brand"><span>☁️</span> Cloud Path</a>
+    <div class="nav-links">
+      <a href="index.html">Journey</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="resources.html">Resources</a>
+    </div>
+    <div class="header-xp">
+      <span id="header-level" class="header-level">☁️ Cloud Rookie</span>
+      <span id="header-xp-text">0 XP</span>
+      <div class="header-xp-bar"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
+      <span id="header-streak" class="header-streak"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1>💼 Phase 5: Pre-Sales Skills</h1>
+    <p class="section-subtitle">Turn technical knowledge into business impact — learn to discover, design, present, and win.</p>
+  </div>
+</section>
+
+<!-- Progress -->
+<section class="section">
+  <div class="container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="phase-progress-fill" style="width:0%"></div>
+    </div>
+    <p class="progress-label" id="phase-progress-label">0 of 6 topics completed</p>
+
+    <!-- ========== TOPIC LIST ========== -->
+    <div class="topic-list" id="topic-list">
+
+      <!-- Topic 1: presales-lifecycle -->
+      <div class="topic-item" data-topic="presales-lifecycle">
+        <div class="topic-header" onclick="toggleTopic('presales-lifecycle')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-presales-lifecycle">⬜</span>
+            <span class="topic-name">1. The Pre-Sales Lifecycle</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="toggle-icon" id="icon-presales-lifecycle">▶</span>
+        </div>
+        <p class="topic-desc">Understand the end-to-end journey from first contact to signed contract.</p>
+        <div class="topic-content" id="content-presales-lifecycle">
+          <div class="analogy">
+            <strong>💡 Real-World Analogy:</strong> Think of planning a wedding. First comes <em>discovery</em> — what does the couple want? Then <em>solution design</em> — pick the venue, menu, and flowers. Next is the <em>proposal</em> — here's the plan and price. The <em>demo</em> is a venue tour and food tasting. A <em>PoC</em> is the trial run (rehearsal dinner). And finally, the <em>close</em> — sign the contract and celebrate!
+          </div>
+          <p>The pre-sales lifecycle mirrors this journey in tech. You guide the customer from "I have a problem" all the way to "Here's the solution, proven and priced." At each stage your role shifts: listener → architect → storyteller → builder → closer.</p>
+          <ul>
+            <li><strong>Discovery:</strong> Ask smart questions. Understand pain points, goals, budget, and timeline.</li>
+            <li><strong>Solution Design:</strong> Map customer needs to cloud services. Draft an architecture.</li>
+            <li><strong>Proposal:</strong> Package the solution with pricing, timeline, and expected outcomes.</li>
+            <li><strong>Demo:</strong> Show — don't just tell. Let the customer experience the solution.</li>
+            <li><strong>PoC (Proof of Concept):</strong> Build a small-scale working version to reduce risk.</li>
+            <li><strong>Close:</strong> Address final objections, align stakeholders, and win the deal.</li>
+          </ul>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=technical+pre-sales+career+tech+sales+advice" target="_blank">🎬 Video: "Technical Pre-Sales Career" by Tech Sales Advice</a>
+                <a class="resource-link" href="https://www.google.com/search?q=mastering+technical+sales+book+summary" target="_blank">📖 Article: "Mastering Technical Sales" — Book Summary</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-presales-lifecycle" onclick="completeTopic('presales-lifecycle')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- Topic 2: solution-architecture -->
+      <div class="topic-item" data-topic="solution-architecture">
+        <div class="topic-header" onclick="toggleTopic('solution-architecture')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-solution-architecture">⬜</span>
+            <span class="topic-name">2. Solution Architecture Basics</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="toggle-icon" id="icon-solution-architecture">▶</span>
+        </div>
+        <p class="topic-desc">Read architecture diagrams and understand common cloud patterns.</p>
+        <div class="topic-content" id="content-solution-architecture">
+          <div class="analogy">
+            <strong>💡 Real-World Analogy:</strong> A solution architecture is like a <em>blueprint for a house</em>. It shows how rooms (services) connect, where the plumbing (networking) goes, and how the electrical system (security) works. You wouldn't build a house without a blueprint — and you shouldn't build a cloud solution without an architecture diagram.
+          </div>
+          <p>In pre-sales, you don't need to build every piece — but you <strong>must</strong> be able to read the blueprint and explain it to both technical and non-technical audiences. The Azure Well-Architected Framework gives you a checklist: reliability, security, cost optimization, operational excellence, and performance efficiency.</p>
+          <ul>
+            <li><strong>Architecture Diagrams:</strong> Boxes = services, arrows = data flow, colors = security boundaries.</li>
+            <li><strong>Common Patterns:</strong> N-tier, microservices, event-driven, serverless.</li>
+            <li><strong>Azure Well-Architected Framework:</strong> Five pillars that guide every design decision.</li>
+          </ul>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=azure+architecture+john+savill" target="_blank">🎬 Video: "Azure Architecture" by John Savill</a>
+                <a class="resource-link" href="https://learn.microsoft.com/en-us/azure/architecture/" target="_blank">📖 Article: Microsoft — Azure Architecture Center</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-solution-architecture" onclick="completeTopic('solution-architecture')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- Topic 3: cloud-roi -->
+      <div class="topic-item" data-topic="cloud-roi">
+        <div class="topic-header" onclick="toggleTopic('cloud-roi')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-cloud-roi">⬜</span>
+            <span class="topic-name">3. Cloud Economics & ROI</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="toggle-icon" id="icon-cloud-roi">▶</span>
+        </div>
+        <p class="topic-desc">Build business cases with TCO calculators and ROI frameworks.</p>
+        <div class="topic-content" id="content-cloud-roi">
+          <div class="analogy">
+            <strong>💡 Real-World Analogy:</strong> Buying a car isn't just the sticker price — it's insurance, gas, maintenance, parking, and depreciation over 5 years. That's <em>Total Cost of Ownership (TCO)</em>. The same applies to IT: on-premises servers have hidden costs (power, cooling, staff, space, downtime) that cloud migration can reduce or eliminate.
+          </div>
+          <p>CFOs don't care about "cool tech." They care about numbers. Your job is to translate cloud benefits into dollars, percentages, and timelines. A solid ROI framework shows: what they spend today, what they'll spend in the cloud, and what they'll <strong>save or earn</strong> as a result.</p>
+          <ul>
+            <li><strong>TCO Calculators:</strong> Azure TCO Calculator compares on-prem vs cloud costs side-by-side.</li>
+            <li><strong>Business Case:</strong> Include direct savings, productivity gains, risk reduction, and innovation speed.</li>
+            <li><strong>ROI Frameworks:</strong> Payback period, break-even point, 3-year cost projection.</li>
+            <li><strong>Migration Savings:</strong> License consolidation, reserved instances, auto-scaling to avoid over-provisioning.</li>
+          </ul>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=cloud+economics+a+cloud+guru" target="_blank">🎬 Video: "Cloud Economics" by A Cloud Guru</a>
+                <a class="resource-link" href="https://azure.microsoft.com/en-us/pricing/tco/calculator/" target="_blank">📖 Article: Azure — TCO Calculator Walkthrough</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-cloud-roi" onclick="completeTopic('cloud-roi')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- Topic 4: compliance-governance -->
+      <div class="topic-item" data-topic="compliance-governance">
+        <div class="topic-header" onclick="toggleTopic('compliance-governance')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-compliance-governance">⬜</span>
+            <span class="topic-name">4. Compliance & Governance</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="toggle-icon" id="icon-compliance-governance">▶</span>
+        </div>
+        <p class="topic-desc">Navigate regulations like GDPR and HIPAA in cloud solutions.</p>
+        <div class="topic-content" id="content-compliance-governance">
+          <div class="analogy">
+            <strong>💡 Real-World Analogy:</strong> Think of <em>building codes</em>. You can design your house however you want — modern, rustic, minimalist — but it <strong>must</strong> meet safety standards: fire exits, electrical codes, plumbing regulations. Compliance in the cloud is the same: innovate freely, but respect the rules that protect people's data and privacy.
+          </div>
+          <p>In pre-sales, compliance questions often come from legal, risk, or security teams. You don't need to be a lawyer, but you <strong>must</strong> know what Azure offers: 100+ compliance certifications, data residency options, encryption at rest and in transit, and tools like Azure Policy and Microsoft Purview.</p>
+          <ul>
+            <li><strong>GDPR:</strong> European data privacy — right to be forgotten, data portability, consent.</li>
+            <li><strong>HIPAA:</strong> US healthcare data — strict controls on patient information.</li>
+            <li><strong>Data Residency:</strong> Where data is stored matters. Azure has 60+ regions worldwide.</li>
+            <li><strong>Azure Compliance:</strong> SOC 1/2/3, ISO 27001, FedRAMP, PCI-DSS, and more.</li>
+            <li><strong>Governance Tools:</strong> Azure Policy, Blueprints, Management Groups, Microsoft Defender for Cloud.</li>
+          </ul>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=cloud+compliance+a+cloud+guru" target="_blank">🎬 Video: "Cloud Compliance" by A Cloud Guru</a>
+                <a class="resource-link" href="https://learn.microsoft.com/en-us/azure/compliance/" target="_blank">📖 Article: Microsoft — Azure Compliance Offerings</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-compliance-governance" onclick="completeTopic('compliance-governance')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- Topic 5: demo-presentation -->
+      <div class="topic-item" data-topic="demo-presentation">
+        <div class="topic-header" onclick="toggleTopic('demo-presentation')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-demo-presentation">⬜</span>
+            <span class="topic-name">5. Presentation & Demo Skills</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="toggle-icon" id="icon-demo-presentation">▶</span>
+        </div>
+        <p class="topic-desc">Master the art of storytelling, live demos, and handling objections.</p>
+        <div class="topic-content" id="content-demo-presentation">
+          <div class="analogy">
+            <strong>💡 Real-World Analogy:</strong> A great demo is like a <em>movie trailer</em>. You don't show the whole film — you show the most exciting scenes that make the audience want to see more. You hook them with a problem, dazzle them with a solution, and leave them wanting the full experience.
+          </div>
+          <p>Technical demos fail when they turn into feature tours. Winning demos tell a <strong>story</strong>: "Here's your pain → here's how we solve it → here's the proof." Always apply the <em>"So what?"</em> test: for every feature you show, ask yourself — why should the customer care?</p>
+          <ul>
+            <li><strong>Storytelling:</strong> Start with the customer's problem, not your product's features.</li>
+            <li><strong>Demo Environments:</strong> Always have a pre-built, reliable environment. Never demo on production.</li>
+            <li><strong>Handling Objections:</strong> Acknowledge → reframe → respond with evidence.</li>
+            <li><strong>Whiteboard Sessions:</strong> Draw solutions live to show you truly understand the problem.</li>
+          </ul>
+          <p><strong>🎯 Practical Tips:</strong></p>
+          <ul>
+            <li>Prepare at least 3 demo scenarios tailored to different audiences (CTO, CFO, IT Manager).</li>
+            <li>Practice the "So what?" test — if a feature doesn't solve a stated pain, cut it.</li>
+            <li>Always have a backup plan: screenshots, recorded demo, whiteboard.</li>
+          </ul>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=how+to+demo+software+pre-sales+collective" target="_blank">🎬 Video: "How to Demo Software" by Pre-Sales Collective</a>
+                <a class="resource-link" href="https://www.google.com/search?q=the+art+of+the+technical+demo" target="_blank">📖 Article: "The Art of the Technical Demo"</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-demo-presentation" onclick="completeTopic('demo-presentation')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- Topic 6: competitive-landscape -->
+      <div class="topic-item" data-topic="competitive-landscape">
+        <div class="topic-header" onclick="toggleTopic('competitive-landscape')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-competitive-landscape">⬜</span>
+            <span class="topic-name">6. Competitive Landscape</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="toggle-icon" id="icon-competitive-landscape">▶</span>
+        </div>
+        <p class="topic-desc">Position Azure against AWS and GCP — know strengths, weaknesses, and when to recommend each.</p>
+        <div class="topic-content" id="content-competitive-landscape">
+          <div class="analogy">
+            <strong>💡 Real-World Analogy:</strong> It's like <em>car shopping</em>. Every brand has strengths. Some excel at luxury and reliability (Azure's enterprise integration). Some offer the widest selection of models (AWS's breadth of services). Some lead in fuel efficiency and tech innovation (GCP's data and AI). The best salesperson doesn't trash the competition — they help the customer find the <strong>best fit for their needs</strong>.
+          </div>
+          <p>Knowing the competitive landscape isn't about memorizing feature lists — it's about understanding <strong>positioning</strong>. When a customer says "Why not AWS?", you need a confident, honest, value-based answer — not FUD (Fear, Uncertainty, Doubt).</p>
+          <ul>
+            <li><strong>Azure Strengths:</strong> Enterprise integration (Active Directory, Microsoft 365, hybrid cloud), largest compliance portfolio, strong partner ecosystem.</li>
+            <li><strong>AWS Strengths:</strong> Broadest service catalog, largest community, first-mover advantage, mature ecosystem.</li>
+            <li><strong>GCP Strengths:</strong> Data analytics (BigQuery), AI/ML (Vertex AI), Kubernetes leadership, competitive pricing.</li>
+            <li><strong>Key Differentiators:</strong> Hybrid story (Azure Arc), developer tools (GitHub + VS Code), enterprise trust.</li>
+            <li><strong>Market Share:</strong> AWS ~31%, Azure ~25%, GCP ~11% (Gartner/Synergy estimates).</li>
+          </ul>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=aws+vs+azure+vs+gcp+2025+techworld+nana" target="_blank">🎬 Video: "AWS vs Azure vs GCP 2025" by TechWorld with Nana</a>
+                <a class="resource-link" href="https://www.google.com/search?q=gartner+cloud+iaas+magic+quadrant+summary" target="_blank">📖 Article: Gartner Cloud IaaS Magic Quadrant Summary</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-competitive-landscape" onclick="completeTopic('competitive-landscape')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+    </div><!-- /topic-list -->
+
+    <!-- ========== KNOWLEDGE CHECK ========== -->
+    <div class="section" style="margin-top: 40px;">
+      <h2 class="section-title">🧠 Knowledge Check</h2>
+      <p class="section-subtitle">Test your pre-sales instincts with these scenario-based questions.</p>
+
+      <!-- Question 1 -->
+      <div class="check-container" id="check-p5-check-1">
+        <h3>Question 1: Discovery Gone Wrong</h3>
+        <p>You're in a first meeting with a potential customer. The account executive says, "Just show them the Azure demo." What should you do?</p>
+        <div class="check-option" data-check="p5-check-1" data-correct="false" onclick="handleCheck(this)">A) Start the standard Azure demo immediately — the AE knows best.</div>
+        <div class="check-option" data-check="p5-check-1" data-correct="false" onclick="handleCheck(this)">B) Show a 60-slide deck covering every Azure service.</div>
+        <div class="check-option" data-check="p5-check-1" data-correct="true" onclick="handleCheck(this)">C) Push back gently — ask discovery questions first to understand the customer's specific pain points, then tailor the demo.</div>
+        <div class="check-option" data-check="p5-check-1" data-correct="false" onclick="handleCheck(this)">D) Skip the meeting and send a pre-recorded demo video instead.</div>
+        <div class="check-feedback" id="feedback-p5-check-1"></div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="check-container" id="check-p5-check-2">
+        <h3>Question 2: The CFO Question</h3>
+        <p>During a proposal meeting, the CFO asks: "How do I know cloud will actually save us money?" What's your best response?</p>
+        <div class="check-option" data-check="p5-check-2" data-correct="false" onclick="handleCheck(this)">A) "Trust me, everyone saves money in the cloud."</div>
+        <div class="check-option" data-check="p5-check-2" data-correct="true" onclick="handleCheck(this)">B) "Great question — let's walk through a TCO analysis comparing your current on-prem costs (hardware, staff, power, downtime) against the projected Azure costs over 3 years."</div>
+        <div class="check-option" data-check="p5-check-2" data-correct="false" onclick="handleCheck(this)">C) "Cloud isn't really about saving money — it's about innovation."</div>
+        <div class="check-option" data-check="p5-check-2" data-correct="false" onclick="handleCheck(this)">D) "I'll have to get back to you on that one."</div>
+        <div class="check-feedback" id="feedback-p5-check-2"></div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="check-container" id="check-p5-check-3">
+        <h3>Question 3: Competitive Objection</h3>
+        <p>A customer says: "AWS has more services than Azure. Why should we go with you?" How should you respond?</p>
+        <div class="check-option" data-check="p5-check-3" data-correct="false" onclick="handleCheck(this)">A) "That's not true, Azure has more services."</div>
+        <div class="check-option" data-check="p5-check-3" data-correct="false" onclick="handleCheck(this)">B) "AWS is terrible, you should never use them."</div>
+        <div class="check-option" data-check="p5-check-3" data-correct="true" onclick="handleCheck(this)">C) "AWS has great breadth. The real question is which platform best fits your needs. Since you already use Microsoft 365 and Active Directory, Azure gives you seamless integration, plus hybrid cloud capabilities with Azure Arc."</div>
+        <div class="check-option" data-check="p5-check-3" data-correct="false" onclick="handleCheck(this)">D) "Let me redirect you to our marketing materials."</div>
+        <div class="check-feedback" id="feedback-p5-check-3"></div>
+      </div>
+    </div>
+
+    <!-- ========== BOSS CHALLENGE ========== -->
+    <div class="boss-section" id="boss-section">
+      <h2>🏆 Phase Boss Challenge: The Big Demo</h2>
+      <p>A mid-sized retail company (500 employees, 3 data centers) is considering migrating from on-premises to cloud. You're preparing for a critical demo meeting with three stakeholders:</p>
+      <ul>
+        <li><strong>The CTO</strong> — Skeptical about cloud reliability and security.</li>
+        <li><strong>The CFO</strong> — Wants hard numbers on cost savings.</li>
+        <li><strong>The IT Manager</strong> — Worried about disruption to daily operations during migration.</li>
+      </ul>
+      <p>Answer all four parts correctly to defeat this boss!</p>
+
+      <!-- Boss Part 1 -->
+      <div class="boss-part" id="boss-part-1">
+        <h4>Part 1: What do you demo first?</h4>
+        <div class="boss-option" data-boss="1" data-correct="false" onclick="handleBoss(this)">A) A deep dive into Azure's networking configuration.</div>
+        <div class="boss-option" data-boss="1" data-correct="true" onclick="handleBoss(this)">B) A tailored scenario showing their retail workload running on Azure — fast, secure, and monitored — addressing the CTO's reliability concern upfront.</div>
+        <div class="boss-option" data-boss="1" data-correct="false" onclick="handleBoss(this)">C) A comparison slideshow of Azure vs AWS vs GCP pricing.</div>
+        <div class="boss-option" data-boss="1" data-correct="false" onclick="handleBoss(this)">D) A 90-minute overview of every Azure service.</div>
+        <div class="boss-feedback" id="boss-feedback-1"></div>
+      </div>
+
+      <!-- Boss Part 2 -->
+      <div class="boss-part" id="boss-part-2">
+        <h4>Part 2: How do you address the CFO's cost concern?</h4>
+        <div class="boss-option" data-boss="2" data-correct="false" onclick="handleBoss(this)">A) "Cloud always saves money, it's a given."</div>
+        <div class="boss-option" data-boss="2" data-correct="false" onclick="handleBoss(this)">B) Skip the CFO's concern — focus on tech features.</div>
+        <div class="boss-option" data-boss="2" data-correct="true" onclick="handleBoss(this)">C) Present a customized TCO comparison: current on-prem costs (hardware refresh, power, cooling, staffing) vs projected Azure costs with reserved instances, showing a 3-year savings projection.</div>
+        <div class="boss-option" data-boss="2" data-correct="false" onclick="handleBoss(this)">D) "We'll figure out the cost part after you sign."</div>
+        <div class="boss-feedback" id="boss-feedback-2"></div>
+      </div>
+
+      <!-- Boss Part 3 -->
+      <div class="boss-part" id="boss-part-3">
+        <h4>Part 3: How do you reassure the IT Manager about migration disruption?</h4>
+        <div class="boss-option" data-boss="3" data-correct="false" onclick="handleBoss(this)">A) "Just rip and replace — it'll be done in a weekend."</div>
+        <div class="boss-option" data-boss="3" data-correct="true" onclick="handleBoss(this)">B) Show a phased migration plan: start with non-critical workloads, run hybrid during transition using Azure Arc, provide training for the IT team, and include rollback procedures at each stage.</div>
+        <div class="boss-option" data-boss="3" data-correct="false" onclick="handleBoss(this)">C) "That's not really a pre-sales concern — the implementation team handles that."</div>
+        <div class="boss-option" data-boss="3" data-correct="false" onclick="handleBoss(this)">D) Ignore the concern and move to the next slide.</div>
+        <div class="boss-feedback" id="boss-feedback-3"></div>
+      </div>
+
+      <!-- Boss Part 4 -->
+      <div class="boss-part" id="boss-part-4">
+        <h4>Part 4: The CTO asks, "Why not AWS?"</h4>
+        <div class="boss-option" data-boss="4" data-correct="false" onclick="handleBoss(this)">A) "AWS is outdated and losing market share."</div>
+        <div class="boss-option" data-boss="4" data-correct="false" onclick="handleBoss(this)">B) "That's a great question, let me get back to you."</div>
+        <div class="boss-option" data-boss="4" data-correct="true" onclick="handleBoss(this)">C) "AWS is a strong platform. For your scenario — with existing Microsoft 365 and Active Directory — Azure provides native integration, seamless hybrid cloud with Azure Arc, and the largest compliance certification portfolio for your retail regulations."</div>
+        <div class="boss-option" data-boss="4" data-correct="false" onclick="handleBoss(this)">D) "We don't discuss competitors in our presentations."</div>
+        <div class="boss-feedback" id="boss-feedback-4"></div>
+      </div>
+
+      <p id="boss-result" style="margin-top: 18px; font-size: 1.2em; font-weight: 700; display: none;"></p>
+    </div>
+
+    <!-- ========== COMPLETE PHASE ========== -->
+    <div style="text-align:center; margin-top: 36px;">
+      <button class="btn btn-primary btn-lg" id="btn-complete-phase" onclick="completePhase()" disabled>🎓 Complete Phase 5 — Earn 500 XP + Badge</button>
+      <p id="phase-complete-msg" style="color: #22c55e; font-weight: 700; margin-top: 12px; display: none;">✅ Phase 5 Completed! You've earned the Pre-Sales Pro badge!</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-phase-links">
+      <a href="phase4.html" class="btn btn-outline">← Phase 4: Cloud Services Deep Dive</a>
+      <a href="phase6.html" class="btn btn-outline">Phase 6: Certification &amp; Portfolio →</a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p id="motivational-quote" class="motivational-quote"></p>
+    <p style="margin-top:12px;">Cloud Pre-Sales Learning Path © 2026</p>
+  </div>
+</footer>
+
+<script src="js/game-engine.js"></script>
+<script>
+(function() {
+  const PHASE = 5;
+  const TOPICS = [
+    'presales-lifecycle',
+    'solution-architecture',
+    'cloud-roi',
+    'compliance-governance',
+    'demo-presentation',
+    'competitive-landscape'
+  ];
+  const CHECKS = ['p5-check-1', 'p5-check-2', 'p5-check-3'];
+  const BOSS_PARTS = 4;
+
+  let bossAnswers = {};
+  let bossCompleted = false;
+
+  // Toggle topic expand/collapse
+  window.toggleTopic = function(topicId) {
+    var content = document.getElementById('content-' + topicId);
+    var icon = document.getElementById('icon-' + topicId);
+    var isOpen = content.classList.contains('open');
+    content.classList.toggle('open');
+    content.style.display = isOpen ? 'none' : 'block';
+    icon.classList.toggle('open');
+    icon.textContent = isOpen ? '▶' : '▼';
+  };
+
+  // Complete a topic
+  window.completeTopic = function(topicId) {
+    GameEngine.completeTopic(PHASE, topicId);
+    markTopicDone(topicId);
+    updateProgress();
+    checkPhaseReady();
+  };
+
+  function markTopicDone(topicId) {
+    var status = document.getElementById('status-' + topicId);
+    if (status) status.textContent = '✅';
+    var btn = document.getElementById('btn-' + topicId);
+    if (btn) {
+      btn.textContent = 'Completed ✅';
+      btn.disabled = true;
+      btn.classList.remove('btn-success');
+      btn.classList.add('btn-outline');
+    }
+  }
+
+  function updateProgress() {
+    var completed = TOPICS.filter(function(t) { return GameEngine.isTopicCompleted(t); });
+    var pct = Math.round((completed.length / TOPICS.length) * 100);
+    document.getElementById('phase-progress-fill').style.width = pct + '%';
+    document.getElementById('phase-progress-label').textContent = completed.length + ' of ' + TOPICS.length + ' topics completed';
+  }
+
+  function checkPhaseReady() {
+    var allDone = TOPICS.every(function(t) { return GameEngine.isTopicCompleted(t); });
+    var btn = document.getElementById('btn-complete-phase');
+    btn.disabled = !allDone;
+    if (GameEngine.isPhaseCompleted(PHASE)) {
+      btn.disabled = true;
+      btn.textContent = 'Phase 5 Completed ✅';
+      document.getElementById('phase-complete-msg').style.display = 'block';
+    }
+  }
+
+  window.completePhase = function() {
+    GameEngine.completePhase(PHASE);
+    var btn = document.getElementById('btn-complete-phase');
+    btn.disabled = true;
+    btn.textContent = 'Phase 5 Completed ✅';
+    document.getElementById('phase-complete-msg').style.display = 'block';
+    GameEngine.showToast('🎉 Phase 5 Complete! You earned the Pre-Sales Pro badge!');
+  };
+
+  // Knowledge checks
+  window.handleCheck = function(el) {
+    var checkId = el.getAttribute('data-check');
+    var container = document.getElementById('check-' + checkId);
+    if (container.classList.contains('answered')) return;
+
+    var isCorrect = el.getAttribute('data-correct') === 'true';
+    var feedback = document.getElementById('feedback-' + checkId);
+
+    if (isCorrect) {
+      el.style.background = '#22c55e22';
+      el.style.borderColor = '#22c55e';
+      feedback.textContent = '✅ Correct! Great pre-sales instincts.';
+      feedback.style.color = '#22c55e';
+      feedback.style.display = 'block';
+      container.classList.add('answered');
+      GameEngine.completeCheck(checkId);
+    } else {
+      el.style.background = '#ef444422';
+      el.style.borderColor = '#ef4444';
+      feedback.textContent = '❌ Not quite. Think about what a customer-first approach looks like — discovery before demo, data before promises, honesty before FUD.';
+      feedback.style.color = '#ef4444';
+      feedback.style.display = 'block';
+    }
+  };
+
+  // Boss challenge
+  window.handleBoss = function(el) {
+    var part = el.getAttribute('data-boss');
+    if (bossAnswers[part] !== undefined) return;
+
+    var isCorrect = el.getAttribute('data-correct') === 'true';
+    var feedback = document.getElementById('boss-feedback-' + part);
+    bossAnswers[part] = isCorrect;
+
+    var options = el.parentElement.querySelectorAll('.boss-option');
+    options.forEach(function(opt) {
+      if (opt.getAttribute('data-correct') === 'true') opt.classList.add('correct');
+      else if (opt === el && !isCorrect) opt.classList.add('wrong');
+    });
+
+    if (isCorrect) {
+      feedback.textContent = '✅ Excellent move!';
+      feedback.style.color = '#22c55e';
+    } else {
+      feedback.textContent = '❌ Not the strongest choice. In pre-sales, always lead with the customer\'s specific needs and back claims with data.';
+      feedback.style.color = '#ef4444';
+    }
+    feedback.classList.add('show');
+
+    // Check if all parts answered
+    if (Object.keys(bossAnswers).length === BOSS_PARTS && !bossCompleted) {
+      bossCompleted = true;
+      var allCorrect = Object.values(bossAnswers).every(function(v) { return v; });
+      var result = document.getElementById('boss-result');
+      result.style.display = 'block';
+      if (allCorrect) {
+        result.textContent = '🏆 BOSS DEFEATED on first try! You nailed The Big Demo! +200 XP';
+        result.style.color = '#f5c518';
+        GameEngine.completeBoss(PHASE, true);
+      } else {
+        result.textContent = '💪 Boss defeated! You completed The Big Demo. Review the answers above to sharpen your skills. +200 XP';
+        result.style.color = '#f59e0b';
+        GameEngine.completeBoss(PHASE, false);
+      }
+    }
+  };
+
+  // Init on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Restore completed topics
+    TOPICS.forEach(function(t) {
+      if (GameEngine.isTopicCompleted(t)) markTopicDone(t);
+    });
+    updateProgress();
+    checkPhaseReady();
+
+    // Restore knowledge checks
+    CHECKS.forEach(function(checkId) {
+      if (GameEngine.isCheckCompleted(checkId)) {
+        var container = document.getElementById('check-' + checkId);
+        if (container) {
+          container.classList.add('answered');
+          var options = container.querySelectorAll('.check-option');
+          options.forEach(function(opt) {
+            if (opt.getAttribute('data-correct') === 'true') {
+              opt.style.background = '#22c55e22';
+              opt.style.borderColor = '#22c55e';
+            }
+          });
+          var feedback = document.getElementById('feedback-' + checkId);
+          feedback.textContent = '✅ Correct! Great pre-sales instincts.';
+          feedback.style.color = '#22c55e';
+          feedback.style.display = 'block';
+        }
+      }
+    });
+
+    // Update header XP
+    if (typeof GameEngine.updateHeaderUI === 'function') {
+      GameEngine.updateHeaderUI();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

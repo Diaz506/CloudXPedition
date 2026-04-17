@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 2: Infrastructure & Identity — Cloud Pre-Sales Learning Path</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-brand"><span>☁️</span> Cloud Path</a>
+    <div class="nav-links">
+      <a href="index.html">Journey</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="resources.html">Resources</a>
+    </div>
+    <div class="header-xp">
+      <span id="header-level" class="header-level">☁️ Cloud Rookie</span>
+      <span id="header-xp-text">0 XP</span>
+      <div class="header-xp-bar"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
+      <span id="header-streak" class="header-streak"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" style="background:linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);">
+  <div class="container">
+    <h1>🛡️ Phase 2: Infrastructure & Identity</h1>
+    <p>Learn how companies manage servers, users, and the bridge from on-premises to cloud.</p>
+  </div>
+</section>
+
+<!-- Progress -->
+<section class="section">
+  <div class="container">
+    <div class="progress-label">
+      <span id="progress-text">0 / 6 topics completed</span>
+      <span id="progress-pct">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+
+    <div style="margin-top:32px;">
+
+      <!-- Topic 1: Windows Server -->
+      <div class="card" style="margin-bottom:16px;" id="topic-windows-server">
+        <div class="topic-item" onclick="toggleTopic('windows-server')" style="cursor:pointer;border-bottom:none;">
+          <div class="topic-status" id="status-windows-server">1</div>
+          <div class="topic-info">
+            <div class="topic-name">🖥️ Windows Server Basics</div>
+            <div class="topic-desc">The backbone of enterprise IT</div>
+          </div>
+          <div class="topic-xp">+50 XP</div>
+        </div>
+        <div class="topic-content" id="content-windows-server" style="display:none;padding:0 16px 16px;">
+          <div class="analogy" style="margin-bottom:16px;">
+            💡 <strong>Think of it this way:</strong> A server OS is like a restaurant kitchen — it's designed to serve many people efficiently, not just one person sitting at home. Windows Server is the industrial kitchen behind every big enterprise, running services that hundreds or thousands of employees depend on.
+          </div>
+          <p style="margin-bottom:16px;color:var(--gray-600);line-height:1.7;">
+            Unlike your home Windows that's designed for one person, <strong>Windows Server</strong> is built to handle many users simultaneously and run critical services.
+            <strong>Server Roles</strong> are like job titles: <strong>AD DS</strong> (manages users and permissions), <strong>DNS Server</strong> (translates names to addresses), <strong>DHCP Server</strong> (assigns IP addresses), and <strong>File Server</strong> (shared storage for the company).
+            One physical server can wear many hats — or you can spread roles across multiple servers for reliability.
+          </p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">Resources</span>
+              <h3>Windows Server Basics</h3>
+            </div>
+            <div class="resource-links">
+              <a class="resource-link" href="https://www.youtube.com/results?search_query=Windows+Server+2022+Tutorial+NetworkChuck" target="_blank">
+                <span class="emoji">🎬</span> Video: "Windows Server 2022 Tutorial" by NetworkChuck
+              </a>
+              <a class="resource-link" href="https://learn.microsoft.com/en-us/windows-server/" target="_blank">
+                <span class="emoji">📄</span> Article: Microsoft Learn — Windows Server overview
+              </a>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="markComplete(2,'windows-server',this)" id="btn-windows-server">
+            ✅ Mark as Complete
+          </button>
+        </div>
+      </div>
+
+      <!-- Topic 2: Active Directory -->
+      <div class="card" style="margin-bottom:16px;" id="topic-active-directory">
+        <div class="topic-item" onclick="toggleTopic('active-directory')" style="cursor:pointer;border-bottom:none;">
+          <div class="topic-status" id="status-active-directory">2</div>
+          <div class="topic-info">
+            <div class="topic-name">📂 Active Directory</div>
+            <div class="topic-desc">The company's employee directory + badge system</div>
+          </div>
+          <div class="topic-xp">+50 XP</div>
+        </div>
+        <div class="topic-content" id="content-active-directory" style="display:none;padding:0 16px 16px;">
+          <div class="analogy" style="margin-bottom:16px;">
+            💡 <strong>Think of it this way:</strong> Active Directory is the company's employee directory combined with the badge system — it knows who works here, what teams they're on, and which rooms they can access. When you swipe your badge to enter a room, AD is the system checking if you're allowed in.
+          </div>
+          <p style="margin-bottom:16px;color:var(--gray-600);line-height:1.7;">
+            <strong>Users</strong> are individual employee accounts. <strong>Groups</strong> bundle users together — "Everyone in Marketing" or "All Managers."
+            <strong>Organizational Units (OUs)</strong> are like departments on an org chart — they organize users and computers into logical containers.
+            <strong>Group Policy (GPO)</strong> is like company-wide rules enforced automatically — "All computers must have a screen lock after 5 minutes" or "Nobody can install unapproved software." Set it once, and it applies to thousands of machines instantly.
+          </p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">Resources</span>
+              <h3>Active Directory</h3>
+            </div>
+            <div class="resource-links">
+              <a class="resource-link" href="https://www.youtube.com/results?search_query=Active+Directory+for+Beginners+NetworkChuck" target="_blank">
+                <span class="emoji">🎬</span> Video: "Active Directory for Beginners" by NetworkChuck
+              </a>
+              <a class="resource-link" href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview" target="_blank">
+                <span class="emoji">📄</span> Article: Microsoft Learn — Active Directory Domain Services
+              </a>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="markComplete(2,'active-directory',this)" id="btn-active-directory">
+            ✅ Mark as Complete
+          </button>
+        </div>
+      </div>
+
+      <!-- Topic 3: Azure AD / Entra ID -->
+      <div class="card" style="margin-bottom:16px;" id="topic-azure-ad-entra">
+        <div class="topic-item" onclick="toggleTopic('azure-ad-entra')" style="cursor:pointer;border-bottom:none;">
+          <div class="topic-status" id="status-azure-ad-entra">3</div>
+          <div class="topic-info">
+            <div class="topic-name">🔐 Azure AD / Entra ID</div>
+            <div class="topic-desc">Identity in the cloud era</div>
+          </div>
+          <div class="topic-xp">+50 XP</div>
+        </div>
+        <div class="topic-content" id="content-azure-ad-entra" style="display:none;padding:0 16px 16px;">
+          <div class="analogy" style="margin-bottom:16px;">
+            💡 <strong>Think of it this way:</strong> <strong>SSO (Single Sign-On)</strong> is one master key that opens every door in the building — log in once and access all your apps. <strong>MFA (Multi-Factor Authentication)</strong> is like a bank vault that needs BOTH a key AND your fingerprint — even if someone steals your password, they still can't get in.
+          </div>
+          <p style="margin-bottom:16px;color:var(--gray-600);line-height:1.7;">
+            <strong>Microsoft Entra ID</strong> (formerly Azure AD) is Active Directory's cloud-native sibling. While traditional AD manages your office network, Entra ID manages identity for cloud apps like Microsoft 365, Salesforce, and thousands more.
+            <strong>Conditional Access</strong> is like a smart bouncer: "You can enter if you're on a company device, from a trusted location, and passed MFA — otherwise, extra verification needed."
+            <strong>Hybrid Identity</strong> syncs your on-prem AD with Entra ID so users have one identity everywhere — office and cloud.
+          </p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">Resources</span>
+              <h3>Azure AD / Entra ID</h3>
+            </div>
+            <div class="resource-links">
+              <a class="resource-link" href="https://www.youtube.com/results?search_query=Azure+Active+Directory+Tutorial+John+Savill" target="_blank">
+                <span class="emoji">🎬</span> Video: "Azure Active Directory Tutorial" by John Savill
+              </a>
+              <a class="resource-link" href="https://learn.microsoft.com/en-us/entra/fundamentals/whatis" target="_blank">
+                <span class="emoji">📄</span> Article: Microsoft Learn — Microsoft Entra ID
+              </a>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="markComplete(2,'azure-ad-entra',this)" id="btn-azure-ad-entra">
+            ✅ Mark as Complete
+          </button>
+        </div>
+      </div>
+
+      <!-- Topic 4: Linux Basics -->
+      <div class="card" style="margin-bottom:16px;" id="topic-linux-basics">
+        <div class="topic-item" onclick="toggleTopic('linux-basics')" style="cursor:pointer;border-bottom:none;">
+          <div class="topic-status" id="status-linux-basics">4</div>
+          <div class="topic-info">
+            <div class="topic-name">🐧 Basic Linux</div>
+            <div class="topic-desc">The other side of the server world</div>
+          </div>
+          <div class="topic-xp">+50 XP</div>
+        </div>
+        <div class="topic-content" id="content-linux-basics" style="display:none;padding:0 16px 16px;">
+          <div class="analogy" style="margin-bottom:16px;">
+            💡 <strong>Think of it this way:</strong> Learning Linux after Windows is like learning to drive a manual car after only driving automatic — different controls, same fundamental concept. The steering wheel is still there, but now you have a clutch pedal (the command line) that gives you more control.
+          </div>
+          <p style="margin-bottom:16px;color:var(--gray-600);line-height:1.7;">
+            Linux runs the majority of cloud servers, so basic familiarity is essential. The <strong>command line</strong> is your primary tool:
+            <code>ls</code> (list files), <code>cd</code> (change directory), <code>pwd</code> (where am I?), <code>cat</code> (read a file).
+            <strong>File permissions</strong> control who can read, write, or execute files — think of it as "who has the key to which filing cabinet."
+            <strong>Package managers</strong> (<code>apt</code> on Ubuntu, <code>yum</code> on Red Hat) are like app stores for the command line — they install, update, and remove software.
+          </p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">Resources</span>
+              <h3>Basic Linux</h3>
+            </div>
+            <div class="resource-links">
+              <a class="resource-link" href="https://www.youtube.com/results?search_query=Linux+for+Beginners+NetworkChuck" target="_blank">
+                <span class="emoji">🎬</span> Video: "Linux for Beginners" by NetworkChuck
+              </a>
+              <a class="resource-link" href="https://linuxjourney.com/lesson/the-shell" target="_blank">
+                <span class="emoji">📄</span> Article: Linux Journey — Command Line
+              </a>
+              <div class="resource-link">
+                <span class="emoji">🧪</span> Lab: Open WSL or a Linux VM and navigate the file system using <code>ls</code>, <code>cd</code>, <code>pwd</code>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="markComplete(2,'linux-basics',this)" id="btn-linux-basics">
+            ✅ Mark as Complete
+          </button>
+        </div>
+      </div>
+
+      <!-- Topic 5: Scripting & Automation -->
+      <div class="card" style="margin-bottom:16px;" id="topic-scripting-automation">
+        <div class="topic-item" onclick="toggleTopic('scripting-automation')" style="cursor:pointer;border-bottom:none;">
+          <div class="topic-status" id="status-scripting-automation">5</div>
+          <div class="topic-info">
+            <div class="topic-name">⚡ Basic Scripting & Automation</div>
+            <div class="topic-desc">Talk directly to the computer</div>
+          </div>
+          <div class="topic-xp">+50 XP</div>
+        </div>
+        <div class="topic-content" id="content-scripting-automation" style="display:none;padding:0 16px 16px;">
+          <div class="analogy" style="margin-bottom:16px;">
+            💡 <strong>Think of it this way:</strong> Scripting is talking directly to the computer in its language instead of clicking through menus. Imagine telling an assistant "sort these 10,000 files by date" — doing it manually would take days. A script does it in seconds.
+          </div>
+          <p style="margin-bottom:16px;color:var(--gray-600);line-height:1.7;">
+            <strong>PowerShell</strong> is Microsoft's powerful scripting language — it can manage Windows servers, Azure resources, Microsoft 365, and more. It speaks in "verb-noun" commands: <code>Get-Process</code>, <code>Set-Location</code>, <code>New-Item</code>.
+            <strong>Azure CLI</strong> is a command-line tool specifically for managing Azure resources — create VMs, deploy apps, manage storage, all from the terminal.
+            Automation matters at scale: clicking through a GUI to set up one server is fine, but when you need to configure 100 servers identically, scripting is the only sane option.
+          </p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">Resources</span>
+              <h3>Basic Scripting & Automation</h3>
+            </div>
+            <div class="resource-links">
+              <a class="resource-link" href="https://www.youtube.com/results?search_query=PowerShell+for+Beginners+TechThoughts" target="_blank">
+                <span class="emoji">🎬</span> Video: "PowerShell for Beginners" by TechThoughts
+              </a>
+              <a class="resource-link" href="https://learn.microsoft.com/en-us/powershell/scripting/learn/ps101/01-getting-started" target="_blank">
+                <span class="emoji">📄</span> Article: Microsoft Learn — PowerShell 101
+              </a>
+              <div class="resource-link">
+                <span class="emoji">🧪</span> Lab: Write a PowerShell script that lists all files in a folder and their sizes
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="markComplete(2,'scripting-automation',this)" id="btn-scripting-automation">
+            ✅ Mark as Complete
+          </button>
+        </div>
+      </div>
+
+      <!-- Topic 6: On-Prem vs Cloud -->
+      <div class="card" style="margin-bottom:16px;" id="topic-onprem-vs-cloud">
+        <div class="topic-item" onclick="toggleTopic('onprem-vs-cloud')" style="cursor:pointer;border-bottom:none;">
+          <div class="topic-status" id="status-onprem-vs-cloud">6</div>
+          <div class="topic-info">
+            <div class="topic-name">🏠 On-Premises vs Cloud</div>
+            <div class="topic-desc">Own it or rent it?</div>
+          </div>
+          <div class="topic-xp">+50 XP</div>
+        </div>
+        <div class="topic-content" id="content-onprem-vs-cloud" style="display:none;padding:0 16px 16px;">
+          <div class="analogy" style="margin-bottom:16px;">
+            💡 <strong>Think of it this way:</strong> On-premises is like owning your house — you have full control, but YOU'RE the one fixing the plumbing at 3 AM. Cloud is like renting an apartment — the landlord handles maintenance, but you follow their rules and pay monthly.
+          </div>
+          <p style="margin-bottom:16px;color:var(--gray-600);line-height:1.7;">
+            <strong>On-premises pros:</strong> Full control, data stays in your building, no monthly cloud bills (after initial investment), works without internet.
+            <strong>On-premises cons:</strong> Huge upfront cost, you maintain everything, scaling means buying more hardware, disaster recovery is your problem.
+            <strong>Cloud pros:</strong> Pay-as-you-go, scales instantly, provider handles hardware, global availability, built-in backup options.
+            <strong>Cloud cons:</strong> Ongoing costs, internet dependency, less physical control, potential compliance concerns.
+            <strong>The reality:</strong> Most companies go <strong>hybrid</strong> — some workloads on-prem, some in the cloud. It's rarely all-or-nothing.
+          </p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">Resources</span>
+              <h3>On-Premises vs Cloud</h3>
+            </div>
+            <div class="resource-links">
+              <a class="resource-link" href="https://www.youtube.com/results?search_query=On-Premise+vs+Cloud+Simplilearn" target="_blank">
+                <span class="emoji">🎬</span> Video: "On-Premise vs Cloud" by Simplilearn
+              </a>
+              <a class="resource-link" href="https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-cloud-computing" target="_blank">
+                <span class="emoji">📄</span> Article: Microsoft — Cloud vs on-premises
+              </a>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="markComplete(2,'onprem-vs-cloud',this)" id="btn-onprem-vs-cloud">
+            ✅ Mark as Complete
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Knowledge Check -->
+    <div class="check-container" style="margin-top:40px;">
+      <h3>🧠 Knowledge Check</h3>
+      <p style="color:var(--gray-600);margin-bottom:16px;">A company with 200 employees wants to allow staff to access email, file shares, and a CRM app with a single login. Several employees work remotely. What should the IT team implement?</p>
+      <div class="check-option" onclick="checkAnswer(this, false)">A) Give every employee separate passwords for each application for maximum security</div>
+      <div class="check-option" onclick="checkAnswer(this, true)">B) Implement Azure AD / Entra ID with SSO and MFA, synced with on-prem Active Directory</div>
+      <div class="check-option" onclick="checkAnswer(this, false)">C) Set up a VPN and require employees to be on-site for all application access</div>
+      <div class="check-feedback success" id="check-feedback-correct">✅ Correct! Hybrid identity with SSO gives users one login for everything, MFA adds security for remote access, and syncing with on-prem AD maintains existing infrastructure. This is the modern enterprise approach.</div>
+      <div class="check-feedback error" id="check-feedback-wrong">❌ Not quite. With 200 employees and remote workers, you need a centralized identity solution. Azure AD/Entra ID with SSO and MFA is the industry standard — it gives convenience (one login) with security (MFA) across all locations.</div>
+    </div>
+
+    <!-- Boss Challenge -->
+    <div class="card" style="margin-top:24px;border:2px solid var(--accent);">
+      <h3 style="margin-bottom:8px;">🏆 Phase Boss Challenge: "The Infrastructure Overhaul"</h3>
+      <p style="color:var(--gray-500);margin-bottom:16px;font-size:0.9rem;">A growing company needs your expertise!</p>
+
+      <div style="background:var(--gray-50);padding:16px;border-radius:var(--radius-sm);margin-bottom:20px;font-style:italic;color:var(--gray-600);line-height:1.7;">
+        "A 50-person marketing agency currently uses individual computers with no central management. Employees share files via USB drives, everyone uses personal email accounts, and there's no IT policy. The CEO wants to 'professionalize' their IT. They have a mix of Windows and Mac users, and 10 employees work remotely."
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-weight:600;margin-bottom:8px;">Part 1: What should be the first step to centralize user management?</p>
+        <div class="check-option" onclick="bossCheck(this, 1, false)">A) Install Linux on all machines for better security</div>
+        <div class="check-option" onclick="bossCheck(this, 1, true)">B) Set up Active Directory and Azure AD/Entra ID for centralized identity management</div>
+        <div class="check-option" onclick="bossCheck(this, 1, false)">C) Create a shared spreadsheet with everyone's passwords</div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-weight:600;margin-bottom:8px;">Part 2: How should they handle file sharing to replace USB drives?</p>
+        <div class="check-option" onclick="bossCheck(this, 2, false)">A) Set up an FTP server with anonymous access for simplicity</div>
+        <div class="check-option" onclick="bossCheck(this, 2, false)">B) Email all files as attachments</div>
+        <div class="check-option" onclick="bossCheck(this, 2, true)">C) Deploy a file server with proper permissions, plus a cloud solution like OneDrive/SharePoint for remote workers</div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-weight:600;margin-bottom:8px;">Part 3: For the 10 remote employees, how should they securely access company resources?</p>
+        <div class="check-option" onclick="bossCheck(this, 3, true)">A) Use Azure AD/Entra ID with SSO, MFA, and conditional access policies</div>
+        <div class="check-option" onclick="bossCheck(this, 3, false)">B) Give them the admin password so they can access everything</div>
+        <div class="check-option" onclick="bossCheck(this, 3, false)">C) Only allow access during business hours from approved IP addresses</div>
+      </div>
+
+      <div class="check-feedback success" id="boss-feedback-correct" style="display:none;">
+        🎉 <strong>Boss Defeated!</strong> You designed a modern IT infrastructure: centralized identity, proper file sharing with cloud access, and secure remote work policies. This is exactly what a real pre-sales consultant would recommend!
+      </div>
+      <div class="check-feedback error" id="boss-feedback-wrong" style="display:none;"></div>
+    </div>
+
+    <!-- Complete Phase -->
+    <div style="text-align:center;margin-top:40px;">
+      <button class="btn btn-success btn-lg" id="complete-phase-btn" onclick="completePhase()" disabled>
+        🏅 Complete Phase 2 & Earn Badge
+      </button>
+      <p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;" id="complete-phase-hint">Complete all 6 topics to unlock</p>
+    </div>
+
+    <!-- Navigation -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--gray-200);">
+      <a href="phase1.html" class="btn btn-outline">← Phase 1: IT Fundamentals</a>
+      <a href="phase3.html" class="btn btn-primary">Phase 3: Cloud Fundamentals →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p id="motivational-quote" class="motivational-quote"></p>
+    <p style="margin-top:12px;">Cloud Pre-Sales Learning Path © 2026</p>
+  </div>
+</footer>
+
+<script src="js/game-engine.js"></script>
+<script>
+  const PHASE = 2;
+  const TOPICS = ['windows-server','active-directory','azure-ad-entra','linux-basics','scripting-automation','onprem-vs-cloud'];
+
+  function toggleTopic(id) {
+    const el = document.getElementById('content-' + id);
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function markComplete(phase, topicId, btn) {
+    GameEngine.completeTopic(phase, topicId);
+    btn.disabled = true;
+    btn.textContent = '✅ Completed!';
+    btn.classList.remove('btn-primary');
+    btn.classList.add('btn-success');
+    updateUI();
+  }
+
+  function checkAnswer(el, correct) {
+    if (el.classList.contains('correct') || el.classList.contains('incorrect')) return;
+    el.classList.add(correct ? 'correct' : 'incorrect');
+    document.getElementById(correct ? 'check-feedback-correct' : 'check-feedback-wrong').classList.add('show');
+    if (correct) GameEngine.completeCheck('phase2-knowledge');
+  }
+
+  const bossAnswers = {};
+  function bossCheck(el, part, correct) {
+    if (bossAnswers[part] !== undefined) return;
+    bossAnswers[part] = correct;
+    el.classList.add(correct ? 'correct' : 'incorrect');
+    if (!correct) {
+      const fb = document.getElementById('boss-feedback-wrong');
+      fb.style.display = 'block';
+      fb.innerHTML = '❌ Part ' + part + ' incorrect. Review the topics above and try again on your next visit!';
+    }
+    if (Object.keys(bossAnswers).length === 3 && bossAnswers[1] && bossAnswers[2] && bossAnswers[3]) {
+      document.getElementById('boss-feedback-correct').style.display = 'block';
+      const firstTry = !document.getElementById('boss-feedback-wrong').style.display || document.getElementById('boss-feedback-wrong').style.display === 'none';
+      GameEngine.completeBoss(PHASE, firstTry);
+    }
+  }
+
+  function completePhase() {
+    GameEngine.completePhase(PHASE);
+    GameEngine.showToast('🎉 Phase 2 Complete! You earned the Identity Guardian badge!');
+    updateUI();
+  }
+
+  function updateUI() {
+    const completed = GameEngine.getPhaseProgress(PHASE);
+    const count = completed.length;
+    const pct = Math.round((count / TOPICS.length) * 100);
+
+    document.getElementById('progress-text').textContent = count + ' / ' + TOPICS.length + ' topics completed';
+    document.getElementById('progress-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    TOPICS.forEach(id => {
+      const done = GameEngine.isTopicCompleted(id);
+      const status = document.getElementById('status-' + id);
+      const btn = document.getElementById('btn-' + id);
+      if (done) {
+        status.classList.add('done');
+        status.textContent = '✓';
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = '✅ Completed!';
+          btn.classList.remove('btn-primary');
+          btn.classList.add('btn-success');
+        }
+      }
+    });
+
+    const allDone = TOPICS.every(id => GameEngine.isTopicCompleted(id));
+    const phaseBtn = document.getElementById('complete-phase-btn');
+    const hint = document.getElementById('complete-phase-hint');
+    if (GameEngine.isPhaseCompleted(PHASE)) {
+      phaseBtn.disabled = true;
+      phaseBtn.textContent = '🏅 Phase 2 Complete!';
+      hint.textContent = 'You earned the Identity Guardian badge!';
+    } else if (allDone) {
+      phaseBtn.disabled = false;
+      hint.textContent = 'All topics done — claim your badge!';
+    }
+
+    if (typeof GameEngine.updateHeaderUI === 'function') GameEngine.updateHeaderUI();
+  }
+
+  updateUI();
+</script>
+</body>
+</html>

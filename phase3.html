@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 3: Cloud Fundamentals — Cloud Pre-Sales Learning Path</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-brand"><span>☁️</span> Cloud Path</a>
+    <div class="nav-links">
+      <a href="index.html">Journey</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="resources.html">Resources</a>
+    </div>
+    <div class="header-xp">
+      <span id="header-level" class="header-level">☁️ Cloud Rookie</span>
+      <span id="header-xp-text">0 XP</span>
+      <div class="header-xp-bar"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
+      <span id="header-streak" class="header-streak"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" style="background:linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);">
+  <div class="container">
+    <h1>☁️ Phase 3: Cloud Fundamentals</h1>
+    <p>Understand the cloud landscape — models, providers, economics, and migration strategies.</p>
+  </div>
+</section>
+
+<!-- Progress -->
+<section class="section">
+  <div class="container">
+    <div class="progress-label">
+      <span id="progress-text">0 / 6 topics completed</span>
+      <span id="progress-pct">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+
+    <div style="margin-top:32px;">
+
+      <!-- Topic 1: IaaS, PaaS, SaaS -->
+      <div class="card" style="margin-bottom:16px;" id="topic-cloud-models">
+        <div class="topic-item" onclick="toggleTopic('cloud-models')" style="cursor:pointer;border-bottom:none;">
+          <div class="topic-status" id="status-cloud-models">1</div>
+          <div class="topic-info">
+            <div class="topic-name">🏗️ IaaS, PaaS, SaaS</div>
+            <div class="topic-desc">The three flavors of cloud service</div>
+          </div>
+          <div class="topic-xp">+50 XP</div>
+        </div>
+        <div class="topic-content" id="content-cloud-models" style="display:none;padding:0 16px 16px;">
+          <div class="analogy" style="margin-bottom:16px;">
+            💡 <strong>Think of it this way:</strong>
+            <br>🏚️ <strong>IaaS</strong> = An unfurnished apartment — you get the walls and plumbing, but you bring your own furniture, appliances, and decor.
+            <br>🛋️ <strong>PaaS</strong> = A furnished apartment — move in and start living. The basics are handled for you.
+            <br>🏨 <strong>SaaS</strong> = A hotel room — everything is done for you. Just show up and use it.
+          </div>
+          <p style="margin-bottom:16px;color:var(--gray-600);line-height:1.7;">
+            <strong>IaaS (Infrastructure as a Service)</strong> gives you virtual machines, storage, and networking — you manage the OS and everything above it. Examples: Azure VMs, AWS EC2.
+            <strong>PaaS (Platform as a Service)</strong> gives you a ready-made platform to deploy your apps — no managing servers. Examples: Azure App Service, AWS Elastic Beanstalk.
+            <strong>SaaS (Software as a Service)</strong> is fully managed software you just use. Examples: Microsoft 365, Salesforce, Gmail.
+            The <strong>shared responsibility model</strong> shifts: with IaaS you manage most things; with SaaS the provider handles almost everything — like the difference between being a landlord vs a hotel guest.
+          </p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">Resources</span>
+              <h3>IaaS, PaaS, SaaS</h3>
+            </div>
+            <div class="resource-links">
+              <a class="resource-link" href="https://www.youtube.com/results?search_query=Cloud+Computing+Explained+Simplilearn" target="_blank">
+                <span class="emoji">🎬</span> Video: "Cloud Computing Explained" by Simplilearn
+              </a>
+              <a class="resource-link" href="https://learn.microsoft.com/en-us/training/modules/describe-cloud-compute/" target="_blank">
+                <span class="emoji">📄</span> Article: Microsoft Learn — Cloud concepts
+              </a>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="markComplete(3,'cloud-models',this)" id="btn-cloud-models">
+            ✅ Mark as Complete
+          </button>
+        </div>
+      </div>
+
+      <!-- Topic 2: Azure Fundamentals -->
+      <div class="card" style="margin-bottom:16px;" id="topic-azure-fundamentals">
+        <div class="topic-item" onclick="toggleTopic('azure-fundamentals')" style="cursor:pointer;border-bottom:none;">
+          <div class="topic-status" id="status-azure-fundamentals">2</div>
+          <div class="topic-info">
+            <div class="topic-name">🔵 Azure Fundamentals (AZ-900)</div>
+            <div class="topic-desc">Your home base in the cloud</div>
+          </div>
+          <div class="topic-xp">+50 XP</div>
+        </div>
+        <div class="topic-content" id="content-azure-fundamentals" style="display:none;padding:0 16px 16px;">
+          <div class="analogy" style="margin-bottom:16px;">
+            💡 <strong>Think of it this way:</strong> Azure is like a massive shopping mall with hundreds of stores (services). <strong>Resource Groups</strong> are your shopping bags — they keep related purchases together. <strong>Subscriptions</strong> are your credit cards — they determine who pays. <strong>Regions</strong> are different mall locations around the world — you pick the one closest to your customers.
+          </div>
+          <p style="margin-bottom:16px;color:var(--gray-600);line-height:1.7;">
+            <strong>Azure Portal</strong> is the dashboard where you manage everything — think of it as the mall directory.
+            <strong>Resource Groups</strong> are logical containers: put all resources for a project together so you can manage, monitor, and delete them as a unit.
+            <strong>Regions</strong> are physical datacenter locations worldwide — choosing the right region means lower latency for your users.
+            <strong>Subscriptions</strong> are billing boundaries — departments or projects can have separate subscriptions for cost tracking.
+            Core services include <strong>Compute</strong> (VMs, App Service), <strong>Storage</strong> (Blob, Files), <strong>Networking</strong> (VNet, Load Balancer), and <strong>Databases</strong> (SQL, Cosmos DB).
+          </p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">Resources</span>
+              <h3>Azure Fundamentals</h3>
+            </div>
+            <div class="resource-links">
+              <a class="resource-link" href="https://www.youtube.com/results?search_query=AZ-900+Full+Course+John+Savill" target="_blank">
+                <span class="emoji">🎬</span> Video: "AZ-900 Full Course" by John Savill
+              </a>
+              <a class="resource-link" href="https://learn.microsoft.com/en-us/training/paths/az-900-describe-cloud-concepts/" target="_blank">
+                <span class="emoji">📄</span> Article: Microsoft Learn — Azure Fundamentals path
+              </a>
+              <div class="resource-link">
+                <span class="emoji">🧪</span> Lab: Create a free Azure account and explore the portal
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="markComplete(3,'azure-fundamentals',this)" id="btn-azure-fundamentals">
+            ✅ Mark as Complete
+          </button>
+        </div>
+      </div>
+
+      <!-- Topic 3: AWS Basics -->
+      <div class="card" style="margin-bottom:16px;" id="topic-aws-basics">
+        <div class="topic-item" onclick="toggleTopic('aws-basics')" style="cursor:pointer;border-bottom:none;">
+          <div class="topic-status" id="status-aws-basics">3</div>
+          <div class="topic-info">
+            <div class="topic-name">🟠 AWS Cloud Practitioner Basics</div>
+            <div class="topic-desc">Know the competition</div>
+          </div>
+          <div class="topic-xp">+50 XP</div>
+        </div>
+        <div class="topic-content" id="content-aws-basics" style="display:none;padding:0 16px 16px;">
+          <div class="analogy" style="margin-bottom:16px;">
+            💡 <strong>Think of it this way:</strong> If Azure is a shopping mall you know well, AWS is the competing mall across town. The stores have different names but sell similar things. Knowing both makes you a better shopper (and a better pre-sales consultant — customers use both!).
+          </div>
+          <p style="margin-bottom:16px;color:var(--gray-600);line-height:1.7;">
+            <strong>EC2</strong> = AWS's virtual machines (like Azure VMs).
+            <strong>S3</strong> = Object storage (like Azure Blob Storage) — where you store files, backups, images.
+            <strong>IAM</strong> = Identity and Access Management (like Azure AD/Entra ID for AWS).
+            <strong>Regions & Availability Zones</strong> = Same concept as Azure regions, data centers spread globally.
+            <strong>VPC</strong> = Virtual Private Cloud (like Azure VNet) — your private network in AWS.
+            You don't need to be an AWS expert, but being conversational about it is essential in pre-sales — many customers use multi-cloud or are migrating between providers.
+          </p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">Resources</span>
+              <h3>AWS Cloud Practitioner Basics</h3>
+            </div>
+            <div class="resource-links">
+              <a class="resource-link" href="https://www.youtube.com/results?search_query=AWS+in+10+Minutes+Fireship" target="_blank">
+                <span class="emoji">🎬</span> Video: "AWS in 10 Minutes" by Fireship
+              </a>
+              <a class="resource-link" href="https://aws.amazon.com/training/digital/aws-cloud-practitioner-essentials/" target="_blank">
+                <span class="emoji">📄</span> Article: AWS — Cloud Practitioner Essentials
+              </a>
+              <div class="resource-link">
+                <span class="emoji">🧪</span> Lab: Create a free AWS account and launch an EC2 instance
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="markComplete(3,'aws-basics',this)" id="btn-aws-basics">
+            ✅ Mark as Complete
+          </button>
+        </div>
+      </div>
+
+      <!-- Topic 4: Shared Responsibility -->
+      <div class="card" style="margin-bottom:16px;" id="topic-shared-responsibility">
+        <div class="topic-item" onclick="toggleTopic('shared-responsibility')" style="cursor:pointer;border-bottom:none;">
+          <div class="topic-status" id="status-shared-responsibility">4</div>
+          <div class="topic-info">
+            <div class="topic-name">🤝 Shared Responsibility Model</div>
+            <div class="topic-desc">Who's responsible for what?</div>
+          </div>
+          <div class="topic-xp">+50 XP</div>
+        </div>
+        <div class="topic-content" id="content-shared-responsibility" style="display:none;padding:0 16px 16px;">
+          <div class="analogy" style="margin-bottom:16px;">
+            💡 <strong>Think of it this way:</strong> Renting an apartment — the landlord maintains the building structure (foundation, roof, plumbing), but you're responsible for locking your door, not leaving the stove on, and keeping your stuff safe. The cloud works the same way: the provider secures the infrastructure, you secure your data and access.
+          </div>
+          <p style="margin-bottom:16px;color:var(--gray-600);line-height:1.7;">
+            The shared responsibility model defines who handles what:
+            <br><strong>With IaaS:</strong> The provider manages physical security, networking, and hardware. You manage the OS, applications, data, and access control. (Like renting an unfurnished apartment — the building is maintained, but everything inside is on you.)
+            <br><strong>With PaaS:</strong> The provider also handles the OS and runtime. You manage the application code and data. (Furnished apartment — less for you to worry about.)
+            <br><strong>With SaaS:</strong> The provider handles almost everything. You manage your data, accounts, and access permissions. (Hotel — just don't lose your room key.)
+            <br>Understanding this model is <strong>critical</strong> in pre-sales conversations — customers often assume "cloud = someone else's problem." Your job is to clarify what they still own.
+          </p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">Resources</span>
+              <h3>Shared Responsibility Model</h3>
+            </div>
+            <div class="resource-links">
+              <a class="resource-link" href="https://www.youtube.com/results?search_query=Shared+Responsibility+Model+A+Cloud+Guru" target="_blank">
+                <span class="emoji">🎬</span> Video: "Shared Responsibility Model" by A Cloud Guru
+              </a>
+              <a class="resource-link" href="https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility" target="_blank">
+                <span class="emoji">📄</span> Article: Microsoft — Shared responsibility in the cloud
+              </a>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="markComplete(3,'shared-responsibility',this)" id="btn-shared-responsibility">
+            ✅ Mark as Complete
+          </button>
+        </div>
+      </div>
+
+      <!-- Topic 5: Hybrid & Migration -->
+      <div class="card" style="margin-bottom:16px;" id="topic-hybrid-migration">
+        <div class="topic-item" onclick="toggleTopic('hybrid-migration')" style="cursor:pointer;border-bottom:none;">
+          <div class="topic-status" id="status-hybrid-migration">5</div>
+          <div class="topic-info">
+            <div class="topic-name">🔄 Hybrid Cloud & Migration Strategies</div>
+            <div class="topic-desc">Getting to the cloud — the right way</div>
+          </div>
+          <div class="topic-xp">+50 XP</div>
+        </div>
+        <div class="topic-content" id="content-hybrid-migration" style="display:none;padding:0 16px 16px;">
+          <div class="analogy" style="margin-bottom:16px;">
+            💡 <strong>Think of it this way:</strong> Keeping valuables in a home safe (on-prem) but using a bank safe deposit box (cloud) for extra security. Most people don't move everything to the bank overnight — they gradually shift things based on value and convenience. That's hybrid cloud.
+          </div>
+          <p style="margin-bottom:16px;color:var(--gray-600);line-height:1.7;">
+            Migration strategies (the "6 R's"):
+            <br><strong>Lift-and-Shift (Rehost):</strong> Move as-is to the cloud. Fast but doesn't optimize for cloud benefits. Like moving your furniture to a new apartment without changing anything.
+            <br><strong>Re-platform:</strong> Small tweaks during migration. Like rearranging furniture in the new place for a better layout.
+            <br><strong>Re-architect:</strong> Redesign the application to be cloud-native. Most effort, but greatest long-term benefits. Like gutting and renovating the apartment.
+            <br><strong>Azure Arc</strong> extends Azure management to on-prem and multi-cloud resources — manage everything from one pane of glass.
+            <br><strong>Reality check:</strong> Nobody goes 100% cloud overnight. Migration is a journey, not a switch.
+          </p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">Resources</span>
+              <h3>Hybrid Cloud & Migration</h3>
+            </div>
+            <div class="resource-links">
+              <a class="resource-link" href="https://www.youtube.com/results?search_query=Cloud+Migration+Strategies+A+Cloud+Guru" target="_blank">
+                <span class="emoji">🎬</span> Video: "Cloud Migration Strategies" by A Cloud Guru
+              </a>
+              <a class="resource-link" href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/migrate/" target="_blank">
+                <span class="emoji">📄</span> Article: Microsoft — Cloud migration strategies
+              </a>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="markComplete(3,'hybrid-migration',this)" id="btn-hybrid-migration">
+            ✅ Mark as Complete
+          </button>
+        </div>
+      </div>
+
+      <!-- Topic 6: Cloud Economics & FinOps -->
+      <div class="card" style="margin-bottom:16px;" id="topic-finops-economics">
+        <div class="topic-item" onclick="toggleTopic('finops-economics')" style="cursor:pointer;border-bottom:none;">
+          <div class="topic-status" id="status-finops-economics">6</div>
+          <div class="topic-info">
+            <div class="topic-name">💰 Cloud Economics & FinOps</div>
+            <div class="topic-desc">The money side of cloud</div>
+          </div>
+          <div class="topic-xp">+50 XP</div>
+        </div>
+        <div class="topic-content" id="content-finops-economics" style="display:none;padding:0 16px 16px;">
+          <div class="analogy" style="margin-bottom:16px;">
+            💡 <strong>Think of it this way:</strong> <strong>CapEx</strong> (Capital Expenditure) is buying a car — big upfront cost, you own it, it depreciates. <strong>OpEx</strong> (Operational Expenditure) is using Uber — pay per ride, no maintenance, scale up or down as needed. Cloud shifts IT from buying cars to using Uber.
+          </div>
+          <p style="margin-bottom:16px;color:var(--gray-600);line-height:1.7;">
+            <strong>Pay-as-you-go:</strong> Only pay for what you use, like a utility bill. No massive upfront investment.
+            <strong>Reserved Instances:</strong> Commit to 1-3 years for significant discounts (up to 72% off). Like signing a long-term lease for a lower monthly rate.
+            <strong>TCO Calculators:</strong> Tools that compare the total cost of running workloads on-prem vs cloud — including hidden costs like power, cooling, staff, and real estate.
+            <strong>Cost Management Tools:</strong> Azure Cost Management, AWS Cost Explorer — dashboards that track spending and set budget alerts before you get a surprise bill.
+            <strong>FinOps</strong> is the practice of bringing financial accountability to cloud spending — making teams responsible for what they consume, just like a department budget.
+          </p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">Resources</span>
+              <h3>Cloud Economics & FinOps</h3>
+            </div>
+            <div class="resource-links">
+              <a class="resource-link" href="https://www.youtube.com/results?search_query=Cloud+Cost+Management+A+Cloud+Guru" target="_blank">
+                <span class="emoji">🎬</span> Video: "Cloud Cost Management" by A Cloud Guru
+              </a>
+              <a class="resource-link" href="https://azure.microsoft.com/en-us/pricing/tco/calculator/" target="_blank">
+                <span class="emoji">📄</span> Article: Microsoft — Azure pricing and TCO
+              </a>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="markComplete(3,'finops-economics',this)" id="btn-finops-economics">
+            ✅ Mark as Complete
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Knowledge Check -->
+    <div class="check-container" style="margin-top:40px;">
+      <h3>🧠 Knowledge Check</h3>
+      <p style="color:var(--gray-600);margin-bottom:16px;">A startup wants to deploy a web application. They don't want to manage servers or operating systems — just deploy their code and let it run. They expect unpredictable traffic spikes. Which cloud model fits best?</p>
+      <div class="check-option" onclick="checkAnswer(this, false)">A) IaaS — spin up virtual machines and install the web server yourself</div>
+      <div class="check-option" onclick="checkAnswer(this, true)">B) PaaS — deploy code to a managed platform like Azure App Service that auto-scales</div>
+      <div class="check-option" onclick="checkAnswer(this, false)">C) SaaS — use an existing website builder like Wix</div>
+      <div class="check-feedback success" id="check-feedback-correct">✅ Correct! PaaS is perfect here — the startup deploys their custom code without managing infrastructure, and the platform handles scaling automatically during traffic spikes. IaaS would require managing servers; SaaS wouldn't allow custom application code.</div>
+      <div class="check-feedback error" id="check-feedback-wrong">❌ Not quite. The key requirements are: custom code deployment + no server management + auto-scaling. PaaS (like Azure App Service) is designed exactly for this — it handles the infrastructure while the team focuses on code.</div>
+    </div>
+
+    <!-- Boss Challenge -->
+    <div class="card" style="margin-top:24px;border:2px solid var(--accent);">
+      <h3 style="margin-bottom:8px;">🏆 Phase Boss Challenge: "The Cloud Strategy Advisor"</h3>
+      <p style="color:var(--gray-500);margin-bottom:16px;font-size:0.9rem;">A company needs your cloud guidance!</p>
+
+      <div style="background:var(--gray-50);padding:16px;border-radius:var(--radius-sm);margin-bottom:20px;font-style:italic;color:var(--gray-600);line-height:1.7;">
+        "A mid-size manufacturing company (500 employees) runs everything on-premises: ERP system, email (Exchange Server), file shares, and a customer portal website. Their servers are 7 years old and approaching end-of-life. They have strict data regulations requiring some data to stay in-country. The CFO is concerned about the large capital expense of replacing all servers."
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-weight:600;margin-bottom:8px;">Part 1: What migration approach makes sense for the aging ERP system that's deeply customized?</p>
+        <div class="check-option" onclick="bossCheck(this, 1, false)">A) Re-architect it immediately as a cloud-native application</div>
+        <div class="check-option" onclick="bossCheck(this, 1, true)">B) Lift-and-shift to Azure VMs first, then modernize gradually</div>
+        <div class="check-option" onclick="bossCheck(this, 1, false)">C) Replace it with a SaaS ERP immediately</div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-weight:600;margin-bottom:8px;">Part 2: How should you address the CFO's concern about capital expenses?</p>
+        <div class="check-option" onclick="bossCheck(this, 2, false)">A) Tell them cloud is always cheaper — show only the pay-as-you-go prices</div>
+        <div class="check-option" onclick="bossCheck(this, 2, true)">B) Use the Azure TCO calculator to compare total costs, showing the shift from CapEx to OpEx and including hidden on-prem costs</div>
+        <div class="check-option" onclick="bossCheck(this, 2, false)">C) Suggest they just buy new on-prem servers since they already have the infrastructure</div>
+      </div>
+
+      <div style="margin-bottom:16px;">
+        <p style="font-weight:600;margin-bottom:8px;">Part 3: Given the data residency regulations, what cloud strategy best fits?</p>
+        <div class="check-option" onclick="bossCheck(this, 3, false)">A) Full public cloud — just pick a region in their country</div>
+        <div class="check-option" onclick="bossCheck(this, 3, false)">B) Stay fully on-premises — regulations make cloud impossible</div>
+        <div class="check-option" onclick="bossCheck(this, 3, true)">C) Hybrid cloud — regulated data stays on-prem or in a sovereign cloud region, while other workloads move to Azure</div>
+      </div>
+
+      <div class="check-feedback success" id="boss-feedback-correct" style="display:none;">
+        🎉 <strong>Boss Defeated!</strong> You recommended a practical, phased approach: lift-and-shift for quick wins, TCO analysis for the CFO, and hybrid cloud for compliance. This is exactly how real cloud consultants advise enterprise customers!
+      </div>
+      <div class="check-feedback error" id="boss-feedback-wrong" style="display:none;"></div>
+    </div>
+
+    <!-- Complete Phase -->
+    <div style="text-align:center;margin-top:40px;">
+      <button class="btn btn-success btn-lg" id="complete-phase-btn" onclick="completePhase()" disabled>
+        🏅 Complete Phase 3 & Earn Badge
+      </button>
+      <p style="color:var(--gray-500);font-size:0.85rem;margin-top:8px;" id="complete-phase-hint">Complete all 6 topics to unlock</p>
+    </div>
+
+    <!-- Navigation -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--gray-200);">
+      <a href="phase2.html" class="btn btn-outline">← Phase 2: Infrastructure & Identity</a>
+      <a href="index.html" class="btn btn-primary">Back to Journey Map →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p id="motivational-quote" class="motivational-quote"></p>
+    <p style="margin-top:12px;">Cloud Pre-Sales Learning Path © 2026</p>
+  </div>
+</footer>
+
+<script src="js/game-engine.js"></script>
+<script>
+  const PHASE = 3;
+  const TOPICS = ['cloud-models','azure-fundamentals','aws-basics','shared-responsibility','hybrid-migration','finops-economics'];
+
+  function toggleTopic(id) {
+    const el = document.getElementById('content-' + id);
+    el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function markComplete(phase, topicId, btn) {
+    GameEngine.completeTopic(phase, topicId);
+    btn.disabled = true;
+    btn.textContent = '✅ Completed!';
+    btn.classList.remove('btn-primary');
+    btn.classList.add('btn-success');
+    updateUI();
+  }
+
+  function checkAnswer(el, correct) {
+    if (el.classList.contains('correct') || el.classList.contains('incorrect')) return;
+    el.classList.add(correct ? 'correct' : 'incorrect');
+    document.getElementById(correct ? 'check-feedback-correct' : 'check-feedback-wrong').classList.add('show');
+    if (correct) GameEngine.completeCheck('phase3-knowledge');
+  }
+
+  const bossAnswers = {};
+  function bossCheck(el, part, correct) {
+    if (bossAnswers[part] !== undefined) return;
+    bossAnswers[part] = correct;
+    el.classList.add(correct ? 'correct' : 'incorrect');
+    if (!correct) {
+      const fb = document.getElementById('boss-feedback-wrong');
+      fb.style.display = 'block';
+      fb.innerHTML = '❌ Part ' + part + ' incorrect. Review the topics above and try again on your next visit!';
+    }
+    if (Object.keys(bossAnswers).length === 3 && bossAnswers[1] && bossAnswers[2] && bossAnswers[3]) {
+      document.getElementById('boss-feedback-correct').style.display = 'block';
+      const firstTry = !document.getElementById('boss-feedback-wrong').style.display || document.getElementById('boss-feedback-wrong').style.display === 'none';
+      GameEngine.completeBoss(PHASE, firstTry);
+    }
+  }
+
+  function completePhase() {
+    GameEngine.completePhase(PHASE);
+    GameEngine.showToast('🎉 Phase 3 Complete! You earned the Cloud Pioneer badge!');
+    updateUI();
+  }
+
+  function updateUI() {
+    const completed = GameEngine.getPhaseProgress(PHASE);
+    const count = completed.length;
+    const pct = Math.round((count / TOPICS.length) * 100);
+
+    document.getElementById('progress-text').textContent = count + ' / ' + TOPICS.length + ' topics completed';
+    document.getElementById('progress-pct').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    TOPICS.forEach(id => {
+      const done = GameEngine.isTopicCompleted(id);
+      const status = document.getElementById('status-' + id);
+      const btn = document.getElementById('btn-' + id);
+      if (done) {
+        status.classList.add('done');
+        status.textContent = '✓';
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = '✅ Completed!';
+          btn.classList.remove('btn-primary');
+          btn.classList.add('btn-success');
+        }
+      }
+    });
+
+    const allDone = TOPICS.every(id => GameEngine.isTopicCompleted(id));
+    const phaseBtn = document.getElementById('complete-phase-btn');
+    const hint = document.getElementById('complete-phase-hint');
+    if (GameEngine.isPhaseCompleted(PHASE)) {
+      phaseBtn.disabled = true;
+      phaseBtn.textContent = '🏅 Phase 3 Complete!';
+      hint.textContent = 'You earned the Cloud Pioneer badge!';
+    } else if (allDone) {
+      phaseBtn.disabled = false;
+      hint.textContent = 'All topics done — claim your badge!';
+    }
+
+    if (typeof GameEngine.updateHeaderUI === 'function') GameEngine.updateHeaderUI();
+  }
+
+  updateUI();
+</script>
+</body>
+</html>

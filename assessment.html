@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Self-Assessment — Cloud Pre-Sales Learning Path</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* Assessment-specific styles */
+    .assessment-hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+      color: #fff;
+      padding: 48px 0;
+      text-align: center;
+    }
+    .assessment-hero h1 { color: #fff; font-size: 2.2rem; margin-bottom: 12px; }
+    .assessment-hero p { opacity: 0.9; max-width: 620px; margin: 0 auto; font-size: 1.05rem; line-height: 1.7; }
+    .assessment-hero .subtitle { font-size: 1.15rem; font-weight: 600; margin-bottom: 8px; opacity: 1; }
+
+    .welcome-panel {
+      max-width: 680px;
+      margin: -32px auto 0;
+      position: relative;
+      z-index: 1;
+    }
+    .welcome-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+    .welcome-card h2 { margin-bottom: 16px; }
+    .welcome-card p { color: var(--gray-600); line-height: 1.7; margin-bottom: 12px; }
+    .welcome-features {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 24px 0;
+    }
+    .welcome-feature {
+      background: var(--gray-50);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      flex: 1;
+      min-width: 150px;
+      max-width: 200px;
+    }
+    .welcome-feature .icon { font-size: 1.5rem; margin-bottom: 6px; }
+    .welcome-feature .label { font-size: 0.85rem; font-weight: 600; color: var(--gray-700); }
+
+    /* Progress bar */
+    .assessment-progress {
+      max-width: 680px;
+      margin: 32px auto 0;
+      position: relative;
+      z-index: 1;
+    }
+    .assessment-progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gray-500);
+    }
+    .assessment-progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .assessment-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--success));
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    /* Scenario container */
+    .scenario-container {
+      max-width: 680px;
+      margin: 24px auto 0;
+      position: relative;
+      min-height: 340px;
+    }
+    .scenario-card {
+      animation: fadeSlideIn 0.4s ease;
+    }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Results extras */
+    .results-container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 32px 0;
+    }
+    .results-summary {
+      text-align: center;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      color: var(--gray-600);
+    }
+    .results-panel { animation: fadeSlideIn 0.5s ease; }
+    .results-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .screen { display: none; }
+    .screen.active { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-brand"><span>☁️</span> Cloud Path</a>
+    <div class="nav-links">
+      <a href="index.html">Journey</a>
+      <a href="assessment.html" class="active">Assessment</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="resources.html">Resources</a>
+    </div>
+    <div class="header-xp">
+      <span id="header-level" class="header-level">☁️ Cloud Rookie</span>
+      <span id="header-xp-text">0 XP</span>
+      <div class="header-xp-bar"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
+      <span id="header-streak" class="header-streak"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="assessment-hero">
+  <div class="container">
+    <p class="subtitle">🗺️ Your Personalized Learning Map</p>
+    <h1>Cloud Pre-Sales Self-Assessment</h1>
+    <p>Discover where you stand today — and build a clear path to where you want to be.</p>
+  </div>
+</section>
+
+<!-- ========== WELCOME SCREEN ========== -->
+<div id="screen-welcome" class="screen active">
+  <div class="welcome-panel">
+    <div class="welcome-card">
+      <h2>How This Works</h2>
+      <p>You'll read <strong>14 real-world pre-sales scenarios</strong> and rate how confident you'd feel in each situation. There are <strong>no right or wrong answers</strong> — this is about honest self-reflection.</p>
+      <p>Your responses will generate a <strong>personalized learning map</strong> that tells you exactly which phases to prioritize, which to review, and which you can skip.</p>
+      <div class="welcome-features">
+        <div class="welcome-feature">
+          <div class="icon">⏱️</div>
+          <div class="label">5-7 minutes</div>
+        </div>
+        <div class="welcome-feature">
+          <div class="icon">🎯</div>
+          <div class="label">14 scenarios</div>
+        </div>
+        <div class="welcome-feature">
+          <div class="icon">🗺️</div>
+          <div class="label">Personal map</div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-lg" onclick="startAssessment()">Begin Assessment →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SCENARIO SCREEN ========== -->
+<div id="screen-scenario" class="screen">
+  <div class="assessment-progress">
+    <div class="assessment-progress-header">
+      <span id="progress-label">Scenario 1 of 14</span>
+      <span id="progress-percent">0%</span>
+    </div>
+    <div class="assessment-progress-bar">
+      <div class="assessment-progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+  <div class="scenario-container" id="scenario-container"></div>
+</div>
+
+<!-- ========== RESULTS SCREEN ========== -->
+<div id="screen-results" class="screen">
+  <div class="results-container" id="results-container"></div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p id="motivational-quote" class="motivational-quote"></p>
+    <p style="margin-top:12px;">Cloud Pre-Sales Learning Path © 2026</p>
+  </div>
+</footer>
+
+<script src="js/game-engine.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // ── Scenario Data ──
+  const SCENARIOS = [
+    { id: 's1',  phase: 1, title: 'The Network Outage',
+      text: 'A client calls saying their new branch office can\'t reach the company\'s internal applications. The IT team says it\'s a subnet and routing issue — the new office was assigned an IP range that overlaps with headquarters. How confident are you in understanding what went wrong?' },
+    { id: 's2',  phase: 1, title: 'The Mystery Domain',
+      text: 'A company just bought a new domain for their product launch, but when customers type the URL, they get a "page not found" error. Someone mentions DNS records aren\'t configured. How confident are you in understanding what needs to happen?' },
+    { id: 's3',  phase: 1, title: 'The Slow Server',
+      text: 'A small business complains their application is running slow. The hosting provider suggests upgrading their virtual machine to one with more CPU and RAM. The client asks you: "What\'s a virtual machine, and why can\'t we just buy a bigger computer?" How confident are you in explaining this?' },
+    { id: 's4',  phase: 1, title: 'The Storage Crunch',
+      text: 'A media company says they\'re running out of space on their file server. They have 50TB of video files, and someone suggests moving older files to a cheaper "archive tier" in the cloud while keeping recent work on fast local storage. How confident are you in discussing the options?' },
+    { id: 's5',  phase: 2, title: 'The Locked-Out Employee',
+      text: 'An employee at a 500-person company can\'t log in to their laptop, email, or shared drives. The IT helpdesk says their Active Directory account was disabled by a Group Policy. The manager asks you: "Why does one system control everything?" How confident are you in explaining this?' },
+    { id: 's6',  phase: 2, title: 'The Scripting Shortcut',
+      text: 'A colleague shows you a PowerShell script that creates 50 user accounts in 10 seconds, instead of doing it manually one by one in a web portal. They ask if you\'d be comfortable modifying it to also assign users to specific groups. How confident are you with this?' },
+    { id: 's7',  phase: 3, title: 'The Cloud Pitch',
+      text: 'A manufacturing company\'s CFO asks: "Why should we move to the cloud? We already have servers in our basement that work fine." They want to understand IaaS vs SaaS, and whether it\'ll actually save money. How confident are you in making the case?' },
+    { id: 's8',  phase: 3, title: 'The Migration Debate',
+      text: 'A healthcare company wants to move to the cloud but can\'t move their patient database due to regulations. Someone proposes a hybrid approach — some workloads in Azure, sensitive data on-premises, connected via VPN. How confident are you in discussing this strategy?' },
+    { id: 's9',  phase: 3, title: 'The Cost Surprise',
+      text: 'A startup moved everything to AWS three months ago and just got a $15,000 bill — they expected $3,000. The CTO asks you to help figure out why, and how to prevent it. You see terms like "Reserved Instances," "right-sizing," and "cost allocation tags." How confident are you in this conversation?' },
+    { id: 's10', phase: 4, title: 'The Disaster Scenario',
+      text: 'A client\'s primary data center went offline due to a power failure. They ask: "If we were in Azure, would this still have happened?" They mention terms like availability zones, geo-replication, RPO, and RTO. How confident are you in explaining how cloud handles disasters?' },
+    { id: 's11', phase: 4, title: 'The Container Question',
+      text: 'A development team says they want to "containerize" their application and deploy it on Kubernetes. The CTO asks you to explain why this is better than just running it on a regular VM. How confident are you in explaining the difference?' },
+    { id: 's12', phase: 4, title: 'The Security Incident',
+      text: 'A company had a data breach because an employee\'s password was compromised. The security team recommends implementing "Zero Trust architecture" with conditional access policies and multi-factor authentication everywhere. The CEO asks you: "What does Zero Trust actually mean for us day-to-day?" How confident are you in this discussion?' },
+    { id: 's13', phase: 4, title: 'The Monitoring Blind Spot',
+      text: 'A client\'s web application went down for 2 hours before anyone noticed — a customer reported it. They ask: "How can we know when something breaks before our customers do?" You need to discuss alerting, dashboards, and application monitoring. How confident are you?' },
+    { id: 's14', phase: 5, title: 'The Compliance Deal-Breaker',
+      text: 'You\'re in a pre-sales meeting with a European bank. They ask: "Can you guarantee our data stays in the EU? What certifications does your cloud platform have? How do you handle GDPR and our financial regulators?" The deal depends on your answer. How confident are you in this conversation?' },
+  ];
+
+  const CONFIDENCE_LEVELS = [
+    { value: 0, emoji: '🔴', label: 'Lost',           desc: 'I have no idea what this is about' },
+    { value: 1, emoji: '🟡', label: 'Aware',           desc: "I've heard these terms but couldn't explain them" },
+    { value: 2, emoji: '🟢', label: 'Conversational',  desc: 'I could follow this conversation and ask decent questions' },
+    { value: 3, emoji: '🔵', label: 'Confident',       desc: 'I could help solve this or explain it to someone else' },
+  ];
+
+  const PHASE_INFO = {
+    1: { emoji: '🌐', name: 'IT Fundamentals' },
+    2: { emoji: '🛡️', name: 'Identity & Scripting' },
+    3: { emoji: '☁️',  name: 'Cloud Concepts' },
+    4: { emoji: '⚙️',  name: 'Cloud Services' },
+    5: { emoji: '💼', name: 'Pre-Sales Skills' },
+    6: { emoji: '📜', name: 'Certification' },
+  };
+
+  // ── State ──
+  let currentIndex = 0;
+  const answers = {};   // scenarioId → value (0-3)
+
+  // ── Screen Management ──
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── Welcome / Start ──
+  window.startAssessment = function () {
+    currentIndex = 0;
+    showScreen('scenario');
+    renderScenario();
+  };
+
+  // ── Render Scenario ──
+  function renderScenario() {
+    const s = SCENARIOS[currentIndex];
+    const pct = Math.round((currentIndex / SCENARIOS.length) * 100);
+
+    document.getElementById('progress-label').textContent = `Scenario ${currentIndex + 1} of ${SCENARIOS.length}`;
+    document.getElementById('progress-percent').textContent = pct + '%';
+    document.getElementById('progress-fill').style.width = pct + '%';
+
+    const html = `
+      <div class="scenario-card" style="animation: fadeSlideIn 0.4s ease">
+        <div class="scenario-number">Scenario ${currentIndex + 1} of ${SCENARIOS.length} — Phase ${s.phase}</div>
+        <h3 class="scenario-title">${s.title}</h3>
+        <p class="scenario-text">${s.text}</p>
+        <div class="confidence-options">
+          ${CONFIDENCE_LEVELS.map(c => `
+            <button class="confidence-btn" data-value="${c.value}" onclick="selectConfidence(${c.value})">
+              <span class="emoji">${c.emoji}</span>
+              <span><strong>${c.label}</strong> — ${c.desc}</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>`;
+    document.getElementById('scenario-container').innerHTML = html;
+  }
+
+  // ── Select Confidence ──
+  window.selectConfidence = function (value) {
+    const s = SCENARIOS[currentIndex];
+    answers[s.id] = value;
+
+    // Highlight selected button
+    document.querySelectorAll('.confidence-btn').forEach(btn => {
+      btn.classList.toggle('selected', parseInt(btn.dataset.value) === value);
+      btn.style.pointerEvents = 'none';
+    });
+
+    // Auto-advance after brief pause
+    setTimeout(() => {
+      currentIndex++;
+      if (currentIndex < SCENARIOS.length) {
+        renderScenario();
+      } else {
+        finishAssessment();
+      }
+    }, 400);
+  };
+
+  // ── Finish & Calculate Results ──
+  function finishAssessment() {
+    const phaseScores = calculatePhaseScores();
+    GameEngine.saveAssessment(phaseScores);
+    showResults(phaseScores);
+  }
+
+  function calculatePhaseScores() {
+    // Group scenario answers by phase
+    const phaseAnswers = {};
+    for (const s of SCENARIOS) {
+      if (!phaseAnswers[s.phase]) phaseAnswers[s.phase] = [];
+      if (answers[s.id] !== undefined) phaseAnswers[s.phase].push(answers[s.id]);
+    }
+
+    const scores = {};
+    // Phases 1-5: use LOWEST score from that phase's scenarios
+    for (let p = 1; p <= 5; p++) {
+      const vals = phaseAnswers[p] || [];
+      scores[p] = vals.length > 0 ? Math.min(...vals) : 0;
+    }
+    // Phase 6 (Certification): always "required" — no scenario covers it
+    scores[6] = 0;
+    return scores;
+  }
+
+  function getRecommendation(score) {
+    switch (score) {
+      case 0: return { text: '🔴 Required',       cls: 'rec-required', detail: 'Start here' };
+      case 1: return { text: '🟡 Review needed',   cls: 'rec-review',   detail: 'Review the material' };
+      case 2: return { text: '🟢 Skim for gaps',   cls: 'rec-skim',     detail: 'Quick review' };
+      case 3: return { text: '🔵 Skip (revision)', cls: 'rec-skip',     detail: 'Revision only' };
+      default: return { text: '🔴 Required',       cls: 'rec-required', detail: 'Start here' };
+    }
+  }
+
+  // ── Show Results ──
+  function showResults(scores) {
+    showScreen('results');
+
+    // Count how many phases need work
+    const requiredCount = Object.values(scores).filter(v => v <= 1).length;
+    const skipCount = Object.values(scores).filter(v => v >= 3).length;
+
+    let summary;
+    if (requiredCount >= 4) {
+      summary = "You're at the beginning of an exciting journey! There's a lot to learn, and this path will guide you step by step. 💪";
+    } else if (skipCount >= 4) {
+      summary = "Impressive! You already have strong foundations. Focus on the gaps and you'll be unstoppable. 🚀";
+    } else {
+      summary = "A solid mix! You have strengths to build on and clear areas to grow. Your personalized map is ready. 🗺️";
+    }
+
+    let cardsHTML = '';
+    for (let p = 1; p <= 6; p++) {
+      const info = PHASE_INFO[p];
+      const rec = getRecommendation(scores[p]);
+      cardsHTML += `
+        <div class="results-phase-card">
+          <div class="emoji">${info.emoji}</div>
+          <div class="name">Phase ${p}: ${info.name}</div>
+          <div class="rec ${rec.cls}">${rec.text}</div>
+        </div>`;
+    }
+
+    document.getElementById('results-container').innerHTML = `
+      <p class="results-summary">${summary}</p>
+      <div class="results-panel">
+        <h2>🗺️ Your Personalized Learning Map</h2>
+        <p style="opacity:0.85; margin-bottom: 8px;">Based on your scenario responses, here's your recommended focus for each phase:</p>
+        <div class="results-phase-grid">${cardsHTML}</div>
+        <div class="results-actions">
+          <a href="index.html" class="btn btn-success btn-lg">Start Your Journey →</a>
+          <button class="btn btn-outline" onclick="retakeAssessment()" style="border-color:rgba(255,255,255,0.5); color:#fff;">🔄 Retake Assessment</button>
+        </div>
+      </div>`;
+
+    // Update progress bar to 100%
+    document.getElementById('progress-fill').style.width = '100%';
+  }
+
+  // ── Retake ──
+  window.retakeAssessment = function () {
+    currentIndex = 0;
+    Object.keys(answers).forEach(k => delete answers[k]);
+    showScreen('welcome');
+  };
+
+  // ── Init ──
+  function init() {
+    GameEngine.updateHeaderUI();
+
+    // Set motivational quote
+    const quote = GameEngine.getRandomQuote();
+    const quoteEl = document.getElementById('motivational-quote');
+    if (quoteEl && quote) {
+      quoteEl.innerHTML = `"${quote.text}" <span class="author">— ${quote.author}</span>`;
+    }
+
+    // If assessment already done, go straight to results
+    if (GameEngine.isAssessmentDone()) {
+      const scores = GameEngine.getAssessmentScores();
+      if (scores && Object.keys(scores).length > 0) {
+        showResults(scores);
+        return;
+      }
+    }
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>

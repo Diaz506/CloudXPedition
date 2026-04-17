@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 4: Cloud Services Deep Dive ⚙️ — Cloud Pre-Sales Learning Path</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .topic-header { cursor: pointer; user-select: none; display: flex; align-items: center; justify-content: space-between; }
+    .topic-header:hover { opacity: 0.85; }
+    .topic-toggle { font-size: 1.3rem; transition: transform 0.2s; }
+    .topic-toggle.open { transform: rotate(90deg); }
+    .topic-content { display: none; padding-top: 12px; }
+    .topic-content.visible { display: block; }
+    .boss-part { background: var(--bg-light, #f8f9fa); border-radius: 8px; padding: 16px; margin: 10px 0; }
+    .boss-part h4 { margin-bottom: 8px; }
+    .boss-textarea { width: 100%; min-height: 80px; border-radius: 8px; border: 1px solid #ccc; padding: 10px; font-family: inherit; resize: vertical; }
+    .boss-feedback { margin-top: 8px; padding: 10px; border-radius: 8px; display: none; }
+    .phase-nav { display: flex; justify-content: space-between; margin-top: 32px; flex-wrap: wrap; gap: 12px; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-brand"><span>☁️</span> Cloud Path</a>
+    <div class="nav-links">
+      <a href="index.html">Journey</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="resources.html">Resources</a>
+    </div>
+    <div class="header-xp">
+      <span id="header-level" class="header-level">☁️ Cloud Rookie</span>
+      <span id="header-xp-text">0 XP</span>
+      <div class="header-xp-bar"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
+      <span id="header-streak" class="header-streak"></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <h1>⚙️ Phase 4: Cloud Services Deep Dive</h1>
+    <p>Master the core services that power every cloud solution — from compute and containers to security and disaster recovery.</p>
+  </div>
+</section>
+
+<!-- Progress -->
+<section class="section">
+  <div class="container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="phase-progress-fill" style="width:0%"></div>
+    </div>
+    <div class="progress-label" id="phase-progress-label">0 of 9 topics completed</div>
+  </div>
+</section>
+
+<!-- Topics -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">🗺️ Topics</h2>
+    <p class="section-subtitle">Click any topic to expand it. Complete all 9 to unlock the Phase Boss Challenge.</p>
+
+    <div class="topic-list" id="topic-list">
+
+      <!-- 1. Cloud Compute -->
+      <div class="topic-item" data-topic="cloud-compute">
+        <div class="topic-header" onclick="toggleTopic('cloud-compute')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-cloud-compute">⬜</span>
+            <span class="topic-name">1. Cloud Compute Services</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="topic-toggle" id="toggle-cloud-compute">▶</span>
+        </div>
+        <div class="topic-content" id="content-cloud-compute">
+          <div class="analogy">
+            🏠 <strong>Analogy:</strong> Think of <em>renting an apartment vs. booking a hotel room</em>. <strong>Virtual Machines</strong> are like long-term apartment leases — you get full control, but you handle the furniture and repairs. <strong>App Services</strong> are like hotel stays — someone else handles the maintenance; you just show up and work.
+          </div>
+          <p>Cloud compute is the engine behind every workload. <strong>Azure VMs</strong> (or AWS EC2) give you raw virtual hardware — full OS access, custom installs, total control. <strong>Azure App Service</strong> (or AWS Elastic Beanstalk) abstracts the infrastructure so you deploy code, not servers. Choose VMs when you need deep customization; choose managed services when you want speed and simplicity.</p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=Azure+VMs+Explained+John+Savill" target="_blank">🎬 Video — Azure VMs Explained by John Savill</a>
+                <a class="resource-link" href="https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree" target="_blank">📖 Article — Microsoft Learn: Compute Options</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-cloud-compute" onclick="completeTopic('cloud-compute')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- 2. Containers & Kubernetes -->
+      <div class="topic-item" data-topic="containers-kubernetes">
+        <div class="topic-header" onclick="toggleTopic('containers-kubernetes')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-containers-kubernetes">⬜</span>
+            <span class="topic-name">2. Containers & Kubernetes</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="topic-toggle" id="toggle-containers-kubernetes">▶</span>
+        </div>
+        <div class="topic-content" id="content-containers-kubernetes">
+          <div class="analogy">
+            🚢 <strong>Analogy:</strong> Imagine <em>shipping containers on a cargo ship</em>. Each container is standardized, portable, and isolated — it doesn't matter what's inside; it fits on any ship. That's Docker. Now picture a <strong>harbor master</strong> who decides which containers go on which ship, replaces damaged ones, and balances the load — that's <strong>Kubernetes</strong>.
+          </div>
+          <p>Containers package your app and all its dependencies into a single portable unit. Unlike VMs, they share the host OS kernel, making them lighter and faster to start. <strong>Docker</strong> is the standard for building containers. <strong>AKS</strong> (Azure Kubernetes Service) and <strong>EKS</strong> (AWS) orchestrate thousands of containers — handling scaling, healing, and load balancing automatically.</p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=Docker+in+100+Seconds+Fireship" target="_blank">🎬 Video — Docker in 100 Seconds by Fireship</a>
+                <a class="resource-link" href="https://learn.microsoft.com/en-us/azure/containers/" target="_blank">📖 Article — Microsoft Learn: Introduction to Containers</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-containers-kubernetes" onclick="completeTopic('containers-kubernetes')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- 3. Cloud Networking -->
+      <div class="topic-item" data-topic="cloud-networking">
+        <div class="topic-header" onclick="toggleTopic('cloud-networking')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-cloud-networking">⬜</span>
+            <span class="topic-name">3. Cloud Networking</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="topic-toggle" id="toggle-cloud-networking">▶</span>
+        </div>
+        <div class="topic-content" id="content-cloud-networking">
+          <div class="analogy">
+            🛣️ <strong>Analogy:</strong> A <strong>VPN</strong> is like a <em>private tunnel through a public highway</em> — your data travels securely even over the open internet. A <strong>load balancer</strong> is like a <em>restaurant host</em> who distributes customers evenly across available tables so no single waiter is overwhelmed. <strong>ExpressRoute</strong> is a <em>private road built directly from your office to the cloud</em> — no public traffic at all.
+          </div>
+          <p>Cloud networking connects everything. <strong>Virtual Networks</strong> (VNets in Azure, VPCs in AWS) create isolated network spaces. <strong>NSGs</strong> act as firewalls controlling traffic. <strong>Load Balancers</strong> distribute requests across healthy instances. <strong>VPN Gateway</strong> creates encrypted tunnels to on-premises, while <strong>ExpressRoute/Direct Connect</strong> provides dedicated private connectivity for mission-critical workloads.</p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=Azure+Networking+John+Savill" target="_blank">🎬 Video — Azure Networking by John Savill</a>
+                <a class="resource-link" href="https://learn.microsoft.com/en-us/azure/networking/fundamentals/networking-overview" target="_blank">📖 Article — Microsoft Learn: Azure Networking</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-cloud-networking" onclick="completeTopic('cloud-networking')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- 4. Cloud Storage -->
+      <div class="topic-item" data-topic="cloud-storage">
+        <div class="topic-header" onclick="toggleTopic('cloud-storage')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-cloud-storage">⬜</span>
+            <span class="topic-name">4. Cloud Storage Services</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="topic-toggle" id="toggle-cloud-storage">▶</span>
+        </div>
+        <div class="topic-content" id="content-cloud-storage">
+          <div class="analogy">
+            🏭 <strong>Analogy:</strong> Cloud storage is like a <em>massive warehouse</em>. You pay based on how much space you use and how often you access your stuff. <strong>Hot tier</strong> is the front shelf — instant access, higher rent. <strong>Cool tier</strong> is the back room — cheaper, but takes a moment to grab. <strong>Archive tier</strong> is off-site deep storage — very cheap, but retrieval takes hours.
+          </div>
+          <p><strong>Azure Blob Storage</strong> (or AWS S3) stores unstructured data — images, backups, logs — at massive scale. <strong>Managed Disks</strong> attach directly to VMs like virtual hard drives. <strong>Azure Files</strong> offers SMB file shares in the cloud. Understanding <strong>access tiers</strong> (hot, cool, archive) is key to optimizing storage costs for customers.</p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=Azure+Storage+Explained+John+Savill" target="_blank">🎬 Video — Azure Storage Explained by John Savill</a>
+                <a class="resource-link" href="https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction" target="_blank">📖 Article — Microsoft Learn: Storage Services</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-cloud-storage" onclick="completeTopic('cloud-storage')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- 5. Cloud Databases -->
+      <div class="topic-item" data-topic="cloud-databases">
+        <div class="topic-header" onclick="toggleTopic('cloud-databases')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-cloud-databases">⬜</span>
+            <span class="topic-name">5. Cloud Database Services</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="topic-toggle" id="toggle-cloud-databases">▶</span>
+        </div>
+        <div class="topic-content" id="content-cloud-databases">
+          <div class="analogy">
+            📚 <strong>Analogy:</strong> Think of a <em>library</em>. <strong>SQL databases</strong> are like a well-organized card catalog — every book has a fixed place, and you search by exact categories. <strong>NoSQL databases</strong> are like a free-form notebook — each page can look completely different, which gives you flexibility but less structure.
+          </div>
+          <p><strong>Azure SQL</strong> and <strong>AWS RDS</strong> provide managed relational databases — patching, backups, and HA built in. <strong>Cosmos DB</strong> and <strong>DynamoDB</strong> handle NoSQL workloads with global distribution and flexible schemas. The key pre-sales question: does the customer's data have a fixed structure (→ SQL) or does it vary wildly (→ NoSQL)? Managed services eliminate the "database admin at 3 AM" problem.</p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=SQL+vs+NoSQL+Fireship" target="_blank">🎬 Video — SQL vs NoSQL by Fireship</a>
+                <a class="resource-link" href="https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/data-store-overview" target="_blank">📖 Article — Microsoft Learn: Database Options</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-cloud-databases" onclick="completeTopic('cloud-databases')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- 6. Backup & DR -->
+      <div class="topic-item" data-topic="backup-dr">
+        <div class="topic-header" onclick="toggleTopic('backup-dr')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-backup-dr">⬜</span>
+            <span class="topic-name">6. Backup & Disaster Recovery</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="topic-toggle" id="toggle-backup-dr">▶</span>
+        </div>
+        <div class="topic-content" id="content-backup-dr">
+          <div class="analogy">
+            📓 <strong>Analogy:</strong> Imagine your notebook is destroyed. <strong>RPO (Recovery Point Objective)</strong> answers: <em>"When was the last photocopy?"</em> — how much work can you afford to lose? <strong>RTO (Recovery Time Objective)</strong> answers: <em>"How fast can you get a new notebook and rewrite?"</em> — how long can the business be down?
+          </div>
+          <p><strong>Azure Backup</strong> provides automated, policy-driven backups for VMs, databases, and files. <strong>Azure Site Recovery (ASR)</strong> replicates entire workloads to a secondary region for disaster recovery. <strong>Cross-region replication</strong> ensures data survives even regional outages. When talking to customers, RPO and RTO are the two magic numbers that shape every DR strategy and its cost.</p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=Disaster+Recovery+in+Azure+John+Savill" target="_blank">🎬 Video — Disaster Recovery in Azure by John Savill</a>
+                <a class="resource-link" href="https://learn.microsoft.com/en-us/azure/reliability/business-continuity-management-program" target="_blank">📖 Article — Microsoft Learn: Business Continuity</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-backup-dr" onclick="completeTopic('backup-dr')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- 7. High Availability & SLAs -->
+      <div class="topic-item" data-topic="high-availability">
+        <div class="topic-header" onclick="toggleTopic('high-availability')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-high-availability">⬜</span>
+            <span class="topic-name">7. High Availability & SLAs</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="topic-toggle" id="toggle-high-availability">▶</span>
+        </div>
+        <div class="topic-content" id="content-high-availability">
+          <div class="analogy">
+            🍽️ <strong>Analogy:</strong> Think of a <em>restaurant chain</em>. If one kitchen catches fire, the other locations keep serving customers. That's <strong>high availability</strong> — redundancy across locations so a single failure doesn't bring everything down. The SLA is the restaurant's promise: "We guarantee 99.99% of your orders will be served on time."
+          </div>
+          <p><strong>Availability Zones</strong> are physically separate datacenters within an Azure region — your app runs in multiple zones so one datacenter failure doesn't cause downtime. SLA tiers matter: <strong>99.9%</strong> allows ~8.7 hours of downtime/year; <strong>99.99%</strong> allows only ~52 minutes/year. In pre-sales, helping customers understand the cost vs. uptime tradeoff is a huge value-add.</p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=Azure+Availability+Zones+John+Savill" target="_blank">🎬 Video — Azure Availability Zones by John Savill</a>
+                <a class="resource-link" href="https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services" target="_blank">📖 Article — Microsoft: Azure SLAs</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-high-availability" onclick="completeTopic('high-availability')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- 8. Monitoring & Observability -->
+      <div class="topic-item" data-topic="monitoring-observability">
+        <div class="topic-header" onclick="toggleTopic('monitoring-observability')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-monitoring-observability">⬜</span>
+            <span class="topic-name">8. Monitoring & Observability</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="topic-toggle" id="toggle-monitoring-observability">▶</span>
+        </div>
+        <div class="topic-content" id="content-monitoring-observability">
+          <div class="analogy">
+            🚗 <strong>Analogy:</strong> Think of the <em>dashboard instruments in a car</em>. You have a speedometer, fuel gauge, and warning lights. A check-engine light comes on <strong>before</strong> you break down — that's monitoring. <strong>Observability</strong> goes deeper: it's like having a mechanic's diagnostic tool that tells you exactly <em>which</em> part is failing and <em>why</em>.
+          </div>
+          <p><strong>Azure Monitor</strong> is the central hub for metrics and logs. <strong>Log Analytics</strong> lets you query logs with KQL. <strong>Application Insights</strong> tracks app performance — response times, failures, dependencies. <strong>Alerts</strong> notify your team before users even notice problems. For pre-sales, monitoring is how you prove the cloud is working and catch issues before they become outages.</p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=Azure+Monitor+John+Savill" target="_blank">🎬 Video — Azure Monitor by John Savill</a>
+                <a class="resource-link" href="https://learn.microsoft.com/en-us/azure/azure-monitor/overview" target="_blank">📖 Article — Microsoft Learn: Monitoring Overview</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-monitoring-observability" onclick="completeTopic('monitoring-observability')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+      <!-- 9. Security & Zero Trust -->
+      <div class="topic-item" data-topic="security-zerotrust">
+        <div class="topic-header" onclick="toggleTopic('security-zerotrust')">
+          <div class="topic-info">
+            <span class="topic-status" id="status-security-zerotrust">⬜</span>
+            <span class="topic-name">9. Cloud Security & Zero Trust</span>
+            <span class="topic-xp">+50 XP</span>
+          </div>
+          <span class="topic-toggle" id="toggle-security-zerotrust">▶</span>
+        </div>
+        <div class="topic-content" id="content-security-zerotrust">
+          <div class="analogy">
+            ✈️ <strong>Analogy:</strong> Think of <em>airport security</em>. Even after you pass the main checkpoint and you're inside the terminal, you still get checked at <strong>every gate</strong> before boarding. That's <strong>Zero Trust</strong> — never assume someone is safe just because they're "inside" the network. Verify explicitly, every time.
+          </div>
+          <p>Zero Trust follows three principles: <strong>verify explicitly</strong>, <strong>use least-privilege access</strong>, and <strong>assume breach</strong>. <strong>Azure Key Vault</strong> stores secrets and certificates securely. <strong>IAM policies</strong> and <strong>RBAC</strong> control who can do what. <strong>Conditional Access</strong> adds context-aware rules (e.g., block sign-ins from risky locations). In pre-sales, security is never optional — it's the foundation of every cloud conversation.</p>
+          <div class="learning-card">
+            <div class="learning-card-header">
+              <span class="learning-card-badge">📚 Resources</span>
+            </div>
+            <div class="learning-card-section">
+              <div class="resource-links">
+                <a class="resource-link" href="https://www.youtube.com/results?search_query=Zero+Trust+Explained+Microsoft" target="_blank">🎬 Video — Zero Trust Explained by Microsoft</a>
+                <a class="resource-link" href="https://www.microsoft.com/en-us/security/business/zero-trust" target="_blank">📖 Article — Microsoft: Zero Trust Architecture</a>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success btn-block" id="btn-security-zerotrust" onclick="completeTopic('security-zerotrust')">Mark as Complete ✅</button>
+        </div>
+      </div>
+
+    </div><!-- /topic-list -->
+  </div>
+</section>
+
+<!-- Knowledge Check -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">🧠 Knowledge Check</h2>
+    <p class="section-subtitle">Test your understanding with these scenario-based questions.</p>
+
+    <!-- Question 1 -->
+    <div class="check-container" id="check-p4-check-1">
+      <h3>Question 1: Choosing the Right Compute</h3>
+      <p>A customer has a legacy .NET application that requires specific Windows registry settings and a custom driver. They cannot modify the application code. Which compute option is the best fit?</p>
+      <div class="check-option" onclick="checkAnswer('p4-check-1', this, false)">A) Azure App Service — it's fully managed and easiest to deploy</div>
+      <div class="check-option" onclick="checkAnswer('p4-check-1', this, true)">B) Azure Virtual Machine — full OS control for custom drivers and registry</div>
+      <div class="check-option" onclick="checkAnswer('p4-check-1', this, false)">C) Azure Kubernetes Service — containers are always better than VMs</div>
+      <div class="check-option" onclick="checkAnswer('p4-check-1', this, false)">D) Azure Functions — serverless is the most cost-effective option</div>
+      <div class="check-feedback" id="feedback-p4-check-1"></div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="check-container" id="check-p4-check-2">
+      <h3>Question 2: Storage Tier Strategy</h3>
+      <p>A media company stores video files. New videos are accessed frequently for 30 days, occasionally for the next 6 months, and rarely after that but must be retained for 7 years. Which storage tier strategy minimizes costs?</p>
+      <div class="check-option" onclick="checkAnswer('p4-check-2', this, false)">A) Keep everything in Hot tier for fastest access</div>
+      <div class="check-option" onclick="checkAnswer('p4-check-2', this, false)">B) Put everything in Archive tier to save money</div>
+      <div class="check-option" onclick="checkAnswer('p4-check-2', this, true)">C) Hot for 30 days → Cool for 6 months → Archive for long-term retention</div>
+      <div class="check-option" onclick="checkAnswer('p4-check-2', this, false)">D) Use only managed disks attached to a VM for all storage</div>
+      <div class="check-feedback" id="feedback-p4-check-2"></div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="check-container" id="check-p4-check-3">
+      <h3>Question 3: Disaster Recovery Design</h3>
+      <p>A financial services company needs RPO of 5 minutes and RTO of 1 hour. Which combination of services best meets these requirements?</p>
+      <div class="check-option" onclick="checkAnswer('p4-check-3', this, false)">A) Daily Azure Backup only — simple and cheap</div>
+      <div class="check-option" onclick="checkAnswer('p4-check-3', this, false)">B) Manual VM snapshots taken weekly by an admin</div>
+      <div class="check-option" onclick="checkAnswer('p4-check-3', this, true)">C) Azure Site Recovery with continuous replication + geo-redundant database backups</div>
+      <div class="check-option" onclick="checkAnswer('p4-check-3', this, false)">D) A single VM in one availability zone with local backups</div>
+      <div class="check-feedback" id="feedback-p4-check-3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Boss Challenge -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">🏆 Phase Boss: The Resilient Architecture Challenge</h2>
+    <p class="section-subtitle">A customer wants a highly available e-commerce platform. Design the architecture across all the services you've learned. Answer each part below.</p>
+
+    <div id="boss-challenge">
+      <div class="boss-part">
+        <h4>Part 1: Compute & Containers</h4>
+        <p>The e-commerce front-end needs to scale during flash sales (10× traffic spikes). Would you recommend VMs, App Service, or containers with Kubernetes? Explain your reasoning.</p>
+        <textarea class="boss-textarea" id="boss-answer-1" placeholder="Type your answer here..."></textarea>
+      </div>
+      <div class="boss-part">
+        <h4>Part 2: Data & Storage</h4>
+        <p>The platform needs a product catalog (structured data), user-uploaded images, and a shopping cart (fast, flexible reads/writes). Which database(s) and storage services would you use?</p>
+        <textarea class="boss-textarea" id="boss-answer-2" placeholder="Type your answer here..."></textarea>
+      </div>
+      <div class="boss-part">
+        <h4>Part 3: Networking & Security</h4>
+        <p>How would you protect the platform? Consider network segmentation, traffic management, Zero Trust principles, and key management.</p>
+        <textarea class="boss-textarea" id="boss-answer-3" placeholder="Type your answer here..."></textarea>
+      </div>
+      <div class="boss-part">
+        <h4>Part 4: Resilience & Monitoring</h4>
+        <p>The customer's SLA target is 99.99% uptime. What availability, backup/DR, and monitoring strategies would you put in place?</p>
+        <textarea class="boss-textarea" id="boss-answer-4" placeholder="Type your answer here..."></textarea>
+      </div>
+
+      <div id="boss-feedback" class="boss-feedback"></div>
+      <button class="btn btn-primary btn-lg btn-block" id="btn-boss" onclick="submitBoss()" style="margin-top:16px;">Submit Boss Challenge 🏆</button>
+    </div>
+  </div>
+</section>
+
+<!-- Complete Phase -->
+<section class="section">
+  <div class="container" style="text-align:center;">
+    <button class="btn btn-primary btn-lg" id="btn-complete-phase" onclick="completePhase()" disabled>
+      🎓 Complete Phase 4 — Earn 500 XP + Badge
+    </button>
+    <p id="phase-complete-msg" style="margin-top:12px; display:none; color:green; font-weight:bold;">✅ Phase 4 Complete! You've earned the Cloud Services Deep Dive badge!</p>
+
+    <div class="phase-nav">
+      <a href="phase3.html" class="btn btn-outline">← Phase 3: Cloud Foundations</a>
+      <a href="phase5.html" class="btn btn-outline">Phase 5: Pre-Sales Skills →</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p id="motivational-quote" class="motivational-quote"></p>
+    <p style="margin-top:12px;">Cloud Pre-Sales Learning Path © 2026</p>
+  </div>
+</footer>
+
+<script src="js/game-engine.js"></script>
+<script>
+(function() {
+  const PHASE = 4;
+  const TOPICS = [
+    'cloud-compute', 'containers-kubernetes', 'cloud-networking',
+    'cloud-storage', 'cloud-databases', 'backup-dr',
+    'high-availability', 'monitoring-observability', 'security-zerotrust'
+  ];
+  const CHECKS = ['p4-check-1', 'p4-check-2', 'p4-check-3'];
+
+  let bossAttempted = false;
+
+  // Toggle topic expand/collapse
+  window.toggleTopic = function(topicId) {
+    var content = document.getElementById('content-' + topicId);
+    var toggle = document.getElementById('toggle-' + topicId);
+    if (content.classList.contains('visible')) {
+      content.classList.remove('visible');
+      toggle.classList.remove('open');
+    } else {
+      content.classList.add('visible');
+      toggle.classList.add('open');
+    }
+  };
+
+  // Complete a topic
+  window.completeTopic = function(topicId) {
+    GameEngine.completeTopic(PHASE, topicId);
+    markTopicDone(topicId);
+    updateProgress();
+  };
+
+  function markTopicDone(topicId) {
+    var status = document.getElementById('status-' + topicId);
+    if (status) status.textContent = '✅';
+    var btn = document.getElementById('btn-' + topicId);
+    if (btn) {
+      btn.textContent = '✅ Completed';
+      btn.disabled = true;
+      btn.classList.remove('btn-success');
+      btn.classList.add('btn-outline');
+    }
+  }
+
+  function updateProgress() {
+    var completed = TOPICS.filter(function(t) { return GameEngine.isTopicCompleted(t); });
+    var count = completed.length;
+    var pct = Math.round((count / TOPICS.length) * 100);
+    document.getElementById('phase-progress-fill').style.width = pct + '%';
+    document.getElementById('phase-progress-label').textContent = count + ' of ' + TOPICS.length + ' topics completed';
+
+    var btn = document.getElementById('btn-complete-phase');
+    if (count === TOPICS.length) {
+      btn.disabled = false;
+    } else {
+      btn.disabled = true;
+    }
+  }
+
+  // Knowledge check
+  window.checkAnswer = function(checkId, el, correct) {
+    if (GameEngine.isCheckCompleted(checkId)) return;
+    var feedback = document.getElementById('feedback-' + checkId);
+    feedback.style.display = 'block';
+    if (correct) {
+      feedback.textContent = '✅ Correct! Well done.';
+      feedback.style.background = '#d4edda';
+      feedback.style.color = '#155724';
+      el.style.background = '#d4edda';
+      GameEngine.completeCheck(checkId);
+      disableCheckOptions(checkId);
+    } else {
+      feedback.style.background = '#f8d7da';
+      feedback.style.color = '#721c24';
+      el.style.background = '#f8d7da';
+      if (checkId === 'p4-check-1') {
+        feedback.textContent = '❌ Not quite. The app needs custom drivers and registry settings — only a VM gives full OS-level control.';
+      } else if (checkId === 'p4-check-2') {
+        feedback.textContent = '❌ Not quite. A lifecycle policy moving data through Hot → Cool → Archive matches the access pattern and minimizes cost.';
+      } else {
+        feedback.textContent = '❌ Not quite. With a 5-minute RPO and 1-hour RTO, you need continuous replication (ASR) plus geo-redundant backups — manual or infrequent backups won\'t meet the requirement.';
+      }
+    }
+  };
+
+  function disableCheckOptions(checkId) {
+    var container = document.getElementById('check-' + checkId);
+    var options = container.querySelectorAll('.check-option');
+    options.forEach(function(opt) { opt.style.pointerEvents = 'none'; });
+  }
+
+  // Boss Challenge
+  window.submitBoss = function() {
+    var answers = [
+      document.getElementById('boss-answer-1').value.trim(),
+      document.getElementById('boss-answer-2').value.trim(),
+      document.getElementById('boss-answer-3').value.trim(),
+      document.getElementById('boss-answer-4').value.trim()
+    ];
+
+    var feedback = document.getElementById('boss-feedback');
+    feedback.style.display = 'block';
+
+    var filled = answers.filter(function(a) { return a.length > 20; }).length;
+    if (filled < 4) {
+      feedback.style.background = '#f8d7da';
+      feedback.style.color = '#721c24';
+      feedback.innerHTML = '❌ Please provide a thoughtful answer (more than 20 characters) for each part before submitting.';
+      return;
+    }
+
+    var firstTry = !bossAttempted;
+    bossAttempted = true;
+
+    feedback.style.background = '#d4edda';
+    feedback.style.color = '#155724';
+    feedback.innerHTML = '🏆 <strong>Boss Defeated!</strong> Great architecture design! Here are key points:<br>' +
+      '<strong>Compute:</strong> AKS or App Service with autoscaling handles traffic spikes; containers offer portability.<br>' +
+      '<strong>Data:</strong> Azure SQL for structured catalog, Cosmos DB for cart (low-latency), Blob Storage for images.<br>' +
+      '<strong>Security:</strong> VNet segmentation, NSGs, Key Vault for secrets, RBAC, conditional access — Zero Trust throughout.<br>' +
+      '<strong>Resilience:</strong> Multi-zone deployment, ASR for DR, Azure Monitor + Application Insights, geo-redundant backups for 99.99% SLA.';
+
+    GameEngine.completeBoss(PHASE, firstTry);
+    document.getElementById('btn-boss').disabled = true;
+    document.getElementById('btn-boss').textContent = '✅ Boss Defeated!';
+  };
+
+  // Complete phase
+  window.completePhase = function() {
+    GameEngine.completePhase(PHASE);
+    document.getElementById('btn-complete-phase').disabled = true;
+    document.getElementById('btn-complete-phase').textContent = '✅ Phase 4 Completed!';
+    document.getElementById('phase-complete-msg').style.display = 'block';
+  };
+
+  // Restore state on load
+  function restoreState() {
+    // Topics
+    TOPICS.forEach(function(t) {
+      if (GameEngine.isTopicCompleted(t)) markTopicDone(t);
+    });
+    updateProgress();
+
+    // Checks
+    CHECKS.forEach(function(c) {
+      if (GameEngine.isCheckCompleted(c)) {
+        var feedback = document.getElementById('feedback-' + c);
+        feedback.style.display = 'block';
+        feedback.textContent = '✅ Correct! Well done.';
+        feedback.style.background = '#d4edda';
+        feedback.style.color = '#155724';
+        disableCheckOptions(c);
+      }
+    });
+
+    // Phase
+    if (GameEngine.isPhaseCompleted(PHASE)) {
+      document.getElementById('btn-complete-phase').disabled = true;
+      document.getElementById('btn-complete-phase').textContent = '✅ Phase 4 Completed!';
+      document.getElementById('phase-complete-msg').style.display = 'block';
+    }
+
+    if (typeof GameEngine.updateHeaderUI === 'function') {
+      GameEngine.updateHeaderUI();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', restoreState);
+})();
+</script>
+
+</body>
+</html>
