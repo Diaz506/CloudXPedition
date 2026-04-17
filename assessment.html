@@ -95,6 +95,51 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Feedback panel after selecting confidence */
+    .scenario-feedback {
+      margin-top: 16px;
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      background: var(--gray-50);
+      border-left: 4px solid var(--primary);
+      animation: feedbackSlideIn 0.35s ease;
+    }
+    @keyframes feedbackSlideIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .scenario-feedback .feedback-title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .scenario-feedback .feedback-text {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+    .scenario-feedback .feedback-phase-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .scenario-nav {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 16px;
+      gap: 12px;
+    }
+    .change-answer-hint {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+      margin-top: 12px;
+      text-align: center;
+    }
+
     /* Results extras */
     .results-container {
       max-width: 780px;
@@ -116,8 +161,85 @@
       flex-wrap: wrap;
     }
 
+    /* Results legend */
+    .results-legend {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+    .results-legend h4 {
+      font-size: 0.9rem;
+      color: #fff;
+      margin-bottom: 10px;
+      opacity: 0.95;
+    }
+    .results-legend-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .results-legend-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+    .results-legend-item .legend-badge {
+      flex-shrink: 0;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .results-legend-item .legend-desc {
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* Phase detail in results */
+    .results-phase-card .phase-detail {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.7);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+    .results-phase-card .phase-reason {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    /* Retake guidance */
+    .retake-guidance {
+      text-align: center;
+      margin-top: 24px;
+      padding: 20px;
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .retake-guidance h4 {
+      font-size: 0.95rem;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .retake-guidance p {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
     .screen { display: none; }
     .screen.active { display: block; }
+
+    @media (max-width: 600px) {
+      .results-legend-items { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -211,33 +333,61 @@
   // ── Scenario Data ──
   const SCENARIOS = [
     { id: 's1',  phase: 1, title: 'The Network Outage',
-      text: 'A client calls saying their new branch office can\'t reach the company\'s internal applications. The IT team says it\'s a subnet and routing issue — the new office was assigned an IP range that overlaps with headquarters. How confident are you in understanding what went wrong?' },
+      text: 'A client calls saying their new branch office can\'t reach the company\'s internal applications. The IT team says it\'s a subnet and routing issue — the new office was assigned an IP range that overlaps with headquarters. How confident are you in understanding what went wrong?',
+      tests: 'IP addressing, subnets, and routing fundamentals',
+      phaseLink: 'phase1.html' },
     { id: 's2',  phase: 1, title: 'The Mystery Domain',
-      text: 'A company just bought a new domain for their product launch, but when customers type the URL, they get a "page not found" error. Someone mentions DNS records aren\'t configured. How confident are you in understanding what needs to happen?' },
+      text: 'A company just bought a new domain for their product launch, but when customers type the URL, they get a "page not found" error. Someone mentions DNS records aren\'t configured. How confident are you in understanding what needs to happen?',
+      tests: 'DNS, domain resolution, and how web traffic finds servers',
+      phaseLink: 'phase1.html' },
     { id: 's3',  phase: 1, title: 'The Slow Server',
-      text: 'A small business complains their application is running slow. The hosting provider suggests upgrading their virtual machine to one with more CPU and RAM. The client asks you: "What\'s a virtual machine, and why can\'t we just buy a bigger computer?" How confident are you in explaining this?' },
+      text: 'A small business complains their application is running slow. The hosting provider suggests upgrading their virtual machine to one with more CPU and RAM. The client asks you: "What\'s a virtual machine, and why can\'t we just buy a bigger computer?" How confident are you in explaining this?',
+      tests: 'Virtual machines, compute resources, and how they compare to physical hardware',
+      phaseLink: 'phase1.html' },
     { id: 's4',  phase: 1, title: 'The Storage Crunch',
-      text: 'A media company says they\'re running out of space on their file server. They have 50TB of video files, and someone suggests moving older files to a cheaper "archive tier" in the cloud while keeping recent work on fast local storage. How confident are you in discussing the options?' },
+      text: 'A media company says they\'re running out of space on their file server. They have 50TB of video files, and someone suggests moving older files to a cheaper "archive tier" in the cloud while keeping recent work on fast local storage. How confident are you in discussing the options?',
+      tests: 'Storage types, access tiers, and data lifecycle management',
+      phaseLink: 'phase1.html' },
     { id: 's5',  phase: 2, title: 'The Locked-Out Employee',
-      text: 'An employee at a 500-person company can\'t log in to their laptop, email, or shared drives. The IT helpdesk says their Active Directory account was disabled by a Group Policy. The manager asks you: "Why does one system control everything?" How confident are you in explaining this?' },
+      text: 'An employee at a 500-person company can\'t log in to their laptop, email, or shared drives. The IT helpdesk says their Active Directory account was disabled by a Group Policy. The manager asks you: "Why does one system control everything?" How confident are you in explaining this?',
+      tests: 'Active Directory, identity management, and Group Policy',
+      phaseLink: 'phase2.html' },
     { id: 's6',  phase: 2, title: 'The Scripting Shortcut',
-      text: 'A colleague shows you a PowerShell script that creates 50 user accounts in 10 seconds, instead of doing it manually one by one in a web portal. They ask if you\'d be comfortable modifying it to also assign users to specific groups. How confident are you with this?' },
+      text: 'A colleague shows you a PowerShell script that creates 50 user accounts in 10 seconds, instead of doing it manually one by one in a web portal. They ask if you\'d be comfortable modifying it to also assign users to specific groups. How confident are you with this?',
+      tests: 'PowerShell scripting and IT automation basics',
+      phaseLink: 'phase2.html' },
     { id: 's7',  phase: 3, title: 'The Cloud Pitch',
-      text: 'A manufacturing company\'s CFO asks: "Why should we move to the cloud? We already have servers in our basement that work fine." They want to understand IaaS vs SaaS, and whether it\'ll actually save money. How confident are you in making the case?' },
+      text: 'A manufacturing company\'s CFO asks: "Why should we move to the cloud? We already have servers in our basement that work fine." They want to understand IaaS vs SaaS, and whether it\'ll actually save money. How confident are you in making the case?',
+      tests: 'Cloud service models (IaaS, PaaS, SaaS) and business value arguments',
+      phaseLink: 'phase3.html' },
     { id: 's8',  phase: 3, title: 'The Migration Debate',
-      text: 'A healthcare company wants to move to the cloud but can\'t move their patient database due to regulations. Someone proposes a hybrid approach — some workloads in Azure, sensitive data on-premises, connected via VPN. How confident are you in discussing this strategy?' },
+      text: 'A healthcare company wants to move to the cloud but can\'t move their patient database due to regulations. Someone proposes a hybrid approach — some workloads in Azure, sensitive data on-premises, connected via VPN. How confident are you in discussing this strategy?',
+      tests: 'Hybrid cloud strategy, regulatory compliance, and VPN connectivity',
+      phaseLink: 'phase3.html' },
     { id: 's9',  phase: 3, title: 'The Cost Surprise',
-      text: 'A startup moved everything to AWS three months ago and just got a $15,000 bill — they expected $3,000. The CTO asks you to help figure out why, and how to prevent it. You see terms like "Reserved Instances," "right-sizing," and "cost allocation tags." How confident are you in this conversation?' },
+      text: 'A startup moved everything to AWS three months ago and just got a $15,000 bill — they expected $3,000. The CTO asks you to help figure out why, and how to prevent it. You see terms like "Reserved Instances," "right-sizing," and "cost allocation tags." How confident are you in this conversation?',
+      tests: 'Cloud cost management, pricing models, and optimization strategies',
+      phaseLink: 'phase3.html' },
     { id: 's10', phase: 4, title: 'The Disaster Scenario',
-      text: 'A client\'s primary data center went offline due to a power failure. They ask: "If we were in Azure, would this still have happened?" They mention terms like availability zones, geo-replication, RPO, and RTO. How confident are you in explaining how cloud handles disasters?' },
+      text: 'A client\'s primary data center went offline due to a power failure. They ask: "If we were in Azure, would this still have happened?" They mention terms like availability zones, geo-replication, RPO, and RTO. How confident are you in explaining how cloud handles disasters?',
+      tests: 'Disaster recovery, availability zones, geo-redundancy, RPO/RTO concepts',
+      phaseLink: 'phase4.html' },
     { id: 's11', phase: 4, title: 'The Container Question',
-      text: 'A development team says they want to "containerize" their application and deploy it on Kubernetes. The CTO asks you to explain why this is better than just running it on a regular VM. How confident are you in explaining the difference?' },
+      text: 'A development team says they want to "containerize" their application and deploy it on Kubernetes. The CTO asks you to explain why this is better than just running it on a regular VM. How confident are you in explaining the difference?',
+      tests: 'Containers vs VMs, Kubernetes orchestration, and modern deployment',
+      phaseLink: 'phase4.html' },
     { id: 's12', phase: 4, title: 'The Security Incident',
-      text: 'A company had a data breach because an employee\'s password was compromised. The security team recommends implementing "Zero Trust architecture" with conditional access policies and multi-factor authentication everywhere. The CEO asks you: "What does Zero Trust actually mean for us day-to-day?" How confident are you in this discussion?' },
+      text: 'A company had a data breach because an employee\'s password was compromised. The security team recommends implementing "Zero Trust architecture" with conditional access policies and multi-factor authentication everywhere. The CEO asks you: "What does Zero Trust actually mean for us day-to-day?" How confident are you in this discussion?',
+      tests: 'Zero Trust security, MFA, conditional access, and modern security posture',
+      phaseLink: 'phase4.html' },
     { id: 's13', phase: 4, title: 'The Monitoring Blind Spot',
-      text: 'A client\'s web application went down for 2 hours before anyone noticed — a customer reported it. They ask: "How can we know when something breaks before our customers do?" You need to discuss alerting, dashboards, and application monitoring. How confident are you?' },
+      text: 'A client\'s web application went down for 2 hours before anyone noticed — a customer reported it. They ask: "How can we know when something breaks before our customers do?" You need to discuss alerting, dashboards, and application monitoring. How confident are you?',
+      tests: 'Cloud monitoring, alerting, observability, and proactive incident detection',
+      phaseLink: 'phase4.html' },
     { id: 's14', phase: 5, title: 'The Compliance Deal-Breaker',
-      text: 'You\'re in a pre-sales meeting with a European bank. They ask: "Can you guarantee our data stays in the EU? What certifications does your cloud platform have? How do you handle GDPR and our financial regulators?" The deal depends on your answer. How confident are you in this conversation?' },
+      text: 'You\'re in a pre-sales meeting with a European bank. They ask: "Can you guarantee our data stays in the EU? What certifications does your cloud platform have? How do you handle GDPR and our financial regulators?" The deal depends on your answer. How confident are you in this conversation?',
+      tests: 'Data residency, compliance certifications, GDPR, and regulatory requirements',
+      phaseLink: 'phase5.html' },
   ];
 
   const CONFIDENCE_LEVELS = [
@@ -304,29 +454,57 @@
   window.selectConfidence = function (value) {
     const s = SCENARIOS[currentIndex];
     answers[s.id] = value;
+    const level = CONFIDENCE_LEVELS[value];
 
-    // Highlight selected button
+    // Highlight selected button, but keep all clickable for changing answer
     document.querySelectorAll('.confidence-btn').forEach(btn => {
       btn.classList.toggle('selected', parseInt(btn.dataset.value) === value);
-      btn.style.pointerEvents = 'none';
     });
 
-    // Auto-advance after brief pause
-    setTimeout(() => {
-      currentIndex++;
-      if (currentIndex < SCENARIOS.length) {
-        renderScenario();
-      } else {
-        finishAssessment();
-      }
-    }, 400);
+    // Show feedback panel with what this scenario tests
+    const existingFeedback = document.getElementById('scenario-feedback');
+    if (existingFeedback) existingFeedback.remove();
+
+    const phaseInfo = PHASE_INFO[s.phase];
+    const feedbackHTML = `
+      <div class="scenario-feedback" id="scenario-feedback" role="status" aria-live="polite">
+        <div class="feedback-title">📋 This scenario tests:</div>
+        <p class="feedback-text">${s.tests}</p>
+        <span class="feedback-phase-link">
+          ${phaseInfo.emoji} Covered in Phase ${s.phase}: ${phaseInfo.name}
+        </span>
+      </div>
+      <p class="change-answer-hint">💡 You can change your answer above before continuing</p>
+      <div class="scenario-nav">
+        <button class="btn btn-primary" onclick="nextScenario()">
+          ${currentIndex < SCENARIOS.length - 1 ? 'Continue →' : 'See My Results →'}
+        </button>
+      </div>`;
+
+    document.getElementById('scenario-container').querySelector('.scenario-card').insertAdjacentHTML('beforeend', feedbackHTML);
+
+    // Scroll feedback into view
+    document.getElementById('scenario-feedback').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  };
+
+  // ── Next Scenario ──
+  window.nextScenario = function () {
+    currentIndex++;
+    if (currentIndex < SCENARIOS.length) {
+      renderScenario();
+    } else {
+      finishAssessment();
+    }
   };
 
   // ── Finish & Calculate Results ──
   function finishAssessment() {
-    const phaseScores = calculatePhaseScores();
-    GameEngine.saveAssessment(phaseScores);
-    showResults(phaseScores);
+    const { scores, reasons } = calculatePhaseScores();
+    // Save only the numeric scores for GameEngine (convert Phase 6 back to 0)
+    const saveScores = { ...scores };
+    saveScores[6] = 0;
+    GameEngine.saveAssessment(saveScores);
+    showResults(scores, reasons);
   }
 
   function calculatePhaseScores() {
@@ -334,37 +512,48 @@
     const phaseAnswers = {};
     for (const s of SCENARIOS) {
       if (!phaseAnswers[s.phase]) phaseAnswers[s.phase] = [];
-      if (answers[s.id] !== undefined) phaseAnswers[s.phase].push(answers[s.id]);
+      if (answers[s.id] !== undefined) phaseAnswers[s.phase].push({ score: answers[s.id], title: s.title, tests: s.tests });
     }
 
     const scores = {};
+    const reasons = {};
     // Phases 1-5: use LOWEST score from that phase's scenarios
     for (let p = 1; p <= 5; p++) {
       const vals = phaseAnswers[p] || [];
-      scores[p] = vals.length > 0 ? Math.min(...vals) : 0;
+      if (vals.length > 0) {
+        const weakest = vals.reduce((min, v) => v.score < min.score ? v : min, vals[0]);
+        scores[p] = weakest.score;
+        reasons[p] = weakest;
+      } else {
+        scores[p] = 0;
+        reasons[p] = null;
+      }
     }
-    // Phase 6 (Certification): always "required" — no scenario covers it
-    scores[6] = 0;
-    return scores;
+    // Phase 6 (Certification): final milestone — not directly assessed
+    scores[6] = -1;
+    reasons[6] = null;
+    return { scores, reasons };
   }
 
   function getRecommendation(score) {
     switch (score) {
-      case 0: return { text: '🔴 Required',       cls: 'rec-required', detail: 'Start here' };
-      case 1: return { text: '🟡 Review needed',   cls: 'rec-review',   detail: 'Review the material' };
-      case 2: return { text: '🟢 Skim for gaps',   cls: 'rec-skim',     detail: 'Quick review' };
-      case 3: return { text: '🔵 Skip (revision)', cls: 'rec-skip',     detail: 'Revision only' };
+      case -1: return { text: '📜 Final Milestone', cls: 'rec-skip',     detail: 'Complete after all phases' };
+      case 0: return { text: '🔴 Required',       cls: 'rec-required', detail: 'Start here — this phase covers essential gaps in your knowledge' };
+      case 1: return { text: '🟡 Review needed',   cls: 'rec-review',   detail: 'You recognize the concepts — a focused review will solidify your understanding' };
+      case 2: return { text: '🟢 Skim for gaps',   cls: 'rec-skim',     detail: 'Solid foundation — skim to catch any remaining blind spots' };
+      case 3: return { text: '🔵 Skip (revision)', cls: 'rec-skip',     detail: 'Strong knowledge — revisit only as a quick refresher' };
       default: return { text: '🔴 Required',       cls: 'rec-required', detail: 'Start here' };
     }
   }
 
   // ── Show Results ──
-  function showResults(scores) {
+  function showResults(scores, reasons) {
     showScreen('results');
 
-    // Count how many phases need work
-    const requiredCount = Object.values(scores).filter(v => v <= 1).length;
-    const skipCount = Object.values(scores).filter(v => v >= 3).length;
+    // Count how many phases need work (excluding Phase 6)
+    const assessedScores = Object.entries(scores).filter(([k]) => k !== '6').map(([,v]) => v);
+    const requiredCount = assessedScores.filter(v => v <= 1).length;
+    const skipCount = assessedScores.filter(v => v >= 3).length;
 
     let summary;
     if (requiredCount >= 4) {
@@ -379,27 +568,65 @@
     for (let p = 1; p <= 6; p++) {
       const info = PHASE_INFO[p];
       const rec = getRecommendation(scores[p]);
+      const reason = reasons ? reasons[p] : null;
+      let reasonHTML = '';
+      if (reason && scores[p] >= 0 && scores[p] <= 2) {
+        reasonHTML = `<div class="phase-reason">Based on: "${reason.title}" — ${reason.tests}</div>`;
+      }
       cardsHTML += `
         <div class="results-phase-card">
           <div class="emoji">${info.emoji}</div>
           <div class="name">Phase ${p}: ${info.name}</div>
           <div class="rec ${rec.cls}">${rec.text}</div>
+          <div class="phase-detail">${rec.detail}</div>
+          ${reasonHTML}
         </div>`;
     }
+
+    const legendHTML = `
+      <div class="results-legend">
+        <h4>📖 What do these levels mean?</h4>
+        <div class="results-legend-items">
+          <div class="results-legend-item">
+            <span class="legend-badge rec-required">🔴 Required</span>
+            <span class="legend-desc">Key gaps found — this phase is essential for you</span>
+          </div>
+          <div class="results-legend-item">
+            <span class="legend-badge rec-review">🟡 Review</span>
+            <span class="legend-desc">You know some concepts but need deeper understanding</span>
+          </div>
+          <div class="results-legend-item">
+            <span class="legend-badge rec-skim">🟢 Skim</span>
+            <span class="legend-desc">Good foundation — a quick pass will fill any small gaps</span>
+          </div>
+          <div class="results-legend-item">
+            <span class="legend-badge rec-skip">🔵 Skip</span>
+            <span class="legend-desc">Strong knowledge — use this phase as a reference only</span>
+          </div>
+        </div>
+      </div>`;
+
+    const retakeHTML = `
+      <div class="retake-guidance">
+        <h4>🔄 Want to Retake?</h4>
+        <p>Retake the assessment after working through your recommended phases to <strong>track your growth</strong>. 
+           Your previous results will be replaced with your new scores, and you can see how far you've come.</p>
+        <button class="btn btn-outline" onclick="retakeAssessment()" style="border-color:rgba(255,255,255,0.5); color:#fff;">🔄 Retake Assessment Now</button>
+      </div>`;
 
     document.getElementById('results-container').innerHTML = `
       <p class="results-summary">${summary}</p>
       <div class="results-panel">
         <h2>🗺️ Your Personalized Learning Map</h2>
-        <p style="opacity:0.85; margin-bottom: 8px;">Based on your scenario responses, here's your recommended focus for each phase:</p>
+        <p style="opacity:0.85; margin-bottom: 16px;">Based on your scenario responses, here's your recommended focus for each phase:</p>
+        ${legendHTML}
         <div class="results-phase-grid">${cardsHTML}</div>
         <div class="results-actions">
           <a href="index.html" class="btn btn-success btn-lg">Start Your Journey →</a>
-          <button class="btn btn-outline" onclick="retakeAssessment()" style="border-color:rgba(255,255,255,0.5); color:#fff;">🔄 Retake Assessment</button>
         </div>
+        ${retakeHTML}
       </div>`;
 
-    // Update progress bar to 100%
     document.getElementById('progress-fill').style.width = '100%';
   }
 
@@ -407,6 +634,7 @@
   window.retakeAssessment = function () {
     currentIndex = 0;
     Object.keys(answers).forEach(k => delete answers[k]);
+    GameEngine.resetAssessment();
     showScreen('welcome');
   };
 
@@ -425,7 +653,10 @@
     if (GameEngine.isAssessmentDone()) {
       const scores = GameEngine.getAssessmentScores();
       if (scores && Object.keys(scores).length > 0) {
-        showResults(scores);
+        // Convert Phase 6 to -1 for display
+        const displayScores = { ...scores };
+        displayScores[6] = -1;
+        showResults(displayScores, null);
         return;
       }
     }

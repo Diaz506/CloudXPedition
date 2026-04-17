@@ -233,6 +233,11 @@ const GameEngine = (() => {
 
   function getAssessmentScores() { return state.assessmentScores; }
   function isAssessmentDone() { return state.assessmentDone; }
+  function resetAssessment() {
+    state.assessmentScores = {};
+    state.assessmentDone = false;
+    saveState(state);
+  }
 
   // --- Streak ---
   function updateStreak() {
@@ -350,7 +355,7 @@ const GameEngine = (() => {
     completePhase, isPhaseCompleted, getCurrentPhase,
     completeCheck, isCheckCompleted,
     completeBoss,
-    saveAssessment, getAssessmentScores, isAssessmentDone,
+    saveAssessment, getAssessmentScores, isAssessmentDone, resetAssessment,
     getStreak, getStreakMultiplier,
     getRandomQuote, getOverallProgress,
     showToast, triggerCelebration, updateHeaderUI,
