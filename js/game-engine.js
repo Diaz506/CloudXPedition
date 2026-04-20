@@ -322,7 +322,12 @@ const GameEngine = (() => {
     const streakEl = document.getElementById('header-streak');
 
     if (xpEl) xpEl.textContent = `${state.xp} XP`;
-    if (xpFill) xpFill.style.width = getLevelProgress() + '%';
+    if (xpFill) {
+      const progress = getLevelProgress();
+      xpFill.style.width = progress + '%';
+      const xpBar = document.querySelector('.header-xp-bar');
+      if (xpBar) xpBar.setAttribute('aria-valuenow', Math.round(progress));
+    }
     if (levelEl) {
       const lvl = getLevel();
       levelEl.textContent = lvl.title;
@@ -331,6 +336,9 @@ const GameEngine = (() => {
       const s = getStreak();
       streakEl.innerHTML = s.current > 0 ? `🔥 ${s.current}d` : '';
     }
+    // Reveal header after first paint with correct values
+    const headerXp = document.querySelector('.header-xp');
+    if (headerXp) headerXp.classList.add('loaded');
   }
 
   function getOverallProgress() {

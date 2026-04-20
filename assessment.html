@@ -257,7 +257,7 @@
     <div class="header-xp">
       <span id="header-level" class="header-level">☁️ Cloud Rookie</span>
       <span id="header-xp-text">0 XP</span>
-      <div class="header-xp-bar"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
+      <div class="header-xp-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="XP progress"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
       <span id="header-streak" class="header-streak"></span>
     </div>
   </div>
@@ -277,7 +277,7 @@
   <div class="welcome-panel">
     <div class="welcome-card">
       <h2>How This Works</h2>
-      <p>You'll read <strong>14 real-world pre-sales scenarios</strong> and rate how confident you'd feel in each situation. There are <strong>no right or wrong answers</strong> — this is about honest self-reflection.</p>
+      <p>You'll read <strong>19 real-world pre-sales scenarios</strong> and rate how confident you'd feel in each situation. There are <strong>no right or wrong answers</strong> — this is about honest self-reflection.</p>
       <p>Your responses will generate a <strong>personalized learning map</strong> that tells you exactly which phases to prioritize, which to review, and which you can skip.</p>
       <div class="welcome-features">
         <div class="welcome-feature">
@@ -286,7 +286,7 @@
         </div>
         <div class="welcome-feature">
           <div class="icon">🎯</div>
-          <div class="label">14 scenarios</div>
+          <div class="label">19 scenarios</div>
         </div>
         <div class="welcome-feature">
           <div class="icon">🗺️</div>
@@ -302,10 +302,10 @@
 <div id="screen-scenario" class="screen">
   <div class="assessment-progress">
     <div class="assessment-progress-header">
-      <span id="progress-label">Scenario 1 of 14</span>
+      <span id="progress-label">Scenario 1 of 19</span>
       <span id="progress-percent">0%</span>
     </div>
-    <div class="assessment-progress-bar">
+    <div class="assessment-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Assessment progress">
       <div class="assessment-progress-fill" id="progress-fill" style="width:0%"></div>
     </div>
   </div>
@@ -384,6 +384,26 @@
       text: 'A client\'s web application went down for 2 hours before anyone noticed — a customer reported it. They ask: "How can we know when something breaks before our customers do?" You need to discuss alerting, dashboards, and application monitoring. How confident are you?',
       tests: 'Cloud monitoring, alerting, observability, and proactive incident detection',
       phaseLink: 'phase4.html' },
+    { id: 's13b', phase: 4, title: 'The VM Sizing Debate',
+      text: 'A client is moving their ERP system to the cloud and asks: "Should we get one big VM or several smaller ones? What\'s the difference between general-purpose, compute-optimized, and memory-optimized VMs?" Their DBA adds: "And can we scale up on month-end when reports run?" How confident are you in guiding this conversation?',
+      tests: 'Cloud compute services, VM families, vertical vs horizontal scaling',
+      phaseLink: 'phase4.html' },
+    { id: 's13c', phase: 4, title: 'The Network Architecture',
+      text: 'A company with offices in 3 countries needs their cloud resources to communicate securely. They ask about VNets, subnets, peering, load balancers, and private endpoints. Their security team insists: "No public IPs on any backend service." How confident are you in designing this network layout?',
+      tests: 'Cloud networking — VNets, subnets, load balancers, private endpoints, and peering',
+      phaseLink: 'phase4.html' },
+    { id: 's13d', phase: 4, title: 'The Data Storage Decision',
+      text: 'A media startup needs to store 200TB of video files, serve thumbnails instantly to millions of users, and archive raw footage they rarely access. They ask: "What\'s the difference between Blob Storage, File Storage, and Disk Storage? And what are hot, cool, and archive tiers?" How confident are you in recommending the right storage strategy?',
+      tests: 'Cloud storage services, object vs block vs file storage, access tiers',
+      phaseLink: 'phase4.html' },
+    { id: 's13e', phase: 4, title: 'The Database Dilemma',
+      text: 'A fintech company needs a database for their transaction system (millions of writes/sec), another for their product catalog (flexible schema), and a third for analytics dashboards. They ask: "Should we use SQL or NoSQL? What about Cosmos DB vs SQL Database vs Data Lake?" How confident are you in navigating this conversation?',
+      tests: 'Cloud database services — SQL vs NoSQL, managed databases, choosing the right DB for the workload',
+      phaseLink: 'phase4.html' },
+    { id: 's13f', phase: 4, title: 'The SLA Negotiation',
+      text: 'A client building an e-commerce platform asks: "What does 99.99% uptime actually mean? What happens if Azure goes down — do we get our money back?" They also want to know the difference between availability sets, availability zones, and region pairs. How confident are you in explaining SLAs and high availability options?',
+      tests: 'High availability, SLAs, availability zones, redundancy strategies',
+      phaseLink: 'phase4.html' },
     { id: 's14', phase: 5, title: 'The Compliance Deal-Breaker',
       text: 'You\'re in a pre-sales meeting with a European bank. They ask: "Can you guarantee our data stays in the EU? What certifications does your cloud platform have? How do you handle GDPR and our financial regulators?" The deal depends on your answer. How confident are you in this conversation?',
       tests: 'Data residency, compliance certifications, GDPR, and regulatory requirements',
@@ -401,7 +421,7 @@
     1: { emoji: '🌐', name: 'IT Fundamentals' },
     2: { emoji: '🛡️', name: 'Identity & Scripting' },
     3: { emoji: '☁️',  name: 'Cloud Concepts' },
-    4: { emoji: '⚙️',  name: 'Cloud Services' },
+    4: { emoji: '⚙️',  name: 'Cloud Services Deep Dive' },
     5: { emoji: '💼', name: 'Pre-Sales Skills' },
     6: { emoji: '📜', name: 'Certification' },
   };
@@ -432,6 +452,7 @@
     document.getElementById('progress-label').textContent = `Scenario ${currentIndex + 1} of ${SCENARIOS.length}`;
     document.getElementById('progress-percent').textContent = pct + '%';
     document.getElementById('progress-fill').style.width = pct + '%';
+    document.querySelector('.assessment-progress-bar').setAttribute('aria-valuenow', pct);
 
     const html = `
       <div class="scenario-card" style="animation: fadeSlideIn 0.4s ease">
@@ -636,6 +657,7 @@
       </div>`;
 
     document.getElementById('progress-fill').style.width = '100%';
+    document.querySelector('.assessment-progress-bar').setAttribute('aria-valuenow', 100);
   }
 
   // ── Retake ──

@@ -20,7 +20,7 @@
     <div class="header-xp">
       <span id="header-level" class="header-level">☁️ Cloud Rookie</span>
       <span id="header-xp-text">0 XP</span>
-      <div class="header-xp-bar"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
+      <div class="header-xp-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="XP progress"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
       <span id="header-streak" class="header-streak"></span>
     </div>
   </div>
@@ -49,7 +49,7 @@
     <div class="card">
       <h3 style="margin-bottom:4px;" id="level-title">Progress to Next Level</h3>
       <p style="font-size:0.85rem;color:var(--gray-500);margin-bottom:8px;" id="level-subtitle"></p>
-      <div class="progress-bar" style="height:14px;">
+      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Level progress" style="height:14px;">
         <div class="progress-fill" id="level-progress-fill" style="width:0%;height:100%;"></div>
       </div>
       <div class="progress-label">
@@ -103,7 +103,7 @@
     { num: 1, icon: '🌐', title: 'IT Fundamentals',          topics: 6 },
     { num: 2, icon: '🛡️', title: 'Infrastructure & Identity', topics: 6 },
     { num: 3, icon: '☁️', title: 'Cloud Fundamentals',        topics: 6 },
-    { num: 4, icon: '⚙️', title: 'Cloud Deep Dive',           topics: 9 },
+    { num: 4, icon: '⚙️', title: 'Cloud Services Deep Dive',  topics: 9 },
     { num: 5, icon: '💼', title: 'Pre-Sales Skills',          topics: 6 },
     { num: 6, icon: '📜', title: 'Certification & Portfolio', topics: 4 },
   ];
@@ -135,6 +135,7 @@
     const pct = GameEngine.getLevelProgress();
 
     document.getElementById('level-progress-fill').style.width = pct + '%';
+    document.querySelector('.progress-bar[aria-label="Level progress"]').setAttribute('aria-valuenow', Math.round(pct));
 
     if (next) {
       document.getElementById('level-title').textContent = level.title + ' → ' + next.title;
@@ -187,7 +188,7 @@
             '<div class="card-subtitle">Phase ' + p.num + (completed ? ' ✅ Complete' : '') + '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+        '<div class="progress-bar" role="progressbar" aria-valuenow="' + pct + '" aria-valuemin="0" aria-valuemax="100" aria-label="Phase ' + p.num + ' progress"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
         '<div class="progress-label"><span>' + progress.length + ' / ' + p.topics + ' topics</span><span>' + pct + '%</span></div>';
 
       grid.appendChild(card);

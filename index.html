@@ -20,7 +20,7 @@
     <div class="header-xp">
       <span id="header-level" class="header-level">☁️ Cloud Rookie</span>
       <span id="header-xp-text">0 XP</span>
-      <div class="header-xp-bar"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
+      <div class="header-xp-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="XP progress"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
       <span id="header-streak" class="header-streak"></span>
     </div>
   </div>
@@ -71,7 +71,7 @@
     { num: 1, icon: '🌐', title: 'IT Fundamentals',          desc: 'Networking, VMs, storage, security basics',                     topics: 6 },
     { num: 2, icon: '🛡️', title: 'Infrastructure & Identity', desc: 'Active Directory, Windows Server, Linux, scripting',             topics: 6 },
     { num: 3, icon: '☁️', title: 'Cloud Fundamentals',        desc: 'IaaS/PaaS/SaaS, Azure, AWS, cloud economics',                   topics: 6 },
-    { num: 4, icon: '⚙️', title: 'Cloud Deep Dive',           desc: 'Compute, containers, networking, DR, monitoring, security',      topics: 9 },
+    { num: 4, icon: '⚙️', title: 'Cloud Services Deep Dive',  desc: 'Compute, containers, networking, DR, monitoring, security',      topics: 9 },
     { num: 5, icon: '💼', title: 'Pre-Sales Skills',          desc: 'Lifecycle, architecture, ROI, compliance, demos',                topics: 6 },
     { num: 6, icon: '📜', title: 'Certification & Portfolio', desc: 'AZ-900, AZ-104, portfolio, mock scenarios',                     topics: 4 },
   ];
@@ -157,7 +157,7 @@
           '</div>' +
         '</div>' +
         '<p style="font-size:0.9rem;color:var(--gray-600);margin-bottom:8px;">' + p.desc + '</p>' +
-        '<div class="progress-bar"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+        '<div class="progress-bar" role="progressbar" aria-valuenow="' + pct + '" aria-valuemin="0" aria-valuemax="100" aria-label="Phase ' + p.num + ' progress"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
         '<div class="progress-label"><span>' + progress.length + ' / ' + p.topics + ' topics</span><span>' + pct + '%</span></div>';
 
       if (!locked) {

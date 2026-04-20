@@ -33,7 +33,7 @@
     <div class="header-xp">
       <span id="header-level" class="header-level">☁️ Cloud Rookie</span>
       <span id="header-xp-text">0 XP</span>
-      <div class="header-xp-bar"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
+      <div class="header-xp-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="XP progress"><div class="header-xp-fill" id="header-xp-fill" style="width:0%"></div></div>
       <span id="header-streak" class="header-streak"></span>
     </div>
   </div>
@@ -50,7 +50,7 @@
 <!-- Progress -->
 <section class="section">
   <div class="container">
-    <div class="progress-bar">
+    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Phase 4 completion progress">
       <div class="progress-fill" id="phase-progress-fill" style="width:0%"></div>
     </div>
     <div class="progress-label" id="phase-progress-label">0 of 9 topics completed</div>
@@ -424,7 +424,7 @@
     <p id="phase-complete-msg" style="margin-top:12px; display:none; color:green; font-weight:bold;">✅ Phase 4 Complete! You've earned the Cloud Services Deep Dive badge!</p>
 
     <div class="phase-nav">
-      <a href="phase3.html" class="btn btn-outline">← Phase 3: Cloud Foundations</a>
+      <a href="phase3.html" class="btn btn-outline">← Phase 3: Cloud Fundamentals</a>
       <a href="phase5.html" class="btn btn-outline">Phase 5: Pre-Sales Skills →</a>
     </div>
   </div>
@@ -487,6 +487,7 @@
     var count = completed.length;
     var pct = Math.round((count / TOPICS.length) * 100);
     document.getElementById('phase-progress-fill').style.width = pct + '%';
+    document.querySelector('.progress-bar').setAttribute('aria-valuenow', pct);
     document.getElementById('phase-progress-label').textContent = count + ' of ' + TOPICS.length + ' topics completed';
 
     var btn = document.getElementById('btn-complete-phase');
